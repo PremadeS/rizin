@@ -1672,7 +1672,23 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->fixedbits = false;
 
 	/* initialize libraries */
+	// TODO: make it return pointer of new instance, not singleton *
 	core->cons = rz_cons_new();
+
+	/* TODO: get rid of refcnt */
+	core->intr = RZ_NEW0(RzInterrupt);
+	if (core->intr) {
+		// TODO: Cutter might override these callbacks when multiple sessions are in place
+		// TODO: Do we need a void* user?
+		core->intr->user = NULL;
+		// TODO: we need casting??? why we need casting?
+		core->intr->is_breaked = (bool (*)(void *))rz_cons_is_breaked;
+		core->intr->break_push = (void (*)(void *, void *, void *))rz_cons_break_push;
+		core->intr->break_pop = (void (*)(void *))rz_cons_break_pop;
+		core->intr->sleep_begin = (void *(*)(void *))rz_cons_sleep_begin;
+		core->intr->sleep_end = (void (*)(void *, void *))rz_cons_sleep_end;
+	}
+
 	if (core->cons->refcnt == 1) {
 		if (core->cons->line) {
 			core->cons->line->user = core;

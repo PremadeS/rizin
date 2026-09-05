@@ -450,6 +450,7 @@ static bool rz_core_rtr_gdb_run(RzCore *core, ut32 port, const char *file_path, 
 		return false;
 	}
 	gdbr_init(g, true);
+	gdbr_set_interrupt(g, core->intr);
 	g->server_debug = debug_msg;
 	int arch = rz_sys_arch_id(rz_config_get(core->config, "asm.arch"));
 	int bits = rz_config_get_i(core->config, "asm.bits");

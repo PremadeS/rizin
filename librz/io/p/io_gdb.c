@@ -53,6 +53,7 @@ static int debug_gdb_write_at(RzIODesc *fd, const ut8 *buf, int sz, ut64 addr) {
 	return sz;
 }
 
+#include <rz_core.h>
 static RzIODesc *__open(RzIO *io, const char *file, int rw, int mode) {
 	RzIODesc *riogdb = NULL;
 	libgdbr_t *desc = NULL;
@@ -104,6 +105,9 @@ static RzIODesc *__open(RzIO *io, const char *file, int rw, int mode) {
 
 	desc = RZ_NEW(libgdbr_t);
 	gdbr_init(desc, false);
+	// TODO: verify there is a .core & do we need if check?
+	RzCore *core = io->corebind.core;
+	gdbr_set_interrupt(desc, core->intr);
 
 	if (gdbr_connect(desc, host, i_port) == 0) {
 		__close(NULL);

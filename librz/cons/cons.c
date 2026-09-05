@@ -19,9 +19,10 @@
 
 RZ_LIB_VERSION(rz_cons);
 
-static RzConsContext rz_cons_context_default = { { { { 0 } } } };
-static RzCons rz_cons_instance = { 0 };
-#define I rz_cons_instance
+// TODO: const or remove?
+static const RzConsContext rz_cons_context_default = { { { { 0 } } } };
+// static RzCons rz_cons_instance = { 0 };
+// #define I rz_cons_instance
 
 #if __WINDOWS__
 // restore only the console flags rizin owns instead of replaying the whole host mode word

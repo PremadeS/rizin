@@ -5,6 +5,7 @@
 #define _winkd_H_
 
 #include <rz_util.h>
+#include <rz_interrupt.h>
 #include <stdint.h>
 #include "kd.h"
 
@@ -108,6 +109,7 @@ typedef struct _KdCtx {
 	int context_cache_size;
 	bool context_cache_valid;
 	bool breaked;
+	RzInterrupt *intr; // TODO: doc and should it be here or diff struct??
 } KdCtx;
 
 #define TARGET_BACKEND  0
@@ -182,4 +184,6 @@ int winkd_write_at_phys(RZ_BORROW RZ_NONNULL KdCtx *ctx, const ut64 offset, RZ_B
 void winkd_break(void *ctx);
 bool winkd_lock_enter(RZ_BORROW RZ_NONNULL KdCtx *ctx);
 bool winkd_lock_leave(RZ_BORROW RZ_NONNULL KdCtx *ctx);
+// TODO: return type need to be bool??
+bool winkd_set_interrupt(RZ_BORROW RZ_NONNULL KdCtx *ctx, RzInterrupt *intr);
 #endif

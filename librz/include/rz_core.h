@@ -33,6 +33,7 @@
 #include <rz_bind.h>
 #include <rz_util/rz_annotated_code.h>
 #include <rz_mark.h>
+#include <rz_interrupt.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -385,6 +386,7 @@ struct rz_core_t {
 	RzHash *hash;
 	RzList /*<char *>*/ *warnings_after;
 	RzPath *sys_path; ///< pointer to RzPath, contains path prefix of the system
+	RzInterrupt *intr; ///< TODO: DOCS
 
 	bool vmarks_init;
 	ut64 vmarks[UT8_MAX + 1];

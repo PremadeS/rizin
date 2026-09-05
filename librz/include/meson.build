@@ -57,6 +57,7 @@ include_files = [
   'rz_vector.h',
   'rz_windows.h',
   'rz_windows_heap.h',
+  'rz_interrupt.h',
 ]
 install_headers(include_files, install_dir: rizin_incdir)
 

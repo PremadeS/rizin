@@ -31,12 +31,11 @@ gdb_inc = [
 ]
 
 rz_util_dep = dependency('rz_util')
-rz_cons_dep = dependency('rz_cons')
 rz_socket_dep = dependency('rz_socket')
 
 librzgdb = static_library('rzgdb', gdb_files,
   include_directories: gdb_inc,
-  dependencies: [rz_util_dep, rz_cons_dep, rz_socket_dep],
+  dependencies: [rz_util_dep, rz_socket_dep],
   implicit_include_directories: false
 )
 
