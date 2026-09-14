@@ -11,7 +11,7 @@
 #include "rz_types_base.h"
 #include "rz_socket.h"
 #include "rz_th.h"
-#include "rz_interrupt.h"
+#include "rz_util/rz_interrupt.h"
 
 #define MSG_OK            0
 #define MSG_NOT_SUPPORTED -1
@@ -200,7 +200,7 @@ typedef struct libgdbr_t {
 		bool valid;
 	} target;
 
-	bool isbreaked;
+	bool isbreaked; // TODO: do we need this now? we can use intr -> is_breaked
 	RzInterrupt *intr; // TODO: doc
 } libgdbr_t;
 

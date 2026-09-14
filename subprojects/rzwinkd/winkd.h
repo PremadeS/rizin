@@ -5,7 +5,6 @@
 #define _winkd_H_
 
 #include <rz_util.h>
-#include <rz_interrupt.h>
 #include <stdint.h>
 #include "kd.h"
 
@@ -108,7 +107,7 @@ typedef struct _KdCtx {
 	ut8 *context_cache;
 	int context_cache_size;
 	bool context_cache_valid;
-	bool breaked;
+	bool breaked; // TODO: same comment as libgdbr struct
 	RzInterrupt *intr; // TODO: doc and should it be here or diff struct??
 } KdCtx;
 
