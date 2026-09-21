@@ -855,10 +855,10 @@ RZ_API void rz_core_rtr_cmds(RzCore *core, const char *port) {
 	}
 
 	RZ_LOG_INFO("core: listening for commands on port %s\n", port);
-	rz_cons_break_push((RzConsBreak)rz_stop_pipe_stop, sp);
+	rz_interrupt_break_push(dbg->intr, (RzInterruptBreak)rz_stop_pipe_stop, sp);
 	for (;;) {
 		// wait for connection
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		void *bed = rz_cons_sleep_begin();
@@ -926,7 +926,7 @@ RZ_API void rz_core_rtr_cmds(RzCore *core, const char *port) {
 		rz_socket_free(ch);
 	}
 break_outer:
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 err_socket:
 	rz_socket_free(s);
 err_sp:

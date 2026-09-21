@@ -54,7 +54,7 @@ static RzList /*<char *>*/ *__childrenFlagsOf(RzCore *core, RzList /*<RzFlagItem
 		if (prefix_len > strlen(f->name)) {
 			continue;
 		}
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		const char *name = f->name;

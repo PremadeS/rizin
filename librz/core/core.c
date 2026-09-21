@@ -1601,6 +1601,25 @@ static void ev_binfiledel_cb(RzEvent *ev, int type, void *user, void *data) {
 	rz_core_vfile_bin_file_deleted(user, bev->bf);
 }
 
+// TODOe: the logic is repeated here, same as "rz_cons_printf"
+static int cb_printf(void *user, const char *format, ...) {
+	RzCore *core = (RzCore *)user;
+	va_list ap;
+	if (!format || !*format) {
+		return -1;
+	}
+	va_start(ap, format);
+	rz_cons_printf_list(core->cons, format, ap);
+	va_end(ap);
+
+	return 0;
+}
+
+RZ_API char *cb_color(void *user, int idx, int last, bool bg) {
+	RzCore *core = (RzCore *)user;
+	return rz_cons_rainbow_get(core->cons, idx, last, bg);
+}
+
 RZ_IPI void rz_core_task_ctx_switch(RzCoreTask *next, void *user);
 RZ_IPI void rz_core_task_break_cb(RzCoreTask *task, void *user);
 RZ_IPI void rz_core_file_free(RzCoreFile *cf);
@@ -1636,8 +1655,8 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->print->num = core->num;
 	core->print->offname = rz_core_print_offname;
 	core->print->offsize = rz_core_print_offsize;
-	core->print->cb_printf = rz_cons_printf;
-	core->print->cb_color = rz_cons_rainbow_get;
+	core->print->cb_printf = cb_printf; // TODOe: maybe rename to core_cons_printf_cb?? or sum?
+	core->print->cb_color = cb_color;
 	core->print->write = mywrite;
 	core->print->exists_var = exists_var;
 	core->print->disasm = __disasm;
@@ -1681,6 +1700,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 			core->cons->line->cb_editor =
 				(RzLineEditorCb)&rz_core_editor;
 			core->cons->line->cb_fkey = core->cons->cb_fkey;
+			core->cons->line->cons = core->cons;
 		}
 #if __EMSCRIPTEN__
 		core->cons->user_fgets = NULL;
@@ -1702,8 +1722,9 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->lang->cmdf = (int (*)(void *, const char *, ...))rz_core_cmdf;
 	rz_core_bind_cons(core);
 	core->lang->cb_printf = rz_cons_printf;
+	core->lang->intr = core->intr;
 	rz_lang_define(core->lang, "RzCore", "core", core);
-	rz_lang_set_user_ptr(core->lang, core);
+	rz_lang_set_user_ptr(core->lang, core); // TODOe can use this for printf_cb..
 	core->rasm = rz_asm_new();
 	rz_asm_set_core(core->rasm, core);
 	// initialize path
@@ -1843,7 +1864,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 		// TODO: Do we need a void* user?
 		// TODO: use that stoopid typedef format so we don't need casting
 		core->intr->user = NULL;
-		core->intr->is_breaked = (bool (*)(void *))rz_cons_is_breaked;
+		core->intr->is_breaked = (bool (*)(void *))rz_interrupt_is_breaked;
 		core->intr->break_push = (void (*)(void *, void *, void *))rz_cons_break_push;
 		core->intr->break_pop = (void (*)(void *))rz_cons_break_pop;
 		core->intr->sleep_begin = (void *(*)(void *))rz_cons_sleep_begin;
@@ -1863,9 +1884,9 @@ RZ_API void __cons_cb_fkey(RzCore *core, int fkey) {
 	snprintf(buf, sizeof(buf), "key.f%d", fkey);
 	const char *v = rz_config_get(core->config, buf);
 	if (v && *v) {
-		rz_cons_printf("%s\n", v);
+		rz_cons_printf(core->cons, "%s\n", v);
 		rz_core_cmd0(core, v);
-		rz_cons_flush();
+		rz_cons_flush(core->cons);
 	}
 }
 
@@ -1873,7 +1894,7 @@ RZ_API void rz_core_bind_cons(RzCore *core) {
 	core->cons->num = core->num;
 	core->cons->cb_fkey = (RzConsFunctionKey)__cons_cb_fkey;
 	core->cons->cb_editor = (RzConsEditorCallback)rz_core_editor;
-	core->cons->cb_break = (RzConsBreakCallback)rz_core_break;
+	core->cons->cb_break = (RzInterruptBreakCallback)rz_core_break;
 	core->cons->cb_sleep_begin = (RzConsSleepBeginCallback)rz_core_sleep_begin;
 	core->cons->cb_sleep_end = (RzConsSleepEndCallback)rz_core_sleep_end;
 	core->cons->cb_task_oneshot = (RzConsQueueTaskOneshot)rz_core_task_enqueue_oneshot;

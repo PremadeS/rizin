@@ -373,10 +373,10 @@ RZ_API RzList /*<RzCoreAsmHit *>*/ *rz_core_asm_strsearch(RzCore *core, const ch
 		tokens[tokcount] = tok;
 	}
 	tokens[tokcount] = NULL;
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	char *opst = NULL;
 	for (at = from; at < to; at += core->blocksize) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if (!rz_io_is_valid_offset(core->io, at, 0)) {
@@ -540,7 +540,7 @@ RZ_API RzList /*<RzCoreAsmHit *>*/ *rz_core_asm_strsearch(RzCore *core, const ch
 			RZ_FREE(opst);
 		}
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	rz_asm_set_pc(core->rasm, toff);
 beach:
 	free(inp);
@@ -548,7 +548,7 @@ beach:
 	free(ptr);
 	free(code);
 	RZ_FREE(opst);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	return hits;
 }
 
@@ -772,7 +772,7 @@ RZ_API RzList /*<RzCoreAsmHit *>*/ *rz_core_asm_bwdisassemble(RzCore *core, ut64
 	}
 
 	for (idx = 1; idx < len; idx++) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		c = rz_asm_mdisassemble(core->rasm, buf + len - idx, idx);
@@ -839,7 +839,7 @@ static RzList /*<RzCoreAsmHit *>*/ *rz_core_asm_back_disassemble_all(RzCore *cor
 	}
 
 	do {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		// reset assembler
@@ -920,7 +920,7 @@ static RzList /*<RzCoreAsmHit *>*/ *rz_core_asm_back_disassemble(RzCore *core, u
 	next_buf_pos = len + extra_padding - 1;
 	current_instr_addr = addr - 1;
 	do {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		// reset assembler

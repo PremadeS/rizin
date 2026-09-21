@@ -221,3 +221,11 @@ RZ_API int rz_lang_run_file(RzLang *lang, const char *file) {
 	}
 	return ret;
 }
+
+// TODOe: verify that this works.
+RZ_API int rz_lang_prompt(RzLang *lang) {
+	if (!lang || !lang->cur || !lang->cur->prompt) {
+		return false;
+	}
+	return lang->cur->prompt(lang);
+}

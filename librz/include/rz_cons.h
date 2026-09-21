@@ -19,6 +19,7 @@ extern "C" {
 #include <rz_util/rz_sys.h>
 #include <rz_util/rz_utf8.h>
 #include <rz_util/rz_file.h>
+#include <rz_util/rz_interrupt.h>
 #include <rz_vector.h>
 #include <sdb.h>
 #include <rz_util/ht_up.h>
@@ -55,14 +56,16 @@ RZ_LIB_VERSION_HEADER(rz_cons);
 
 #define RZ_CONS_CMD_DEPTH 100
 
-// TODO: maybe use RZ_NONNULL here??
+// TODOe: maybe use RZ_NONNULL here??
+// TODOe: USE RZ_NONNULL and else where needed (at the end)
+// TODOe: also check which functions don't need cons...
 typedef int (*RzConsGetSize)(void *cons, int *rows);
 typedef int (*RzConsGetCursor)(void *cons, RZ_NONNULL int *rows);
 typedef bool (*RzConsIsBreaked)(void *cons);
 typedef void (*RzConsFlush)(void *cons);
 typedef void (*RzConsGrepCallback)(void *cons, const char *grep);
 
-// TODO: remove this, if not needed
+// TODOe: remove this, if not needed
 typedef struct rz_cons_bind_t {
 	RzConsGetSize get_size;
 	RzConsGetCursor get_cursor;
@@ -465,7 +468,7 @@ typedef struct rz_cons_canvas_t {
 
 typedef char *(*RzConsEditorCallback)(void *core, const char *file, const char *str);
 typedef int (*RzConsClickCallback)(void *core, int x, int y);
-typedef void (*RzConsBreakCallback)(void *core);
+typedef void (*RzInterruptBreakCallback)(void *core);
 typedef void *(*RzConsSleepBeginCallback)(void *core);
 typedef void (*RzConsSleepEndCallback)(void *core, void *user);
 typedef void (*RzConsQueueTaskOneshot)(void *core, void *task, void *user);
@@ -570,7 +573,7 @@ typedef struct rz_cons_t {
 	MouseEvent mouse_event;
 
 	RzConsEditorCallback cb_editor;
-	RzConsBreakCallback cb_break;
+	RzInterruptBreakCallback cb_break;
 	RzConsSleepBeginCallback cb_sleep_begin;
 	RzConsSleepEndCallback cb_sleep_end;
 	RzConsClickCallback cb_click;
@@ -965,21 +968,21 @@ RZ_API char *rz_cons_lastline_utf8_ansi_len(RzCons *cons, int *len);
 RZ_API void rz_cons_set_click(RzCons *cons, int x, int y, MouseEvent event);
 RZ_API bool rz_cons_get_click(RzCons *cons, int *x, int *y);
 
-// typedef void (*RzConsBreak)(void *);
+// typedef void (*RzInterruptBreak)(void *);
 RZ_API bool rz_cons_is_interactive(RzCons *cons);
 RZ_API bool rz_cons_default_context_is_interactive();
 
 // TODO: move to interrupt =====
-// RZ_API bool rz_cons_is_breaked(RzCons *cons);
+// RZ_API bool rz_interrupt_is_breaked(RzCons *cons);
 // RZ_API void *rz_cons_sleep_begin(RzCons *cons);
 // RZ_API void rz_cons_sleep_end(RzCons *cons, void *user);
-// RZ_API void rz_cons_break_push(RzCons *cons, RzConsBreak cb, void *user);
+// RZ_API void rz_interrupt_break_push(dbg->intr, RzCons *cons, RzInterruptBreak cb, void *user);
 // RZ_API void rz_cons_break_pop(RzCons *cons);
 // RZ_API void rz_cons_break_clear(RzCons *cons);
 // RZ_API void rz_cons_break_end(RzCons *cons);
 // RZ_API void rz_cons_break_timeout(RzCons *cons, int timeout);
 // RZ_API void rz_cons_context_break(RzConsContext *context);
-// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzConsBreak cb, void *user, bool sig);
+// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzInterruptBreak cb, void *user, bool sig);
 // RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool sig);
 // ===============
 
@@ -993,8 +996,10 @@ RZ_API void rz_cons_breakword(RzCons *cons, RZ_NULLABLE const char *s);
 
 /* pipe */
 typedef struct rz_cons_pipe_t RzConsPipe;
-RZ_API RZ_OWN RzConsPipe *rz_cons_pipe_open(RzCons *cons, RZ_NONNULL const char *file, int old_fd, bool append);
-RZ_API void rz_cons_pipe_close(RzCons *cons, RZ_NULLABLE RzConsPipe *cpipe);
+// TODOe: doesn't require cons
+// both of these
+RZ_API RZ_OWN RzConsPipe *rz_cons_pipe_open(RZ_NONNULL const char *file, int old_fd, bool append);
+RZ_API void rz_cons_pipe_close(RZ_NULLABLE RzConsPipe *cpipe);
 
 #if __WINDOWS__
 RZ_API RzVirtTermMode rz_cons_detect_vt_mode(RzCons *cons);
@@ -1107,7 +1112,7 @@ RZ_API RZ_OWN char *rz_cons_get_buffer_dup(RzCons *cons);
 RZ_API int rz_cons_get_buffer_len(RzCons *cons);
 RZ_API void rz_cons_grep_help(RzCons *cons);
 RZ_API void rz_cons_grep_parsecmd(RzCons *cons, char *cmd, const char *quotestr);
-RZ_API char *rz_cons_grep_strip(RzCons *cons, char *cmd, const char *quotestr);
+RZ_API char *rz_cons_grep_strip(char *cmd, const char *quotestr); // TODOe: don't need cons, should be static??
 RZ_API void rz_cons_grep_process(RzCons *cons, RZ_OWN char *grep);
 RZ_API int rz_cons_grep_line(RzCons *cons, char *buf, int len); // must be static
 RZ_API void rz_cons_grepbuf(RzCons *cons);
@@ -1251,6 +1256,7 @@ typedef int (*RzLineHistoryDownCb)(RzLine *line);
 typedef struct rz_line_undo_entry_t RzLineUndoEntry;
 
 struct rz_line_t {
+	RzCons *cons;
 	RzLineCompletion completion;
 	RzLineNSCompletion ns_completion;
 	RzLineBuffer buffer;
@@ -1262,7 +1268,7 @@ struct rz_line_t {
 	RzLineHistoryDownCb cb_history_down;
 	RzLineEditorCb cb_editor;
 	// RzLineFunctionKeyCb cb_fkey;
-	RzConsFunctionKey cb_fkey;
+	RzConsFunctionKey cb_fkey; // TODOe: remove? now that we have actual cons?
 	/* state , TODO: use more bool */
 	int gcomp;
 	int gcomp_idx;

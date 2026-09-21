@@ -51,3 +51,92 @@ RZ_API RzCmdStatus rz_core_lang_plugins_print(RzLang *lang, RzCmdStateOutput *st
 	rz_cmd_state_output_array_end(state);
 	return RZ_CMD_STATUS_OK;
 }
+
+// TODOe: verify (lang_prompt)
+RZ_API int rz_core_lang_prompt(RzCore *core) {
+	char buf[1024];
+	const char *p;
+
+	RzLang *lang = core->lang;
+	if (!lang || !lang->cur) {
+		return false;
+	}
+
+	if (rz_lang_prompt(core->lang)) {
+		return true;
+	}
+
+	RzCons *cons = core->cons;
+	if (!cons || !cons->line) {
+		return false;
+	}
+
+	/* init line */
+	RzLine *line = cons->line;
+	RzLineHistory hist = line->history;
+	RzLineHistory histnull = { 0 };
+	RzLineCompletion oc = line->completion;
+	RzLineCompletion ocnull = { 0 };
+	char *prompt = rz_str_dup(line->prompt);
+	line->completion = ocnull;
+	line->history = histnull;
+
+	/* foo */
+	for (;;) {
+		rz_cons_flush(cons);
+		snprintf(buf, sizeof(buf) - 1, "%s> ", lang->cur->name);
+		rz_line_set_prompt(line, buf);
+		p = rz_line_readline(line);
+		if (!p) {
+			break;
+		}
+		rz_line_hist_add(line, p);
+		strncpy(buf, p, sizeof(buf) - 1);
+		if (*buf == '!') {
+			if (buf[1]) {
+				rz_sys_xsystem(buf + 1);
+			}
+			continue;
+		}
+		if (!memcmp(buf, ". ", 2)) {
+			char *file = rz_file_abspath(buf + 2);
+			if (file) {
+				rz_lang_run_file(lang, file);
+				free(file);
+			}
+			continue;
+		}
+		if (!strcmp(buf, "q")) {
+			free(prompt);
+			return true;
+		}
+		if (!strcmp(buf, "?")) {
+			RzLangDef *def;
+			RzListIter *iter;
+			eprintf("  ?        - show this help message\n"
+				"  !command - run system command\n"
+				"  . file   - interpret file\n"
+				"  q        - quit prompt\n");
+			eprintf("%s example:\n", lang->cur->name);
+			if (lang->cur->help) {
+				eprintf("%s", *lang->cur->help);
+			}
+			if (!rz_list_empty(lang->defs)) {
+				eprintf("variables:\n");
+			}
+			rz_list_foreach (lang->defs, iter, def) {
+				eprintf("  %s %s\n", def->type, def->name);
+			}
+		} else {
+			rz_lang_run(lang, buf, strlen(buf));
+		}
+	}
+	// XXX: leaking history
+	rz_line_set_prompt(line, prompt);
+	line->completion = oc;
+	line->history = hist;
+	clearerr(stdin);
+	printf("\n");
+	free(prompt);
+	return true;
+}

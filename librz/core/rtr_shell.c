@@ -5,7 +5,7 @@ static bool rtr_visual(RzCore *core, TextLog T, const char *cmd) {
 	RzLine *line = core->cons->line;
 	bool autorefresh = false;
 	if (cmd) {
-		rz_cons_break_push(NULL, NULL);
+		rz_interrupt_break_push(dbg->intr, NULL, NULL);
 		for (;;) {
 			char *ret;
 			rz_cons_clear00();
@@ -13,12 +13,12 @@ static bool rtr_visual(RzCore *core, TextLog T, const char *cmd) {
 			rz_cons_println(ret);
 			free(ret);
 			rz_cons_flush();
-			if (rz_cons_is_breaked()) {
+			if (rz_interrupt_is_breaked()) {
 				break;
 			}
 			rz_sys_sleep(1);
 		}
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 	} else {
 		const char *cmds[] = { "px", "pd", "pxa", "dr", "sr SP;pxa", NULL };
 		int cmdidx = 0;
@@ -36,16 +36,16 @@ static bool rtr_visual(RzCore *core, TextLog T, const char *cmd) {
 			if (autorefresh) {
 				rz_cons_printf("(auto-refresh)\n");
 				rz_cons_flush();
-				rz_cons_break_push(NULL, NULL);
+				rz_interrupt_break_push(dbg->intr, NULL, NULL);
 				rz_sys_sleep(1);
-				if (rz_cons_is_breaked()) {
+				if (rz_interrupt_is_breaked()) {
 					autorefresh = false;
 					ch = rz_cons_readchar();
 				} else {
-					rz_cons_break_pop();
+					rz_interrupt_break_pop(dbg->intr);
 					continue;
 				}
-				rz_cons_break_pop();
+				rz_interrupt_break_pop(dbg->intr);
 			} else {
 				ch = rz_cons_readchar();
 			}

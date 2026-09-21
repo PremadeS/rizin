@@ -1406,9 +1406,9 @@ static bool print_cmd_analysis_after_traps_print(RZ_NONNULL RzCore *core, ut64 n
 	bufi = 0;
 	int trapcount = 0;
 	int nopcount = 0;
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	while (addr < addr_end) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		// TODO: too many ioreads here
@@ -1445,7 +1445,7 @@ static bool print_cmd_analysis_after_traps_print(RZ_NONNULL RzCore *core, ut64 n
 		bufi += (op.size > 0) ? op.size : 1;
 		rz_analysis_op_fini(&op);
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	free(buf);
 	return true;
 }
@@ -6137,7 +6137,7 @@ RZ_IPI RzCmdStatus rz_analyze_function_linked_offsets_handler(RzCore *core, int 
 
 	RzListIter *it;
 	rz_list_foreach (fcns, it, fcn) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		rz_core_global_vars_propagate_types(core, fcn);

@@ -1,5 +1,5 @@
-// TODO: update these
-// SPDX-FileCopyrightText: 2024 The Rizin Developers
+// TODOe: update these
+// SPDX-FileCopyrightText: 2026 PremadeS
 // SPDX-License-Identifier: LGPL-3.0-only
 
 /*! \file */
@@ -16,6 +16,7 @@
 typedef void (*RzInterruptEvent)(void *user);
 typedef void *(*RzInterruptSleepBegin)(void *user);
 typedef void (*RzInterruptSleepEnd)(void *user, void *bed);
+typedef void (*RzInterruptBreak)(void *);
 
 typedef struct rz_interrupt_t {
 	bool is_breaked;

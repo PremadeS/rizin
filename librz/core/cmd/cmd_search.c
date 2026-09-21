@@ -226,9 +226,9 @@ static void cmd_search_bin(RzCore *core, RzInterval itv) {
 	int fd = core->file->fd;
 	RzIOBind *iob = rz_analysis_get_io_bind(core->analysis);
 	RzBuffer *b = rz_buf_new_with_io_fd(iob, fd);
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	while (from < to) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		RzBuffer *ref = rz_buf_new_slice(b, from, to);
@@ -254,7 +254,7 @@ static void cmd_search_bin(RzCore *core, RzInterval itv) {
 		from++;
 	}
 	rz_buf_free(b);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 }
 
 static int __prelude_cb_hit(RzSearchKeyword *kw, void *user, ut64 addr) {
@@ -285,7 +285,7 @@ RZ_API int rz_core_search_prelude(RzCore *core, ut64 from, ut64 to, const ut8 *b
 	rz_search_set_callback(core->search, &__prelude_cb_hit, core);
 	core->search->preludecnt = 0;
 	for (at = from; at < to; at += core->blocksize) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if (!rz_io_is_valid_offset(core->io, at, 0)) {
@@ -598,7 +598,7 @@ static void do_syscall_search(RzCore *core, struct search_parameters *param) {
 	}
 	ut64 oldoff = core->offset;
 	int syscallNumber = 0;
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	const char *a0 = rz_reg_get_name(rreg, RZ_REG_NAME_SN);
 	char *esp = rz_str_newf("%s,=", a0);
 	char *esp32 = NULL;
@@ -620,7 +620,7 @@ static void do_syscall_search(RzCore *core, struct search_parameters *param) {
 			goto beach;
 		}
 		for (i = 0, at = from; at < to; at++, i++) {
-			if (rz_cons_is_breaked()) {
+			if (rz_interrupt_is_breaked()) {
 				break;
 			}
 			if (i >= (bsize - 32)) {
@@ -689,7 +689,7 @@ static void do_syscall_search(RzCore *core, struct search_parameters *param) {
 beach:
 	rz_core_seek(core, oldoff, true);
 	rz_analysis_esil_free(esil);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	free(buf);
 	free(esp32);
 	free(esp);
@@ -818,14 +818,14 @@ static bool do_analysis_search(RzCore *core, struct search_parameters *param, co
 		pj_a(param->pj);
 	}
 	input = rz_str_trim_head_ro(input);
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	RzIOMap *map;
 	RzListIter *iter;
 	rz_list_foreach (param->boundaries, iter, map) {
 		ut64 from = map->itv.addr;
 		ut64 to = rz_itv_end(map->itv);
 		for (i = 0, at = from; at < to; i++, at++) {
-			if (rz_cons_is_breaked()) {
+			if (rz_interrupt_is_breaked()) {
 				break;
 			}
 			at = from + i;
@@ -926,7 +926,7 @@ done:
 	if (mode == 'j') {
 		pj_end(param->pj);
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	return false;
 }
 
@@ -957,7 +957,7 @@ static void do_asm_search(RzCore *core, struct search_parameters *param, const c
 	if (param->outmode == RZ_OUTPUT_MODE_JSON) {
 		pj_a(param->pj);
 	}
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	if (everyByte) {
 		input++;
 	}
@@ -967,7 +967,7 @@ static void do_asm_search(RzCore *core, struct search_parameters *param, const c
 		}
 		ut64 from = map->itv.addr;
 		ut64 to = rz_itv_end(map->itv);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if (maxhits && count >= maxhits) {
@@ -978,7 +978,7 @@ static void do_asm_search(RzCore *core, struct search_parameters *param, const c
 		if (hits) {
 			const char *cmdhit = rz_config_get(core->config, "cmd.hit");
 			rz_list_foreach (hits, iter, hit) {
-				if (rz_cons_is_breaked()) {
+				if (rz_interrupt_is_breaked()) {
 					rz_list_free(hits);
 					break;
 				}
@@ -1025,7 +1025,7 @@ static void do_asm_search(RzCore *core, struct search_parameters *param, const c
 	if (param->outmode == RZ_OUTPUT_MODE_JSON) {
 		pj_end(param->pj);
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 }
 
 static void do_string_search(RzCore *core, RzInterval search_itv, struct search_parameters *param) {
@@ -1056,7 +1056,7 @@ static void do_string_search(RzCore *core, RzInterval search_itv, struct search_
 		if (!param->regex_search && !(buf = malloc(core->blocksize))) {
 			return;
 		}
-		rz_cons_break_push(NULL, NULL);
+		rz_interrupt_break_push(dbg->intr, NULL, NULL);
 		// TODO search cross boundary
 		rz_list_foreach (param->boundaries, iter, map) {
 			if (!rz_itv_overlap(search_itv, map->itv)) {
@@ -1064,7 +1064,7 @@ static void do_string_search(RzCore *core, RzInterval search_itv, struct search_
 			}
 			const ut64 saved_nhits = search->nhits;
 			RzInterval itv = rz_itv_intersect(search_itv, map->itv);
-			if (rz_cons_is_breaked()) {
+			if (rz_interrupt_is_breaked()) {
 				break;
 			}
 			if (param->outmode != RZ_OUTPUT_MODE_JSON) {
@@ -1090,7 +1090,7 @@ static void do_string_search(RzCore *core, RzInterval search_itv, struct search_
 			size_t c = 0;
 			for (at = from1; at != to1; at = at + len) {
 				print_search_progress(core->cons, at, to1, search->nhits, param, c);
-				if (rz_cons_is_breaked()) {
+				if (rz_interrupt_is_breaked()) {
 					eprintf("\n\n");
 					break;
 				}
@@ -1137,7 +1137,7 @@ static void do_string_search(RzCore *core, RzInterval search_itv, struct search_
 			}
 		}
 	done:
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 		free(buf);
 	} else {
 		RZ_LOG_ERROR("core: No keywords defined\n");
@@ -1168,7 +1168,7 @@ static void search_similar_pattern_in(RzCore *core, int count, ut64 from, ut64 t
 	}
 	while (addr < to) {
 		(void)rz_io_read_at_mapped(core->io, addr, block, core->blocksize);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		int diff = memcmpdiff(core->block, block, core->blocksize);
@@ -1206,11 +1206,11 @@ static void search_similar_pattern(RzCore *core, int count, struct search_parame
 	RzIOMap *p;
 	RzListIter *iter;
 
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	rz_list_foreach (param->boundaries, iter, p) {
 		search_similar_pattern_in(core, count, p->itv.addr, rz_itv_end(p->itv));
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 }
 
 static bool isArm(RzCore *core) {
@@ -1479,7 +1479,7 @@ reread:
 					rz_core_analysis_search(core, from, to, core->offset, 0);
 					do_ref_search(core, core->offset, from, to, &param);
 				}
-				if (rz_cons_is_breaked()) {
+				if (rz_interrupt_is_breaked()) {
 					break;
 				}
 			}
@@ -1528,10 +1528,10 @@ reread:
 				RzIOMap *map;
 				rz_list_foreach (param.boundaries, iter, map) {
 					eprintf("-- %" PFMT64x " %" PFMT64x "\n", map->itv.addr, rz_itv_end(map->itv));
-					rz_cons_break_push(NULL, NULL);
+					rz_interrupt_break_push(dbg->intr, NULL, NULL);
 					rz_search_pattern_size(core->search, ps);
 					rz_search_pattern(core->search, map->itv.addr, rz_itv_end(map->itv));
-					rz_cons_break_pop();
+					rz_interrupt_break_pop(dbg->intr);
 				}
 				break;
 			}
@@ -1633,12 +1633,12 @@ static int pass_to_legacy_api(RzCore *core, int argc, const char **argv, RzOutpu
 		RZ_LOG_ERROR("core: recursive search is forbidden.\n"); \
 		return RZ_CMD_STATUS_ERROR; \
 	} \
-	rz_cons_break_push(NULL, NULL); \
+	rz_interrupt_break_push(dbg->intr, NULL, NULL); \
 	core->in_search = true;
 
 #define CMD_SEARCH_END() \
 	do { \
-		rz_cons_break_pop(); \
+		rz_interrupt_break_pop(dbg->intr); \
 		core->in_search = false; \
 	} while (0)
 
@@ -1647,7 +1647,7 @@ static bool cmd_search_progress_cancel(void *user, size_t n_hits, RzSearchCancel
 		// we have RzCmdStateOutput state
 		eprintf("Searching... hits: %" PFMTSZu "\r", n_hits);
 	}
-	return rz_cons_is_breaked();
+	return rz_interrupt_is_breaked();
 }
 
 static void cmd_search_output_to_state(RzCmdStateOutput *state, RzSearchHit *hit, const char *flag_name, const char *detail) {
@@ -2240,15 +2240,15 @@ RZ_IPI RzCmdStatus rz_cmd_search_pattern_handler(RzCore *core, int argc, const c
 	RzIOMap *map;
 	rz_list_foreach (param.boundaries, iter, map) {
 		eprintf("-- %" PFMT64x " %" PFMT64x "\n", map->itv.addr, rz_itv_end(map->itv));
-		rz_cons_break_push(NULL, NULL);
+		rz_interrupt_break_push(dbg->intr, NULL, NULL);
 		rz_search_pattern_size(core->search, ps);
 		if (!rz_search_pattern(core->search, map->itv.addr, rz_itv_end(map->itv))) {
 			RZ_LOG_ERROR("Pattern search failed.\n");
-			rz_cons_break_pop();
+			rz_interrupt_break_pop(dbg->intr);
 			CMD_SEARCH_END();
 			return RZ_CMD_STATUS_ERROR;
 		}
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 	}
 	CMD_SEARCH_END();
 	return RZ_CMD_STATUS_OK;

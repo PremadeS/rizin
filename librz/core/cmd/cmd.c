@@ -1986,7 +1986,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_flags_stmt) {
 
 	/* for all flags that match */
 	rz_list_foreach (match_flag_items, iter, flag) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 
@@ -2175,7 +2175,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_instrs_stmt) {
 		rz_core_seek(core, i_addr, true);
 		RzCmdStatus cmd_res = handle_ts_stmt_tmpseek(state, command);
 		UPDATE_CMD_STATUS_RES(res, cmd_res, err);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 	}
@@ -2214,7 +2214,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_step_stmt) {
 		rz_core_block_size(core, step);
 		RzCmdStatus cmd_res = handle_ts_stmt_tmpseek(state, command);
 		UPDATE_CMD_STATUS_RES(res, cmd_res, err);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 	}
@@ -2459,7 +2459,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_symbol_stmt) {
 	RzPVector *symbols = o ? (RzPVector *)rz_bin_object_get_symbols(o) : NULL;
 	RzListIter *iter;
 	void **it;
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	RzList *lost = rz_list_newf(free);
 	rz_pvector_foreach (symbols, it) {
 		sym = *it;
@@ -2468,7 +2468,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_symbol_stmt) {
 	}
 	RzCmdStatus res = RZ_CMD_STATUS_OK;
 	rz_list_foreach (lost, iter, sym) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		rz_core_block_size(core, sym->size);
@@ -2477,7 +2477,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_symbol_stmt) {
 		UPDATE_CMD_STATUS_RES(res, cmd_res, err);
 	}
 err:
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	rz_list_free(lost);
 	rz_core_block_size(core, obs);
 	rz_core_seek(core, offorig, true);
@@ -2624,9 +2624,9 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_function_stmt) {
 	RzList *list = rz_analysis_function_list(core->analysis);
 	RzListIter *iter;
 	RzCmdStatus res = RZ_CMD_STATUS_OK;
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	rz_list_foreach (list, iter, fcn) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if (!filter || rz_str_glob(fcn->name, filter)) {
@@ -2637,7 +2637,7 @@ DEFINE_HANDLE_TS_FCN_AND_SYMBOL(iter_function_stmt) {
 		}
 	}
 err:
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	rz_core_block_size(core, obs);
 	rz_core_seek(core, offorig, true);
 	free(filter);
@@ -2810,7 +2810,7 @@ DEFINE_HANDLE_TS_FCN(statements) {
 		return rz_core_cmd_lastcmd_repeat(core, true) ? RZ_CMD_STATUS_OK : RZ_CMD_STATUS_INVALID;
 	}
 	if (state->split_lines) {
-		rz_cons_break_push(NULL, NULL);
+		rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	}
 	for (i = 0; i < child_count; i++) {
 		if (core->cons->context->cmd_depth < 1) {
@@ -2822,8 +2822,8 @@ DEFINE_HANDLE_TS_FCN(statements) {
 			core->prompt_offset = core->offset;
 		}
 
-		if (state->split_lines && rz_cons_is_breaked()) {
-			rz_cons_break_pop();
+		if (state->split_lines && rz_interrupt_is_breaked()) {
+			rz_interrupt_break_pop(dbg->intr);
 			return res;
 		}
 		TSNode command = ts_node_named_child(node, i);
@@ -2851,7 +2851,7 @@ DEFINE_HANDLE_TS_FCN(statements) {
 	}
 err:
 	if (state->split_lines) {
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 	}
 	return res;
 }

@@ -779,7 +779,7 @@ RZ_API RzDebugReasonType rz_debug_wait(RzDebug *dbg, RzBreakpointItem **bp) {
 			int what = rz_debug_signal_what(dbg, dbg->reason.signum);
 			const char *name = rz_signal_to_string(dbg->reason.signum);
 			if (name && strcmp("SIGTRAP", name)) {
-				rz_cons_printf("[+] signal %d aka %s received %d\n",
+				dbg->cb_printf(dbg->user, "[+] signal %d aka %s received %d\n",
 					dbg->reason.signum, name, what);
 			}
 		}
@@ -1190,7 +1190,7 @@ repeat:
 		return 0;
 	}
 	if (dbg->session && dbg->trace_continue) {
-		while (!rz_cons_is_breaked()) {
+		while (!rz_interrupt_is_breaked(dbg->intr)) {
 			if (rz_debug_step(dbg, 1) != 1) {
 				break;
 			}
@@ -1226,7 +1226,7 @@ repeat:
 		}
 	}
 	if (reason == RZ_DEBUG_REASON_BREAKPOINT &&
-		((bp && !bp->enabled) || (!bp && !rz_cons_is_breaked() && dbg->corebind.core && dbg->corebind.cfggeti(dbg->corebind.core, "dbg.bpsysign")))) {
+		((bp && !bp->enabled) || (!bp && !rz_interrupt_is_breaked(dbg->intr) && dbg->corebind.core && dbg->corebind.cfggeti(dbg->corebind.core, "dbg.bpsysign")))) {
 		goto repeat;
 	}
 
@@ -1329,7 +1329,7 @@ repeat:
 		}
 	}
 #if __WINDOWS__
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 #endif
 
 	// Unset breakpoints before leaving
@@ -1556,7 +1556,9 @@ RZ_API int rz_debug_continue_syscalls(RzDebug *dbg, int *sc, int n_sc) {
 	while (true) {
 		RzDebugReasonType reason;
 
-		if (cons->context->breaked) {
+		// TODOe: check if we can do that it was this before:
+		// if(rz_conns_singleton()->context->breaked)...
+		if (rz_interrupt_is_breaked(dbg->intr)) {
 			break;
 		}
 #if __linux__

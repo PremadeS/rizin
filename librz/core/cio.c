@@ -80,9 +80,9 @@ RZ_API bool rz_core_dump(RzCore *core, const char *file, ut64 addr, ut64 size, i
 		fclose(fd);
 		return false;
 	}
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	for (i = 0; i < size; i += bs) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if ((i + bs) > size) {
@@ -94,7 +94,7 @@ RZ_API bool rz_core_dump(RzCore *core, const char *file, ut64 addr, ut64 size, i
 			break;
 		}
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	fclose(fd);
 	free(buf);
 	return true;

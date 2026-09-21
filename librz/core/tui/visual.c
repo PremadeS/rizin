@@ -3898,7 +3898,7 @@ RZ_IPI int rz_core_visual(RzCore *core, const char *input) {
 					(void)rz_cons_readpush(chrs, chrs_read);
 				}
 			}
-			if (rz_cons_is_breaked()) {
+			if (rz_interrupt_is_breaked()) {
 				break;
 			}
 			rz_core_visual_show_char(core, ch);

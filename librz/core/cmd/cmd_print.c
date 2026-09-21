@@ -2794,7 +2794,7 @@ RZ_IPI RzCmdStatus rz_cmd_disassembly_all_possible_opcodes_handler(RzCore *core,
 	bool color = rz_config_get_i(core->config, "scr.color") > 0;
 	void **p;
 	rz_cmd_state_output_array_start(state);
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	rz_pvector_foreach (vec, p) {
 		RzCoreDisasmOp *op = *p;
 		switch (state->mode) {
@@ -2816,7 +2816,7 @@ RZ_IPI RzCmdStatus rz_cmd_disassembly_all_possible_opcodes_handler(RzCore *core,
 			break;
 		}
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	rz_cmd_state_output_array_end(state);
 
 ret:
@@ -3170,12 +3170,12 @@ RZ_IPI RzCmdStatus rz_cmd_sizes_of_n_instructions_handler(RzCore *core, int argc
 	}
 
 	rz_cmd_state_output_array_start(state);
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	for (ut32 i = 0, j = 0; i < core->blocksize && j < RZ_ABS(n_instrs); i += ret, j++) {
 		RzAsmOp asm_op = { 0 };
 		ret = rz_asm_disassemble(core->rasm, &asm_op, core->block + i, core->blocksize - i);
 		rz_asm_op_fini(&asm_op);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		// be sure to return 0 when it fails to disassemble the
@@ -3196,7 +3196,7 @@ RZ_IPI RzCmdStatus rz_cmd_sizes_of_n_instructions_handler(RzCore *core, int argc
 			ret = 1;
 		}
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	rz_cmd_state_output_array_end(state);
 
 	if (n_instrs < 0) {
@@ -5067,7 +5067,7 @@ static ut8 *analysis_histogram_data(RzCore *core, CoreBlockRange *brange, CoreAn
 		return NULL;
 	}
 	for (i = 0; i < brange->nblocks; i++) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		ut64 off = brange->from + (i + brange->skipblocks) * brange->blocksize;
@@ -5270,7 +5270,7 @@ static RzCmdStatus print_visual_bytes(RzCore *core, RZ_OWN RZ_NONNULL RzHistogra
 	hist->blocksize = brange->blocksize;
 
 	int okey, key;
-	while (!exit_histogram && !is_error && !rz_cons_is_breaked()) {
+	while (!exit_histogram && !is_error && !rz_interrupt_is_breaked()) {
 		// Re-read scr.hist.minimap / scr.hist.block / scr.utf8 / scr.color /
 		// hex.offset from config every iteration so that `:` + `e ...` <Enter>
 		// from inside the visual histogram takes effect on the next redraw.
@@ -5350,7 +5350,7 @@ static RzCmdStatus print_visual_bytes(RzCore *core, RZ_OWN RZ_NONNULL RzHistogra
 		}
 		rz_cons_clear00();
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	core->cons->event_resize = NULL;
 	core->cons->event_data = NULL;
 	core->keep_asmqjmps = false;

@@ -49,6 +49,7 @@ include_files = [
   'rz_socket.h',
   'rz_syscall.h',
   'rz_th.h',
+  'rz_tty.h',
   'rz_type.h',
   'rz_types.h',
   'rz_types_base.h',

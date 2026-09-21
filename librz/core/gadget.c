@@ -1797,7 +1797,7 @@ static RzList /*<RzGadgetEndListPair *>*/ *compute_end_gadget_list(const RzCore 
 			}
 		}
 		rz_analysis_op_fini(&end_gadget);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 	}
@@ -2184,7 +2184,7 @@ static int handle_gadget_search_address(RzCore *core, RzGadgetSearchContext *con
 	// instructions, x86 and friends are weird length instructions, so
 	// we'll just assume 15 byte instructions.
 	const int gadget_depth = context->increment == 1 ? context->max_instr * max_inst_size_x86 /* wow, x86 is long */ : context->max_instr * context->increment;
-	if (rz_cons_is_breaked()) {
+	if (rz_interrupt_is_breaked()) {
 		return -2;
 	}
 	RzGadgetEndListPair *end_gadget = rz_list_pop(context->end_list);
@@ -2198,7 +2198,7 @@ static int handle_gadget_search_address(RzCore *core, RzGadgetSearchContext *con
 		} else if (context->increment != 1 && i < prev) {
 			i = prev;
 		}
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if (i > next && !update_end_gadget(&i, gadget_depth, &end_gadget, context)) {
@@ -2283,7 +2283,7 @@ RZ_API RzCmdStatus rz_core_gadget_search(RZ_NONNULL RzCore *core, RZ_NONNULL RzG
 	if (context->state) {
 		rz_cmd_state_output_array_start(context->state);
 	}
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	if (context->max_count == 0) {
 		context->max_count = -1;
 	}
@@ -2330,7 +2330,7 @@ RZ_API RzCmdStatus rz_core_gadget_search(RZ_NONNULL RzCore *core, RZ_NONNULL RzG
 		const RzInterval itv = rz_itv_intersect(search_itv, map->itv);
 		context->from = itv.addr;
 		context->to = rz_itv_end(itv);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		status = handle_gadget_search_address(core, context, rx_list);
@@ -2345,14 +2345,14 @@ RZ_API RzCmdStatus rz_core_gadget_search(RZ_NONNULL RzCore *core, RZ_NONNULL RzG
 
 cleanup:
 	ht_su_free(context->unique_hitlists);
-	if (rz_cons_is_breaked()) {
+	if (rz_interrupt_is_breaked()) {
 		eprintf("\n");
 	}
 
 	if (context->state) {
 		rz_cmd_state_output_array_end(context->state);
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	rz_list_free(rx_list);
 	return !status ? RZ_CMD_STATUS_OK : RZ_CMD_STATUS_ERROR;
 }

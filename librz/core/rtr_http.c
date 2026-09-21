@@ -416,8 +416,8 @@ static int rz_core_rtr_http_run(RzCore *core, bool open_browser) {
 
 	core->block = newblk;
 	// TODO: handle mutex lock/unlock here
-	rz_cons_break_push(rtr_http_stop, core);
-	while (!rz_cons_is_breaked()) {
+	rz_interrupt_break_push(dbg->intr, (RzInterruptBreak)rtr_http_stop, core);
+	while (!rz_interrupt_is_breaked()) {
 
 		core->http_up = 0; // DAT IS NOT TRUE AT ALL.. but its the way to enable visual
 
@@ -520,7 +520,7 @@ static int rz_core_rtr_http_run(RzCore *core, bool open_browser) {
 		free(dir);
 	}
 the_end:
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	core->http_up = false;
 	free(pfile);
 	rz_socket_free(s);

@@ -5443,16 +5443,16 @@ toro:
 	if (!ds->nlines) {
 		ds->nlines = core->blocksize;
 	}
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	for (idx = ret = 0; idx < len && ds->lines < ds->nlines; idx += inc, ds->index += inc, ds->lines++) {
 		ds->at = ds->addr + idx;
 		ds->vat = rz_core_pava(core, ds->at);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			RZ_FREE(nbuf);
 			if (!ds->vec && ds->pj) {
 				rz_cons_pop();
 			}
-			rz_cons_break_pop();
+			rz_interrupt_break_pop(dbg->intr);
 			rz_config_hold_restore(rch);
 			rz_config_hold_free(rch);
 			ds_free(ds);
@@ -5522,7 +5522,7 @@ toro:
 		}
 		if (ds->retry) {
 			ds->retry = false;
-			rz_cons_break_pop();
+			rz_interrupt_break_pop(dbg->intr);
 			rz_analysis_op_fini(&ds->analysis_op);
 			goto retry;
 		}
@@ -5751,7 +5751,7 @@ toro:
 	rz_analysis_op_fini(&ds->analysis_op);
 
 	RZ_FREE(nbuf);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 
 	if (!ds->cbytes && ds->lines < ds->nlines) {
 		ds->addr = ds->at + inc;
@@ -5870,7 +5870,7 @@ RZ_API int rz_core_print_disasm_instructions_with_buf(RzCore *core, ut64 address
 		}
 	}
 
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	// build ranges to map addr with bits
 	j = 0;
 	for (i = 0; rz_disasm_check_end(nb_opcodes, j, nb_bytes, i); i += ret, j++) {
@@ -5879,7 +5879,7 @@ RZ_API int rz_core_print_disasm_instructions_with_buf(RzCore *core, ut64 address
 		int len = nb_bytes - i;
 		hasanalysis = false;
 		rz_core_seek_arch_bits(core, ds->at);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		ds->hint = rz_core_hint_begin(core, ds->hint, ds->at);
@@ -5996,7 +5996,7 @@ RZ_API int rz_core_print_disasm_instructions_with_buf(RzCore *core, ut64 address
 			ds->hint = NULL;
 		}
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	ds_free(ds);
 	rz_reg_arena_pop(rreg);
 	if (alloc_buf) {
@@ -6210,12 +6210,12 @@ RZ_IPI int rz_core_print_disasm_all(RzCore *core, ut64 addr, int l, int len) {
 		buf = malloc(l + 1);
 		rz_io_read_at_mapped(core->io, addr, buf, l);
 	}
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	for (i = 0; i < l; i++) {
 		ds->at = addr + i;
 		ds->vat = rz_core_pava(core, ds->at);
 		rz_asm_set_pc(core->rasm, ds->vat);
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		RzAsmOp asmop = { 0 };
@@ -6245,7 +6245,7 @@ RZ_IPI int rz_core_print_disasm_all(RzCore *core, ut64 addr, int l, int len) {
 		}
 		rz_asm_op_fini(&asmop);
 	}
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	if (buf != core->block) {
 		free(buf);
 	}
@@ -6298,7 +6298,7 @@ RZ_API int rz_core_disasm_pdi_with_buf(RzCore *core, ut64 address, ut8 *buf, ut3
 		}
 	}
 
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	int midflags = rz_config_get_i(core->config, "asm.flags.middle");
 	bool midbb = rz_config_get_b(core->config, "asm.bb.middle");
 	bool asmmarks = rz_config_get_b(core->config, "asm.marks");
@@ -6307,7 +6307,7 @@ RZ_API int rz_core_disasm_pdi_with_buf(RzCore *core, ut64 address, ut8 *buf, ut3
 	j = 0;
 	RzAnalysisMetaItem *meta = NULL;
 	for (; rz_disasm_check_end(nb_opcodes, j, nb_bytes, i); j++) {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			err = 1;
 			break;
 		}
@@ -6490,7 +6490,7 @@ RZ_API int rz_core_disasm_pdi_with_buf(RzCore *core, ut64 address, ut8 *buf, ut3
 		i += ret;
 	}
 	rz_config_set_i(core->config, "asm.marks", asmmarks);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	if (alloc_buf) {
 		free(buf);
 	}
@@ -6776,7 +6776,7 @@ RZ_API RZ_OWN RzPVector /*<RzCoreDisasmOp *>*/ *rz_core_disasm_all_possible_opco
 	}
 	rz_pvector_reserve(vec, n_bytes);
 
-	for (ut64 position = 0; position < n_bytes && !rz_cons_is_breaked(); position++) {
+	for (ut64 position = 0; position < n_bytes && !rz_interrupt_is_breaked(); position++) {
 		ut64 offset = addr + position;
 		ut8 *ptr = buffer + position;
 		int length = (int)(n_bytes - position);

@@ -213,7 +213,7 @@ static bool step_handle_result(RzCore *core, RzAnalysisILStepResult r) {
 }
 
 static bool step_cond_n(RzAnalysisILVM *vm, void *user) {
-	if (rz_cons_is_breaked()) {
+	if (rz_interrupt_is_breaked()) {
 		rz_cons_printf("Stepping was interrupted.\n");
 		return false;
 	}
@@ -242,7 +242,7 @@ RZ_API bool rz_core_il_step(RZ_NONNULL RzCore *core, ut64 n) {
 }
 
 static bool step_cond_until(RzAnalysisILVM *vm, void *user) {
-	if (rz_cons_is_breaked()) {
+	if (rz_interrupt_is_breaked()) {
 		rz_cons_printf("Stepping was interrupted.\n");
 		return false;
 	}

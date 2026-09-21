@@ -44,7 +44,7 @@ typedef struct {
 	bool breaked;
 	RzConsEvent event_interrupt;
 	void *event_interrupt_data;
-} RzConsBreakStack;
+} RzInterruptBreakStack;
 
 static void cons_grep_reset(RzConsGrep *grep);
 
@@ -55,7 +55,7 @@ static void ctx_rowcol_calc_reset(RzCons *cons) {
 }
 
 static void break_stack_free(void *ptr) {
-	RzConsBreakStack *b = (RzConsBreakStack *)ptr;
+	RzInterruptBreakStack *b = (RzInterruptBreakStack *)ptr;
 	free(b);
 }
 
@@ -335,13 +335,13 @@ RZ_API void rz_cons_break_clear(RzCons *cons) {
 	CTX(breaked) = false;
 }
 
-// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzConsBreak cb, void *user, bool sig) {
+// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzInterruptBreak cb, void *user, bool sig) {
 // 	if (!context->break_stack) {
 // 		return;
 // 	}
 
 // 	// if we don't have any element in the stack start the signal
-// 	RzConsBreakStack *b = RZ_NEW0(RzConsBreakStack);
+// 	RzInterruptBreakStack *b = RZ_NEW0(RzInterruptBreakStack);
 // 	if (!b) {
 // 		return;
 // 	}
@@ -367,7 +367,7 @@ RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool
 		return;
 	}
 	// restore old state
-	RzConsBreakStack *b = NULL;
+	RzInterruptBreakStack *b = NULL;
 	b = rz_stack_pop(context->break_stack);
 	if (b) {
 		context->event_interrupt = b->event_interrupt;
@@ -384,7 +384,7 @@ RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool
 	}
 }
 
-// RZ_API void rz_cons_break_push(RzCons *cons, RzConsBreak cb, void *user) {
+// RZ_API void rz_interrupt_break_push(dbg->intr, RzCons *cons, RzInterruptBreak cb, void *user) {
 // 	rz_cons_context_break_push(cons, cons->context, cb, user, true);
 // }
 
@@ -400,7 +400,7 @@ RZ_API bool rz_cons_default_context_is_interactive() {
 	return rz_cons_context_default.is_interactive;
 }
 
-RZ_API bool rz_cons_is_breaked(RzCons *cons) {
+RZ_API bool rz_interrupt_is_breaked(RzCons *cons) {
 	if (cons->cb_break) {
 		cons->cb_break(cons->user);
 	}
@@ -707,7 +707,7 @@ RZ_API RzCons *rz_cons_new() {
 	rz_cons_reset(cons);
 	rz_cons_rgb_init(cons);
 
-	rz_print_set_is_interrupted_cb(rz_cons_is_breaked);
+	rz_print_set_is_interrupted_cb(rz_interrupt_is_breaked);
 
 	return cons;
 }
@@ -1100,7 +1100,7 @@ RZ_API void rz_cons_flush(RzCons *cons) {
 			int len = CTX(buffer_len);
 			(CTX(buffer))[CTX(buffer_len)] = 0;
 			rz_interrupt_break_push(cons->intr, NULL, NULL); // TODOe: add intr in cons
-			while (nl && !rz_cons_is_breaked(cons)) {
+			while (nl && !rz_interrupt_is_breaked(cons)) {
 				__cons_write(cons, ptr, nl - ptr + 1);
 				if (cons->linesleep && !(i % pagesize)) {
 					rz_sys_usleep(cons->linesleep * 1000);
@@ -2020,7 +2020,7 @@ RZ_API void rz_cons_bind(RzConsBind *bind) {
 	bind->cb_printf = (PrintfCallback)rz_cons_printf;
 	bind->cb_flush = (RzConsFlush)rz_cons_flush;
 	bind->cb_grep = (RzConsGrepCallback)rz_cons_grep;
-	bind->is_breaked = (RzConsIsBreaked)rz_cons_is_breaked;
+	bind->is_breaked = (RzConsIsBreaked)rz_interrupt_is_breaked;
 }
 
 RZ_API const char *rz_cons_get_rune(const ut8 ch) {

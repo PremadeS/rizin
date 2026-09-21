@@ -142,8 +142,8 @@ RZ_IPI RzCmdStatus rz_hash_bang_handler(RzCore *core, int argc, const char **arg
 			free(run_str);
 		}
 	} else {
-		if (rz_cons_is_interactive()) {
-			lang_prompt(core->lang, core->cons);
+		if (rz_cons_is_interactive(core->cons)) {
+			rz_core_lang_prompt(core);
 		} else {
 			RZ_LOG_ERROR("scr.interactive required to run the rlang prompt\n");
 			return RZ_CMD_STATUS_ERROR;

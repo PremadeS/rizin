@@ -2638,6 +2638,8 @@ RZ_API bool rz_cmd_state_output_init(RZ_NONNULL RzCmdStateOutput *state, RzOutpu
  * output on screen. This function takes care of that, doing nothing in case the
  * output was already printed to console for those types that output as they go
  * (e.g. STANDARD, QUIET).
+ *
+ * TODO: add a normal strbuf print here??
  */
 RZ_API void rz_cmd_state_output_print(RZ_NONNULL RzCmdStateOutput *state) {
 	rz_return_if_fail(state);

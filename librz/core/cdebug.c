@@ -81,14 +81,14 @@ RZ_API bool rz_core_debug_step_one(RzCore *core, int times) {
 
 RZ_IPI void rz_core_debug_continue(RzCore *core) {
 	if (rz_core_is_debug(core)) {
-		rz_cons_break_push(rz_core_static_debug_stop, core->dbg);
+		rz_interrupt_break_push(dbg->intr, rz_core_static_debug_stop, core->dbg);
 		rz_reg_arena_swap(core->dbg->reg, true);
 #if __linux__
 		core->dbg->continue_all_threads = true;
 #endif
 		rz_debug_continue(core->dbg);
 		rz_core_reg_update_flags(core);
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 		rz_core_dbg_follow_seek_register(core);
 	} else {
 		rz_core_esil_step(core, UT64_MAX, "0", NULL, false);
@@ -116,7 +116,7 @@ RZ_API bool rz_core_debug_continue_until(RzCore *core, ut64 addr) {
 		bool prev_call = false;
 		bool prev_ret = false;
 		ut64 old_sp, cur_sp;
-		rz_cons_break_push(NULL, NULL);
+		rz_interrupt_break_push(dbg->intr, NULL, NULL);
 		rz_list_free(core->dbg->call_frames);
 		core->dbg->call_frames = rz_list_new();
 		core->dbg->call_frames->free = free;
@@ -157,7 +157,7 @@ RZ_API bool rz_core_debug_continue_until(RzCore *core, ut64 addr) {
 				RZ_LOG_DEBUG("At 0x%08" PFMT64x " after %lu steps\n", pc, steps);
 			}
 #endif
-			if (rz_cons_is_breaked() || rz_debug_is_dead(core->dbg) || pc == addr) {
+			if (rz_interrupt_is_breaked() || rz_debug_is_dead(core->dbg) || pc == addr) {
 				break;
 			}
 			if (is_x86_call(core->dbg, pc)) {
@@ -177,7 +177,7 @@ RZ_API bool rz_core_debug_continue_until(RzCore *core, ut64 addr) {
 #endif
 		}
 		rz_core_reg_update_flags(core);
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 		return true;
 	}
 	RZ_LOG_DEBUG("Continue until 0x%08" PFMT64x "\n", addr);
@@ -216,11 +216,11 @@ RZ_IPI void rz_core_debug_single_step_over(RzCore *core) {
 	rz_config_set_b(core->config, "io.cache", false);
 	if (rz_core_is_debug(core)) {
 		if (core->print->cur_enabled) {
-			rz_cons_break_push(rz_core_static_debug_stop, core->dbg);
+			rz_interrupt_break_push(dbg->intr, rz_core_static_debug_stop, core->dbg);
 			rz_reg_arena_swap(core->dbg->reg, true);
 			rz_debug_continue_until_optype(core->dbg, RZ_ANALYSIS_OP_TYPE_RET, 1);
 			rz_core_reg_update_flags(core);
-			rz_cons_break_pop();
+			rz_interrupt_break_pop(dbg->intr);
 			rz_core_dbg_follow_seek_register(core);
 			core->print->cur_enabled = 0;
 		} else {
@@ -886,9 +886,9 @@ RZ_API bool rz_core_debug_step_until_frame(RzCore *core) {
 	rz_return_val_if_fail(core && core->dbg, false);
 	int maxLoops = 200000;
 	ut64 off, now = rz_debug_reg_get(core->dbg, "SP");
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	do {
-		if (rz_cons_is_breaked()) {
+		if (rz_interrupt_is_breaked()) {
 			break;
 		}
 		if (rz_debug_is_dead(core->dbg)) {
@@ -904,7 +904,7 @@ RZ_API bool rz_core_debug_step_until_frame(RzCore *core) {
 		}
 	} while (off <= now);
 	rz_core_reg_update_flags(core);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	return true;
 }
 

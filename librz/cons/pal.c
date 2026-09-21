@@ -699,8 +699,7 @@ RZ_API void rz_cons_rainbow_free(RzConsContext *ctx) {
 	RZ_FREE(ctx->pal.rainbow);
 }
 
-RZ_API char *rz_cons_rainbow_get(int idx, int last, bool bg) {
-	RzCons *cons = rz_cons_singleton();
+RZ_API char *rz_cons_rainbow_get(RzCons *cons, int idx, int last, bool bg) {
 	if (last < 0) {
 		last = cons->context->pal.rainbow_sz;
 	}
@@ -713,9 +712,9 @@ RZ_API char *rz_cons_rainbow_get(int idx, int last, bool bg) {
 	const char *a = cons->context->pal.rainbow[x];
 	if (bg) {
 		char *dup = rz_str_newf("%s %s", a, a);
-		char *res = rz_cons_pal_parse(dup, NULL);
+		char *res = rz_cons_pal_parse(cons, dup, NULL);
 		free(dup);
 		return res;
 	}
-	return rz_cons_pal_parse(a, NULL);
+	return rz_cons_pal_parse(cons, a, NULL);
 }

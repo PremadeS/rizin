@@ -450,10 +450,10 @@ onemoretime:
 		if (fcn) {
 			rz_analysis_function_resize(fcn, core->offset - fcn->addr);
 		}
-		rz_cons_break_push(NULL, NULL);
+		rz_interrupt_break_push(dbg->intr, NULL, NULL);
 		// required for thumb autodetection
 		rz_core_analysis_function_add(core, NULL, off, false);
-		rz_cons_break_pop();
+		rz_interrupt_break_pop(dbg->intr);
 	} break;
 	case 'v': {
 		ut64 N;

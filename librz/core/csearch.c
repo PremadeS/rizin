@@ -94,7 +94,7 @@ fail:
 }
 
 static bool default_search_no_cancel(void *user, size_t n_hits, RzSearchCancelReason invoke_reason) {
-	return rz_cons_is_breaked();
+	return rz_interrupt_is_breaked();
 }
 
 static RzList /*<RzSearchHit *>*/ *perform_search_on_core_io(RzCore *core, RZ_BORROW RzSearchOpt *search_opts, RZ_BORROW RzList /*<RzIOMap *>*/ *boundaries, RZ_BORROW RzSearchCollection *collection) {

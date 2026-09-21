@@ -12,3 +12,19 @@ rz-sign.c
 rz-find.c
 rz-diff.c
 rz-bin.c
+========================= BEFORE FINDING OUT ABOUT CMDSTATE AUTO PRINT ==============================
+rizin.c
+pipe_helper.c
+windows.c
+linux_debug.c
+less.c
+pager.c
+hud.c
+histogram.c
+html.c
+grep.c
+cpipe.c
+dietline.c
+output.c
+line.c
+input.c

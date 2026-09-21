@@ -767,6 +767,7 @@ RZ_API void rz_core_print_func_args(RzCore *core);
 
 /* clang.c */
 RZ_API RzCmdStatus rz_core_lang_plugins_print(RzLang *lang, RzCmdStateOutput *state);
+RZ_API int rz_core_lang_prompt(RzCore *core);
 
 /* ccore.c */
 RZ_API RzCmdStatus rz_core_core_plugins_print(RzCore *core, RzCmdStateOutput *state);

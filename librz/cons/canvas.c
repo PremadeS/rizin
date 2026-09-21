@@ -288,7 +288,7 @@ RZ_API void rz_cons_canvas_write(RzConsCanvas *c, const char *s) {
 
 	/* split the string into pieces of non-ANSI chars and print them normally,
 	** using the ANSI chars to set the attr of the canvas */
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	do {
 		const char *s_part = set_attr(c, s);
 		ch = 0;
@@ -338,8 +338,8 @@ RZ_API void rz_cons_canvas_write(RzConsCanvas *c, const char *s) {
 			attr_x += utf8_len;
 		}
 		s += piece_len;
-	} while (*s && !rz_cons_is_breaked());
-	rz_cons_break_pop();
+	} while (*s && !rz_interrupt_is_breaked());
+	rz_interrupt_break_pop(dbg->intr);
 	c->x = orig_x;
 }
 

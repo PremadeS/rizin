@@ -794,7 +794,7 @@ RZ_API void rz_core_global_vars_propagate_types(RzCore *core, RzAnalysisFunction
 	rz_config_set_i(core->config, "io.cache", 1);
 	rz_config_set_i(core->config, "dbg.follow", 0);
 	ut64 oldoff = core->offset;
-	rz_cons_break_push(NULL, NULL);
+	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	// TODO: The algorithm can be more accurate if blocks are followed by their jmp/fail, not just by address
 
 	rz_pvector_sort(fcn->bbs, bb_cmpaddr, NULL);
@@ -804,7 +804,7 @@ RZ_API void rz_core_global_vars_propagate_types(RzCore *core, RzAnalysisFunction
 		ut64 to = bb->addr + bb->size;
 		rz_reg_set_value(rreg, pc, at);
 		for (i = 0; at < to; i++) {
-			if (rz_cons_is_breaked()) {
+			if (rz_interrupt_is_breaked()) {
 				goto beach;
 			}
 			if (at < bb->addr) {
@@ -904,7 +904,7 @@ beach:
 	rz_analysis_esil_free(esil);
 	rz_reg_arena_pop(rreg);
 	rz_core_reg_update_flags(core);
-	rz_cons_break_pop();
+	rz_interrupt_break_pop(dbg->intr);
 	free(buf);
 }
 

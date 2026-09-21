@@ -1243,7 +1243,7 @@ RZ_API RZ_BORROW RzCoreFile *rz_core_file_open(RZ_NONNULL RzCore *r, RZ_NONNULL 
 	}
 	r->io->bits = rz_asm_get_bits(r->rasm); // TODO: we need an api for this
 	RzIODesc *fd = rz_io_open_nomap(r->io, file, flags, 0644);
-	if (rz_cons_is_breaked()) {
+	if (rz_interrupt_is_breaked()) {
 		goto beach;
 	}
 	if (!fd && openmany) {
