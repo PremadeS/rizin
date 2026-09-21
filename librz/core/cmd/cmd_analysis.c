@@ -1625,12 +1625,16 @@ RZ_IPI RzCmdStatus rz_analysis_list_vtables_handler(RzCore *core, int argc, cons
 }
 
 RZ_IPI RzCmdStatus rz_analysis_print_rtti_handler(RzCore *core, int argc, const char **argv, RzOutputMode mode) {
-	rz_analysis_rtti_print_at_vtable(core->analysis, core->offset, mode);
+    char * s = rz_analysis_rtti_print_at_vtable(core->analysis, core->offset, mode);
+    rz_cons_print(core->cons, s);
+    free(s);
 	return RZ_CMD_STATUS_OK;
 }
 
 RZ_IPI RzCmdStatus rz_analysis_print_rtti_all_handler(RzCore *core, int argc, const char **argv, RzOutputMode mode) {
-	rz_analysis_rtti_print_all(core->analysis, mode);
+    char* s = rz_analysis_rtti_print_all(core->analysis, mode);
+    rz_cons_print(core->cons, s);
+    free(s);
 	return RZ_CMD_STATUS_OK;
 }
 

@@ -1675,20 +1675,6 @@ RZ_API bool rz_core_init(RzCore *core) {
 	// TODO: make it return pointer of new instance, not singleton *
 	core->cons = rz_cons_new();
 
-	/* TODO: get rid of refcnt */
-	core->intr = RZ_NEW0(RzInterrupt);
-	if (core->intr) {
-		// TODO: Cutter might override these callbacks when multiple sessions are in place
-		// TODO: Do we need a void* user?
-		core->intr->user = NULL;
-		// TODO: we need casting??? why we need casting?
-		core->intr->is_breaked = (bool (*)(void *))rz_cons_is_breaked;
-		core->intr->break_push = (void (*)(void *, void *, void *))rz_cons_break_push;
-		core->intr->break_pop = (void (*)(void *))rz_cons_break_pop;
-		core->intr->sleep_begin = (void *(*)(void *))rz_cons_sleep_begin;
-		core->intr->sleep_end = (void (*)(void *, void *))rz_cons_sleep_end;
-	}
-
 	if (core->cons->refcnt == 1) {
 		if (core->cons->line) {
 			core->cons->line->user = core;
@@ -1813,7 +1799,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 	// rz_debug_use (core->dbg, "native");
 	//  XXX pushing uninitialized regstate results in trashed reg values
 	//	rz_reg_arena_push (core->dbg->reg); // create a 2 level register state stack
-	//	core->dbg->analysis->reg = core->analysis->reg; // XXX: dupped instance.. can cause lost pointerz
+	// core->dbg->analysis->reg = core->analysis->reg; // XXX: dupped instance.. can cause lost pointerz
 	core->io->cb_printf = rz_cons_printf;
 	core->dbg->cb_printf = rz_cons_printf;
 	core->dbg->bp->cb_printf = rz_cons_printf;
@@ -1847,6 +1833,28 @@ RZ_API bool rz_core_init(RzCore *core) {
 		}
 	}
 	rz_core_analysis_type_init(core);
+
+	/*TODO: where should we move this?*/
+	/* interrupt ============================*/
+	/*TODO: we need to allocate mem??*/
+	core->intr = RZ_NEW0(RzInterrupt);
+	if (core->intr) {
+		// TODO: Cutter might override these callbacks when multiple sessions are in place
+		// TODO: Do we need a void* user?
+		// TODO: use that stoopid typedef format so we don't need casting
+		core->intr->user = NULL;
+		core->intr->is_breaked = (bool (*)(void *))rz_cons_is_breaked;
+		core->intr->break_push = (void (*)(void *, void *, void *))rz_cons_break_push;
+		core->intr->break_pop = (void (*)(void *))rz_cons_break_pop;
+		core->intr->sleep_begin = (void *(*)(void *))rz_cons_sleep_begin;
+		core->intr->sleep_end = (void (*)(void *, void *))rz_cons_sleep_end;
+	}
+	rz_analysis_set_interrupt(core->analysis, core->intr);
+	rz_cons_bind(rz_analysis_get_cons_bind(core->analysis));
+	// TODO: add where ever we need to set interrupt aswell brev
+	// like the libgdbr and stuff
+	/* ========================= */
+
 	return 0;
 }
 

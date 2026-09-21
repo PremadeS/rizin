@@ -1905,7 +1905,9 @@ RZ_IPI RzCmdStatus rz_cmd_debug_trace_esil_handler(RzCore *core, int argc, const
 	rz_core_analysis_esil_init(core);
 	int idx = rz_num_math(core->num, argv[1]);
 	RzAnalysisEsil *esil = rz_analysis_get_esil(core->analysis);
-	rz_analysis_esil_trace_show(esil, idx);
+	char *s = rz_analysis_esil_trace_show(esil, idx);
+	rz_cons_print(core->cons, s);
+	free(s);
 	return RZ_CMD_STATUS_OK;
 }
 
@@ -1913,7 +1915,9 @@ RZ_IPI RzCmdStatus rz_cmd_debug_trace_esil_handler(RzCore *core, int argc, const
 RZ_IPI RzCmdStatus rz_cmd_debug_trace_esils_handler(RzCore *core, int argc, const char **argv) {
 	rz_core_analysis_esil_init(core);
 	RzAnalysisEsil *esil = rz_analysis_get_esil(core->analysis);
-	rz_analysis_esil_trace_list(esil);
+	char *s = rz_analysis_esil_trace_list(esil);
+	rz_cons_print(core->cons, s);
+	free(s);
 	return RZ_CMD_STATUS_OK;
 }
 

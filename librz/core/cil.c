@@ -285,6 +285,7 @@ RZ_API bool rz_core_il_step_until_with_events(RZ_NONNULL RzCore *core, ut64 unti
 	RzAnalysisILStepResult r = rz_analysis_il_vm_step_while_with_events(
 		core->analysis, il_vm, rreg,
 		step_cond_until, &until);
+	// print the returned strbuf
 	return step_handle_result(core, r);
 }
 

@@ -21,11 +21,9 @@ static ut64 get_cf_offset(RzAnalysis *analysis, const ut8 *data, int len) {
 	if (!read_u32_leb128(&data[1], &data[len - 1], &fcn_id)) {
 		return UT64_MAX;
 	}
-	rz_cons_push();
 	// 0xfff.. are bad addresses for wasm
 	// cgvwzq: 0xfff... can be external imported JS funcs
 	char *s = analysis->coreb.cmdstrf(analysis->coreb.core, "is~FUNC[2:%u]", fcn_id);
-	rz_cons_pop();
 	if (s) {
 		ut64 n = rz_num_get(NULL, s);
 		free(s);

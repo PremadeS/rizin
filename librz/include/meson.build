@@ -57,7 +57,6 @@ include_files = [
   'rz_vector.h',
   'rz_windows.h',
   'rz_windows_heap.h',
-  'rz_interrupt.h',
 ]
 install_headers(include_files, install_dir: rizin_incdir)
 
@@ -86,6 +85,7 @@ rz_util_files = [
   'rz_util/rz_graph_drawable.h',
   'rz_util/rz_hex.h',
   'rz_util/rz_idpool.h',
+  'rz_util/rz_interrupt.h',
   'rz_util/rz_intervaltree.h',
   'rz_util/rz_iterator.h',
   'rz_util/rz_itv.h',

@@ -42,6 +42,7 @@
 #include <rz_util/rz_graph.h>
 #include <rz_util/rz_hex.h>
 #include <rz_util/rz_idpool.h>
+#include <rz_util/rz_interrupt.h>
 #include <rz_util/rz_intervaltree.h>
 #include <rz_util/rz_iterator.h>
 #include <rz_util/rz_itv.h>

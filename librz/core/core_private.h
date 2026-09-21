@@ -139,8 +139,8 @@ RZ_IPI bool rz_core_agraph_apply(RzCore *core, RzGraph /*<RzGraphNodeInfo *, NUL
 RZ_IPI bool rz_core_graph_print_graph(RZ_NONNULL RzCore *core, RZ_NONNULL RzGraph /*<RzGraphNodeInfo *, None *>*/ *graph, RzCoreGraphFormat format, bool use_offset);
 RZ_IPI bool rz_core_graph_print(RzCore *core, ut64 addr, RzCoreGraphType type, RzCoreGraphFormat format);
 
-RZ_IPI RzCmdStatus rz_core_bin_plugin_print(const RzBinPlugin *bp, RzCmdStateOutput *state);
-RZ_IPI RzCmdStatus rz_core_binxtr_plugin_print(const RzBinXtrPlugin *bx, RzCmdStateOutput *state);
+RZ_IPI RzCmdStatus rz_core_bin_plugin_print(RZ_NONNULL RzCore *core, const RzBinPlugin *bp, RzCmdStateOutput *state);
+RZ_IPI RzCmdStatus rz_core_binxtr_plugin_print(RZ_NONNULL RzCore *core, const RzBinXtrPlugin *bx, RzCmdStateOutput *state);
 
 /* creg.c */
 RZ_IPI RzList /*<RzRegItem *>*/ *rz_core_reg_flags_candidates(RzCore *core, RzReg *reg);

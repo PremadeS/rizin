@@ -33,7 +33,6 @@
 #include <rz_bind.h>
 #include <rz_util/rz_annotated_code.h>
 #include <rz_mark.h>
-#include <rz_interrupt.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -1133,9 +1132,9 @@ RZ_API bool rz_core_bin_pdb_load(RZ_NONNULL RzCore *core, RZ_NONNULL const char 
 RZ_API RzPdb *rz_core_pdb_load_info(RZ_NONNULL RzCore *core, RZ_NONNULL const char *file);
 RZ_API void rz_core_pdb_info_print(RZ_NONNULL RzCore *core, RZ_NONNULL RzTypeDB *db, RZ_NONNULL RzPdb *pdb, RZ_NONNULL RzCmdStateOutput *state);
 RZ_API char *rz_core_bin_pdb_gvars_as_string(RZ_NONNULL RzPdb *pdb, const ut64 img_base, RzCmdStateOutput *state);
-RZ_API RzCmdStatus rz_core_bin_plugins_print(RzBin *bin, RzCmdStateOutput *state);
+RZ_API RzCmdStatus rz_core_bin_plugins_print(RZ_NONNULL RzCore *core, RzBin *bin, RzCmdStateOutput *state);
 
-RZ_API bool rz_core_bin_archs_print(RZ_NONNULL RzBin *bin, RZ_NONNULL RzCmdStateOutput *state);
+RZ_API bool rz_core_bin_archs_print(RZ_NONNULL RzCore *core, RZ_NONNULL RzBin *bin, RZ_NONNULL RzCmdStateOutput *state);
 RZ_API bool rz_core_bin_entries_print(RZ_NONNULL RzCore *core, RZ_NONNULL RzBinFile *bf, RZ_NONNULL RzCmdStateOutput *state);
 RZ_API bool rz_core_bin_initfini_print(RZ_NONNULL RzCore *core, RZ_NONNULL RzBinFile *bf, RZ_NONNULL RzCmdStateOutput *state);
 RZ_API bool rz_core_bin_exports_print(RZ_NONNULL RzCore *core, RZ_NONNULL RzBinFile *bf, RZ_NONNULL RzCmdStateOutput *state, RzCoreBinFilter *filter);
