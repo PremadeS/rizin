@@ -939,23 +939,24 @@ RZ_API bool rz_cons_get_click(int *x, int *y);
 // TODO: check which functions should be static??
 // all of them that don't take in cons? except for init???
 
+// TODOe: check that free functions don't need cons
 #ifdef RZ_API
-RZ_API RzConsCanvas *rz_cons_canvas_new(RzCons *cons, int w, int h);
-RZ_API void rz_cons_canvas_free(RzCons *cons, RzConsCanvas *c);
-RZ_API void rz_cons_canvas_clear(RzCons *cons, RzConsCanvas *c);
+RZ_API RzConsCanvas *rz_cons_canvas_new(int w, int h);
+RZ_API void rz_cons_canvas_free(RzConsCanvas *c);
+RZ_API void rz_cons_canvas_clear(RzConsCanvas *c);
 RZ_API void rz_cons_canvas_print(RzCons *cons, RzConsCanvas *c);
-RZ_API void rz_cons_canvas_print_region(RzCons *cons, RzConsCanvas *c);
-RZ_API RZ_OWN char *rz_cons_canvas_to_string(RzCons *cons, RzConsCanvas *c);
-RZ_API void rz_cons_canvas_write(RzCons *cons, RzConsCanvas *c, const char *_s);
-RZ_API bool rz_cons_canvas_gotoxy(RzCons *cons, RzConsCanvas *c, int x, int y);
-RZ_API void rz_cons_canvas_box(RzCons *cons, RzConsCanvas *c, int x, int y, int w, int h, const char *color);
-RZ_API void rz_cons_canvas_line(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API void rz_cons_canvas_line_diagonal(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API void rz_cons_canvas_line_square(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API int rz_cons_canvas_resize(RzCons *cons, RzConsCanvas *c, int w, int h);
-RZ_API void rz_cons_canvas_fill(RzCons *cons, RzConsCanvas *c, int x, int y, int w, int h, char ch);
-RZ_API void rz_cons_canvas_line_square_defined(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert);
-RZ_API void rz_cons_canvas_line_back_edge(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert);
+RZ_API void rz_cons_canvas_print_region(RzConsCanvas *c);
+RZ_API RZ_OWN char *rz_cons_canvas_to_string(RzConsCanvas *c);
+RZ_API void rz_cons_canvas_write(RzConsCanvas *c, const char *_s);
+RZ_API bool rz_cons_canvas_gotoxy(RzConsCanvas *c, int x, int y);
+RZ_API void rz_cons_canvas_box(RzConsCanvas *c, int x, int y, int w, int h, const char *color);
+RZ_API void rz_cons_canvas_line(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
+RZ_API void rz_cons_canvas_line_diagonal(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
+RZ_API void rz_cons_canvas_line_square(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
+RZ_API int rz_cons_canvas_resize(RzConsCanvas *c, int w, int h);
+RZ_API void rz_cons_canvas_fill(RzConsCanvas *c, int x, int y, int w, int h, char ch);
+RZ_API void rz_cons_canvas_line_square_defined(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert);
+RZ_API void rz_cons_canvas_line_back_edge(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert);
 RZ_API RzCons *rz_cons_new();
 RZ_API RzCons *rz_cons_singleton(RzCons *cons);
 RZ_API RzCons *rz_cons_free(RzCons *cons);
@@ -982,9 +983,9 @@ RZ_API bool rz_cons_default_context_is_interactive();
 // RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool sig);
 // ===============
 
-// TODO: remove these ====
-// RZ_API void rz_cons_push(RzCons *cons);
-// RZ_API void rz_cons_pop(RzCons *cons);
+// TODO: don't???? remove these ====
+RZ_API void rz_cons_push(RzCons *cons);
+RZ_API void rz_cons_pop(RzCons *cons);
 // ====
 
 /* ^C */

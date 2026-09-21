@@ -1,6 +1,14 @@
+meson.build
+rz_core.h
 rz_cons.h
+rz_cmd.h
 cons.c
 cbin.c
 esil_trace.c
 rtti_itanium.c
 analysis_il.c
+rz-asm.c
+rz-sign.c
+rz-find.c
+rz-diff.c
+rz-bin.c

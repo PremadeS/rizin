@@ -173,9 +173,9 @@ static void cons_context_deinit(RzConsContext *context) {
 	context->lastLength = 0;
 }
 
-static void __break_signal(int sig) {
-	rz_cons_context_break(&rz_cons_context_default); // TODO: this static var necessary?
-}
+// static void __break_signal(int sig) {
+// 	rz_cons_context_break(&rz_cons_context_default); // TODO: this static var necessary?
+// }
 
 static inline void __cons_write_ll(RzCons *cons, const char *buf, int len) {
 #if __WINDOWS__
@@ -335,32 +335,32 @@ RZ_API void rz_cons_break_clear(RzCons *cons) {
 	CTX(breaked) = false;
 }
 
-RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzConsBreak cb, void *user, bool sig) {
-	if (!context->break_stack) {
-		return;
-	}
+// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzConsBreak cb, void *user, bool sig) {
+// 	if (!context->break_stack) {
+// 		return;
+// 	}
 
-	// if we don't have any element in the stack start the signal
-	RzConsBreakStack *b = RZ_NEW0(RzConsBreakStack);
-	if (!b) {
-		return;
-	}
-	if (rz_stack_is_empty(context->break_stack)) {
-#if __UNIX__
-		if (sig && rz_cons_context_is_main(cons)) {
-			rz_sys_signal(SIGINT, __break_signal);
-		}
-#endif
-		context->breaked = false;
-	}
-	// save the actual state
-	b->event_interrupt = context->event_interrupt;
-	b->event_interrupt_data = context->event_interrupt_data;
-	rz_stack_push(context->break_stack, b);
-	// configure break
-	context->event_interrupt = cb;
-	context->event_interrupt_data = user;
-}
+// 	// if we don't have any element in the stack start the signal
+// 	RzConsBreakStack *b = RZ_NEW0(RzConsBreakStack);
+// 	if (!b) {
+// 		return;
+// 	}
+// 	if (rz_stack_is_empty(context->break_stack)) {
+// #if __UNIX__
+// 		if (sig && rz_cons_context_is_main(cons)) {
+// 			rz_sys_signal(SIGINT, __break_signal);
+// 		}
+// #endif
+// 		context->breaked = false;
+// 	}
+// 	// save the actual state
+// 	b->event_interrupt = context->event_interrupt;
+// 	b->event_interrupt_data = context->event_interrupt_data;
+// 	rz_stack_push(context->break_stack, b);
+// 	// configure break
+// 	context->event_interrupt = cb;
+// 	context->event_interrupt_data = user;
+// }
 
 RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool sig) {
 	if (!context->break_stack) {
@@ -384,13 +384,13 @@ RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool
 	}
 }
 
-RZ_API void rz_cons_break_push(RzCons *cons, RzConsBreak cb, void *user) {
-	rz_cons_context_break_push(cons, cons->context, cb, user, true);
-}
+// RZ_API void rz_cons_break_push(RzCons *cons, RzConsBreak cb, void *user) {
+// 	rz_cons_context_break_push(cons, cons->context, cb, user, true);
+// }
 
-RZ_API void rz_cons_break_pop(RzCons *cons) {
-	rz_cons_context_break_pop(cons, cons->context, true);
-}
+// RZ_API void rz_cons_break_pop(RzCons *cons) {
+// 	rz_cons_context_break_pop(cons, cons->context, true);
+// }
 
 RZ_API bool rz_cons_is_interactive(RzCons *cons) {
 	return CTX(is_interactive);
@@ -976,15 +976,15 @@ RZ_API bool rz_cons_context_is_main(RzCons *cons) {
 	return cons->context == &rz_cons_context_default;
 }
 
-RZ_API void rz_cons_context_break(RzConsContext *context) {
-	if (!context) {
-		context = &rz_cons_context_default;
-	}
-	context->breaked = true;
-	if (context->event_interrupt) {
-		context->event_interrupt(context->event_interrupt_data);
-	}
-}
+// RZ_API void rz_cons_context_break(RzConsContext *context) {
+// 	if (!context) {
+// 		context = &rz_cons_context_default;
+// 	}
+// 	context->breaked = true;
+// 	if (context->event_interrupt) {
+// 		context->event_interrupt(context->event_interrupt_data);
+// 	}
+// }
 
 RZ_API void rz_cons_last(RzCons *cons) {
 	if (!CTX(lastEnabled)) {
@@ -1099,7 +1099,7 @@ RZ_API void rz_cons_flush(RzCons *cons) {
 			char *nl = strchr(ptr, '\n');
 			int len = CTX(buffer_len);
 			(CTX(buffer))[CTX(buffer_len)] = 0;
-			rz_cons_break_push(cons, NULL, NULL);
+			rz_interrupt_break_push(cons->intr, NULL, NULL); // TODOe: add intr in cons
 			while (nl && !rz_cons_is_breaked(cons)) {
 				__cons_write(cons, ptr, nl - ptr + 1);
 				if (cons->linesleep && !(i % pagesize)) {
@@ -1110,7 +1110,7 @@ RZ_API void rz_cons_flush(RzCons *cons) {
 				i++;
 			}
 			__cons_write(cons, ptr, CTX(buffer) + len - ptr);
-			rz_cons_break_pop(cons);
+			rz_interrupt_break_pop(cons->intr);
 		} else {
 			__cons_write(cons, CTX(buffer), CTX(buffer_len));
 		}

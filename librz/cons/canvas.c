@@ -415,12 +415,12 @@ RZ_API void rz_cons_canvas_print_region(RzConsCanvas *c) {
 	free(o);
 }
 
-RZ_API void rz_cons_canvas_print(RzConsCanvas *c) {
+RZ_API void rz_cons_canvas_print(RzCons *cons, RzConsCanvas *c) {
 	char *o = rz_cons_canvas_to_string(c);
 	if (!o) {
 		return;
 	}
-	rz_cons_strcat(o);
+	rz_cons_strcat(cons, o);
 	free(o);
 }
 

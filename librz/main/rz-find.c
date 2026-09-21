@@ -539,10 +539,11 @@ static int rzfind_open_file(RzfindOptions *ro, const char *file, const ut8 *data
 		to = rz_io_size(io);
 	}
 
-	if (!rz_cons_new()) {
-		result = 1;
-		goto err;
-	}
+	// TODOe:
+	// if (!rz_cons_new()) {
+	// 	result = 1;
+	// 	goto err;
+	// }
 
 	RzBinOptions opt;
 	rz_bin_options_init(&opt, 0, 0, 0, false);
@@ -736,7 +737,7 @@ static int rzfind_open_file(RzfindOptions *ro, const char *file, const ut8 *data
 		}
 	}
 done:
-	rz_cons_free();
+	rz_cons_free(core->cons);
 	rz_bin_free(bin);
 err:
 	free(efile);
