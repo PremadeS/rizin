@@ -398,7 +398,7 @@ bool test_layout_topo_sort_chain() {
 	mu_assert_eq(nE->layer, 4, "layer E");
 
 	rz_agraph_free(ag);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 

@@ -105,10 +105,10 @@ bool test_line_multicompletion(void) {
 
 	const char *exp_buf = "> pd\n"
 			      "pdf       pdF       pdb       pdx       \n";
-	const char *buf = rz_cons_get_buffer();
+	const char *buf = rz_cons_get_buffer(cons);
 	mu_assert_notnull(buf, "buf is not null");
 	mu_assert_streq(buf, exp_buf, "options are shown correctly");
-	rz_cons_reset();
+	rz_cons_reset(cons);
 
 	line->ns_completion.run = multicompletion_run2;
 	strcpy(line->buffer.data, "p");
@@ -122,11 +122,11 @@ bool test_line_multicompletion(void) {
 
 	exp_buf = "> pd\n"
 		  "pdf       pdF       pdb       pdx       \n";
-	buf = rz_cons_get_buffer();
+	buf = rz_cons_get_buffer(cons);
 	mu_assert_notnull(buf, "buf is not null");
 	mu_assert_streq(buf, exp_buf, "options are shown correctly");
 
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
@@ -140,13 +140,13 @@ bool test_line_kill_word(void) {
 
 	// write the string, then do ^b two times to move the index to 10, then ^d to delete the word under the cursor
 	const char instr[] = "pd 10@ hello\x1b\x62\x1b\x62\x1b\x64\n";
-	rz_cons_readpush(instr, sizeof(instr));
+	rz_cons_readpush(cons, instr, sizeof(instr));
 	rz_line_readline(line);
 
 	mu_assert_eq(line->buffer.index, 3, "index is after 'pd '");
 	mu_assert_streq(line->buffer.data, "pd @ hello", "10 was deleted");
 
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
@@ -159,21 +159,21 @@ bool test_line_undo(void) {
 
 	// write 20 chars and undo once
 	char input_concat[] = "01234567890123456789\x1f\n";
-	rz_cons_readpush(input_concat, sizeof(input_concat));
+	rz_cons_readpush(cons, input_concat, sizeof(input_concat));
 	rz_line_readline(line);
 	mu_assert_eq(line->buffer.length, 0, "concatenated string should get cleared");
 	mu_assert_eq(line->buffer.index, 0, "index is 0");
 
 	// write a string, delete, then undo('\x1f') twice
 	char input_undo[] = "0123\x17\x1f\x1f\n";
-	rz_cons_readpush(input_undo, sizeof(input_undo));
+	rz_cons_readpush(cons, input_undo, sizeof(input_undo));
 	rz_line_readline(line);
 	mu_assert_eq(line->buffer.index, 0, "index is at 0");
 	mu_assert_eq(line->buffer.length, 0, "legth is 0");
 
 	// write a string, undo('\x1f') and redo('\x1b\x3f')
 	char input_redo[] = "pDF\x1f\x1b\x3f\n";
-	rz_cons_readpush(input_redo, sizeof(input_redo));
+	rz_cons_readpush(cons, input_redo, sizeof(input_redo));
 	rz_line_readline(line);
 	mu_assert_streq(line->buffer.data, "pDF", "redo not working");
 
@@ -181,11 +181,11 @@ bool test_line_undo(void) {
 	line->ns_completion.run = onecompletion_run;
 	// now "pd" has been confirmed to be completed to "pdf ". undo will turn it to previous state replacing the texts.
 	const char input_undo_group[] = "pd\t\x1f\n";
-	rz_cons_readpush(input_undo_group, sizeof(input_undo_group));
+	rz_cons_readpush(cons, input_undo_group, sizeof(input_undo_group));
 	rz_line_readline(line);
 	mu_assert_streq(line->buffer.data, "pd", "undo group operations not working");
 
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 

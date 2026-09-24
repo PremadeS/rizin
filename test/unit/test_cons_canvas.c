@@ -14,7 +14,7 @@ bool test_canvas_new_free(void) {
 }
 
 bool test_canvas_write_tostring(void) {
-	rz_cons_new();
+	RzCons *cons = rz_cons_new();
 
 	RzConsCanvas *c = rz_cons_canvas_new(10, 3);
 	rz_cons_canvas_gotoxy(c, 0, 0);
@@ -27,12 +27,12 @@ bool test_canvas_write_tostring(void) {
 	mu_assert_streq_free(res, "Hello\n  World\n", "Canvas content check");
 
 	rz_cons_canvas_free(c);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
 bool test_canvas_resize(void) {
-	rz_cons_new();
+	RzCons *cons = rz_cons_new();
 	RzConsCanvas *c = rz_cons_canvas_new(5, 2);
 	rz_cons_canvas_gotoxy(c, 0, 0);
 	rz_cons_canvas_write(c, "Hi");
@@ -47,12 +47,12 @@ bool test_canvas_resize(void) {
 	mu_assert_streq_free(res, "\n\n\n", "Canvas cleared after resize");
 
 	rz_cons_canvas_free(c);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
 bool test_canvas_gotoxy_bounds(void) {
-	rz_cons_new();
+	RzCons *cons = rz_cons_new();
 	RzConsCanvas *c = rz_cons_canvas_new(10, 5);
 	bool ret;
 
@@ -69,24 +69,24 @@ bool test_canvas_gotoxy_bounds(void) {
 	mu_assert_false(ret, "0,5 is OOB y");
 
 	rz_cons_canvas_free(c);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
 bool test_canvas_fill(void) {
-	rz_cons_new();
+	RzCons *cons = rz_cons_new();
 	RzConsCanvas *c = rz_cons_canvas_new(5, 5);
 	rz_cons_canvas_fill(c, 1, 1, 3, 3, 'X');
 	char *res = rz_cons_canvas_to_string(c);
 	mu_assert_notnull(res, "Canvas string should not be null");
 	mu_assert_streq_free(res, "\n XXX\n XXX\n XXX\n", "Canvas fill square");
 	rz_cons_canvas_free(c);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
 bool test_canvas_box(void) {
-	rz_cons_new();
+	RzCons *cons = rz_cons_new();
 	RzConsCanvas *c = rz_cons_canvas_new(5, 5);
 	rz_cons_canvas_box(c, 0, 0, 5, 5, "");
 	char *res = rz_cons_canvas_to_string(c);
@@ -106,12 +106,12 @@ bool test_canvas_box(void) {
 	mu_assert_streq_free(res, ".-.\n| |\n`-'", "Box 3x3 content");
 
 	rz_cons_canvas_free(c);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
 bool test_canvas_lines(void) {
-	rz_cons_new();
+	RzCons *cons = rz_cons_new();
 	RzConsCanvas *c = rz_cons_canvas_new(5, 5);
 	RzCanvasLineStyle style = { LINE_NONE, LINE_NOSYM_HORIZ, DOT_STYLE_NORMAL };
 
@@ -134,7 +134,7 @@ bool test_canvas_lines(void) {
 	mu_assert_streq_free(res, "-\n'-.\n  |", "Square line content");
 
 	rz_cons_canvas_free(c);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
