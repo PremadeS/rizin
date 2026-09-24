@@ -388,7 +388,7 @@ RZ_API RzAnalysisRefStr *rz_analysis_reflines_str(void *_core, ut64 addr, int op
 	}
 	rz_pvector_foreach (analysis->reflines, refline_iter) {
 		ref = *refline_iter;
-		if (core->cons && core->cons->context->breaked) {
+		if (core->cons && rz_interrupt_is_breaked(core->cons->intr)) {
 			rz_list_free(lvls);
 			return NULL;
 		}
@@ -401,7 +401,7 @@ RZ_API RzAnalysisRefStr *rz_analysis_reflines_str(void *_core, ut64 addr, int op
 	rz_buf_append_string(c, " ");
 	rz_buf_append_string(b, " ");
 	rz_list_foreach (lvls, iter, ref) {
-		if (core->cons && core->cons->context->breaked) {
+		if (core->cons && rz_interrupt_is_breaked(core->cons->intr)) {
 			rz_list_free(lvls);
 			rz_buf_free(b);
 			rz_buf_free(c);

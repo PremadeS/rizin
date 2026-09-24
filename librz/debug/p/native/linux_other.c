@@ -69,7 +69,7 @@ static int rz_debug_native_continue(RzDebug *dbg, int pid, int tid, int sig) {
 	}
 	/* SIGINT handler for attached processes: dbg.consbreak (disabled by default) */
 	if (dbg->consbreak) {
-		rz_interrupt_break_push(dbg->intr, (RzInterruptBreak)interrupt_process, dbg);
+		rz_interrupt_break_push(dbg->intr, (RzInterruptBreakCallback)interrupt_process, dbg);
 	}
 
 	if (dbg->continue_all_threads && dbg->n_threads && dbg->threads) {

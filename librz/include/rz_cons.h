@@ -381,6 +381,9 @@ typedef struct rz_cons_canvas_t {
 	int sy; // scrolly
 	int color;
 	int linemode; // 0 = diagonal , 1 = square
+	bool use_utf8; // TODOe: set both of these bih, wherever this canvas is being created
+	bool use_utf8_curvy;
+	RzInterrupt *intr; // TODOe: init this bih, also who will free this interrupt? core?
 } RzConsCanvas;
 
 #define RUNECODE_MIN             0xc8 // 200
@@ -468,7 +471,6 @@ typedef struct rz_cons_canvas_t {
 
 typedef char *(*RzConsEditorCallback)(void *core, const char *file, const char *str);
 typedef int (*RzConsClickCallback)(void *core, int x, int y);
-typedef void (*RzInterruptBreakCallback)(void *core);
 typedef void *(*RzConsSleepBeginCallback)(void *core);
 typedef void (*RzConsSleepEndCallback)(void *core, void *user);
 typedef void (*RzConsQueueTaskOneshot)(void *core, void *task, void *user);
@@ -505,10 +507,7 @@ typedef struct rz_cons_context_t {
 	size_t buffer_len;
 	size_t buffer_sz;
 
-	bool breaked;
-	RzStack *break_stack;
-	RzConsEvent event_interrupt;
-	void *event_interrupt_data;
+	RzInterrupt *intr; // TODOe: docs and verify this works
 	int cmd_depth;
 
 	// Used for per-task logging redirection
@@ -573,9 +572,6 @@ typedef struct rz_cons_t {
 	MouseEvent mouse_event;
 
 	RzConsEditorCallback cb_editor;
-	RzInterruptBreakCallback cb_break;
-	RzConsSleepBeginCallback cb_sleep_begin;
-	RzConsSleepEndCallback cb_sleep_end;
 	RzConsClickCallback cb_click;
 	RzConsQueueTaskOneshot cb_task_oneshot;
 	RzConsFunctionKey cb_fkey;
@@ -617,7 +613,7 @@ typedef struct rz_cons_t {
 	int pagesize;
 	char *break_word;
 	int break_word_len;
-	ut64 timeout; // must come from rz_time_now_mono()
+	// ut64 timeout; //TODOe: added in rz_interrupt.h
 	bool grep_color;
 	bool grep_highlight;
 	int grep_icase;
@@ -629,6 +625,7 @@ typedef struct rz_cons_t {
 	bool show_vals; // show which section in Vv
 	RzStrBuf *echobuf;
 	// TODO: move into instance? + avoid unnecessary copies
+	RzInterrupt *intr; // TODOe: init
 } RzCons;
 
 #define RZ_CONS_SEARCH_CASE_SENSITIVE   0
@@ -917,49 +914,26 @@ typedef struct rz_histogram_interactive_t {
 } RzHistogramInteractive;
 
 #ifdef RZ_API
-RZ_API RzConsCanvas *rz_cons_canvas_new(int w, int h);
-RZ_API void rz_cons_canvas_free(RzConsCanvas *c);
-RZ_API void rz_cons_canvas_clear(RzConsCanvas *c);
-RZ_API void rz_cons_canvas_print(RzConsCanvas *c);
-RZ_API void rz_cons_canvas_print_region(RzConsCanvas *c);
-RZ_API RZ_OWN char *rz_cons_canvas_to_string(RzConsCanvas *c);
-RZ_API void rz_cons_canvas_write(RzConsCanvas *c, const char *_s);
-RZ_API bool rz_cons_canvas_gotoxy(RzConsCanvas *c, int x, int y);
-RZ_API void rz_cons_canvas_box(RzConsCanvas *c, int x, int y, int w, int h, const char *color);
-RZ_API void rz_cons_canvas_line(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API void rz_cons_canvas_line_diagonal(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API void rz_cons_canvas_line_square(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API int rz_cons_canvas_resize(RzConsCanvas *c, int w, int h);
-RZ_API void rz_cons_canvas_fill(RzConsCanvas *c, int x, int y, int w, int h, char ch);
-RZ_API void rz_cons_canvas_line_square_defined(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert);
-RZ_API void rz_cons_canvas_line_back_edge(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert);
-RZ_API RzCons *rz_cons_new(void);
-RZ_API RzCons *rz_cons_free(void);
-RZ_API char *rz_cons_lastline(int *size);
-RZ_API char *rz_cons_lastline_utf8_ansi_len(int *len);
-RZ_API void rz_cons_set_click(int x, int y, MouseEvent event);
-RZ_API bool rz_cons_get_click(int *x, int *y);
 // TODO: check which functions should be static??
 // all of them that don't take in cons? except for init???
 
 // TODOe: check that free functions don't need cons
-#ifdef RZ_API
 RZ_API RzConsCanvas *rz_cons_canvas_new(int w, int h);
 RZ_API void rz_cons_canvas_free(RzConsCanvas *c);
 RZ_API void rz_cons_canvas_clear(RzConsCanvas *c);
 RZ_API void rz_cons_canvas_print(RzCons *cons, RzConsCanvas *c);
-RZ_API void rz_cons_canvas_print_region(RzConsCanvas *c);
+RZ_API void rz_cons_canvas_print_region(RzCons *cons, RzConsCanvas *c);
 RZ_API RZ_OWN char *rz_cons_canvas_to_string(RzConsCanvas *c);
 RZ_API void rz_cons_canvas_write(RzConsCanvas *c, const char *_s);
 RZ_API bool rz_cons_canvas_gotoxy(RzConsCanvas *c, int x, int y);
 RZ_API void rz_cons_canvas_box(RzConsCanvas *c, int x, int y, int w, int h, const char *color);
-RZ_API void rz_cons_canvas_line(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API void rz_cons_canvas_line_diagonal(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
-RZ_API void rz_cons_canvas_line_square(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
+RZ_API void rz_cons_canvas_line(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
+RZ_API void rz_cons_canvas_line_diagonal(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
+RZ_API void rz_cons_canvas_line_square(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style);
 RZ_API int rz_cons_canvas_resize(RzConsCanvas *c, int w, int h);
 RZ_API void rz_cons_canvas_fill(RzConsCanvas *c, int x, int y, int w, int h, char ch);
-RZ_API void rz_cons_canvas_line_square_defined(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert);
-RZ_API void rz_cons_canvas_line_back_edge(RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert);
+RZ_API void rz_cons_canvas_line_square_defined(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert);
+RZ_API void rz_cons_canvas_line_back_edge(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert);
 RZ_API RzCons *rz_cons_new();
 RZ_API RzCons *rz_cons_singleton(RzCons *cons);
 RZ_API RzCons *rz_cons_free(RzCons *cons);
@@ -968,7 +942,7 @@ RZ_API char *rz_cons_lastline_utf8_ansi_len(RzCons *cons, int *len);
 RZ_API void rz_cons_set_click(RzCons *cons, int x, int y, MouseEvent event);
 RZ_API bool rz_cons_get_click(RzCons *cons, int *x, int *y);
 
-// typedef void (*RzInterruptBreak)(void *);
+// typedef void (*RzInterruptBreakCallback)(void *);
 RZ_API bool rz_cons_is_interactive(RzCons *cons);
 RZ_API bool rz_cons_default_context_is_interactive();
 
@@ -976,13 +950,12 @@ RZ_API bool rz_cons_default_context_is_interactive();
 // RZ_API bool rz_interrupt_is_breaked(RzCons *cons);
 // RZ_API void *rz_cons_sleep_begin(RzCons *cons);
 // RZ_API void rz_cons_sleep_end(RzCons *cons, void *user);
-// RZ_API void rz_interrupt_break_push(dbg->intr, RzCons *cons, RzInterruptBreak cb, void *user);
+// RZ_API void rz_interrupt_break_push(dbg->intr, RzCons *cons, RzInterruptBreakCallback cb, void *user);
 // RZ_API void rz_cons_break_pop(RzCons *cons);
 // RZ_API void rz_cons_break_clear(RzCons *cons);
 // RZ_API void rz_cons_break_end(RzCons *cons);
 // RZ_API void rz_cons_break_timeout(RzCons *cons, int timeout);
-// RZ_API void rz_cons_context_break(RzConsContext *context);
-// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzInterruptBreak cb, void *user, bool sig);
+// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzInterruptBreakCallback cb, void *user, bool sig);
 // RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool sig);
 // ===============
 
@@ -1015,7 +988,14 @@ RZ_API RzConsContext *rz_cons_context_new(RZ_NULLABLE RzConsContext *parent);
 RZ_API void rz_cons_context_free(RzConsContext *context);
 RZ_API void rz_cons_context_load(RzCons *cons, RzConsContext *context);
 RZ_API void rz_cons_context_reset(RzCons *cons);
+
+// TODOe: Do we need this now? this was just to check if main context got SIGINT so we abort
 RZ_API bool rz_cons_context_is_main(RzCons *cons);
+// TODOe: do we need these if context has same intr as cons itself?? ===
+RZ_API void rz_cons_context_break_push(RzConsContext *context, RzInterruptEvent cb, void *user);
+RZ_API void rz_cons_context_break_pop(RzConsContext *context);
+RZ_API void rz_cons_context_break(RzConsContext *context);
+// ================================================
 
 /* control */
 RZ_API void rz_cons_reset(RzCons *cons);
@@ -1061,7 +1041,7 @@ RZ_API void rz_cons_less(RzCons *cons);
 RZ_API void rz_cons_memset(RzCons *cons, char ch, int len);
 RZ_API void rz_cons_visual_flush(RzCons *cons);
 RZ_API void rz_cons_visual_write(RzCons *cons, char *buffer);
-RZ_API bool rz_cons_is_utf8(RzCons *cons);
+RZ_API bool rz_cons_is_utf8(void);
 RZ_API void rz_cons_cmd_help(RzCons *cons, const char *help[], bool use_color);
 
 /* input */
@@ -1085,9 +1065,9 @@ RZ_API void rz_cons_pal_random(RzCons *cons);
 RZ_API RzColor rz_cons_pal_get(RzCons *cons, const char *key);
 RZ_API RzColor rz_cons_pal_get_i(RzCons *cons, int index);
 RZ_API const char *rz_cons_pal_get_name(RzCons *cons, int index);
-RZ_API int rz_cons_pal_len(RzCons *cons);
-RZ_API int rz_cons_rgb_parse(RzCons *cons, const char *p, ut8 *r, ut8 *g, ut8 *b, ut8 *a);
-RZ_API char *rz_cons_rgb_tostring(RzCons *cons, ut8 r, ut8 g, ut8 b);
+RZ_API int rz_cons_pal_len(void);
+RZ_API int rz_cons_rgb_parse(const char *p, ut8 *r, ut8 *g, ut8 *b, ut8 *a);
+RZ_API char *rz_cons_rgb_tostring(ut8 r, ut8 g, ut8 b);
 RZ_API void rz_cons_pal_list_as_json(RzCons *cons, RZ_NONNULL PJ *pj);
 RZ_API void rz_cons_pal_list_as_css(RzCons *cons, RZ_NULLABLE const char *name_prefix);
 RZ_API void rz_cons_pal_list_visual(RzCons *cons);
@@ -1099,7 +1079,7 @@ RZ_API int rz_cons_arrow_to_hjkl(RzCons *cons, int ch);
 RZ_API char *rz_cons_html_filter(RzCons *cons, const char *ptr, int *newlen);
 RZ_API char *rz_cons_rainbow_get(RzCons *cons, int idx, int last, bool bg);
 RZ_API void rz_cons_rainbow_free(RzConsContext *ctx);
-RZ_API void rz_cons_rainbow_new(RzCons *cons, RzConsContext *ctx, int sz);
+RZ_API void rz_cons_rainbow_new(RzConsContext *ctx, int sz);
 
 RZ_API int rz_cons_fgets(RzCons *cons, char *buf, int len, int argc, const char **argv);
 RZ_API char *rz_cons_hud(RzCons *cons, RzList /*<char *>*/ *list, const char *prompt);
@@ -1117,8 +1097,8 @@ RZ_API void rz_cons_grep_process(RzCons *cons, RZ_OWN char *grep);
 RZ_API int rz_cons_grep_line(RzCons *cons, char *buf, int len); // must be static
 RZ_API void rz_cons_grepbuf(RzCons *cons);
 
-RZ_API void rz_cons_rgb_init(RzCons *cons);
-RZ_API char *rz_cons_rgb_str_mode(RzCons *cons, RzConsColorMode mode, char *outstr, size_t sz, const RzColor *rcolor);
+RZ_API void rz_cons_rgb_init(void);
+RZ_API char *rz_cons_rgb_str_mode(RzConsColorMode mode, char *outstr, size_t sz, const RzColor *rcolor);
 RZ_API char *rz_cons_rgb_str(RzCons *cons, char *outstr, size_t sz, const RzColor *rcolor);
 RZ_API char *rz_cons_rgb_str_off(RzCons *cons, char *outstr, size_t sz, ut64 off);
 RZ_API void rz_cons_color(RzCons *cons, int fg, int r, int g, int b);

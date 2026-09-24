@@ -114,7 +114,7 @@ typedef struct rz_print_t {
 	const char *cfmt;
 	char datefmt[32];
 	int datezone;
-	int (*write)(const unsigned char *buf, int len);
+	int (*write)(RzCons *cons, const unsigned char *buf, int len);
 	PrintfCallback cb_printf;
 	char *(*cb_color)(void *user, int idx, int last, bool bg);
 	bool scr_prompt;
@@ -181,7 +181,7 @@ typedef struct rz_print_t {
 
 #ifdef RZ_API
 
-/* RzInterruptBreak handlers */
+/* RzInterruptBreakCallback handlers */
 typedef bool (*RzPrintIsInterruptedCallback)();
 
 RZ_API bool rz_print_is_interrupted(void);

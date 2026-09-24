@@ -14,14 +14,15 @@
 // TODO: add DOCSS
 
 typedef void (*RzInterruptEvent)(void *user);
+typedef bool (*RzInterruptIsBreaked)(void *user);
 typedef void *(*RzInterruptSleepBegin)(void *user);
 typedef void (*RzInterruptSleepEnd)(void *user, void *bed);
-typedef void (*RzInterruptBreak)(void *);
+typedef void (*RzInterruptBreakCallback)(void *user);
 
 typedef struct rz_interrupt_t {
 	bool is_breaked;
 	bool hook_signals;
-	ut64 timeout;
+	ut64 timeout; // must come from rz_time_now_mono()
 
 	RzStack *break_stack;
 	RzInterruptEvent current_cb;
@@ -30,6 +31,7 @@ typedef struct rz_interrupt_t {
 	void *user;
 	RzInterruptSleepBegin sleep_begin;
 	RzInterruptSleepEnd sleep_end;
+	RzInterruptBreakCallback cb_break;
 } RzInterrupt;
 
 RZ_API RzInterrupt *rz_interrupt_new(void);
@@ -38,13 +40,9 @@ RZ_API void rz_interrupt_raise(RzInterrupt *intr);
 RZ_API void rz_interrupt_break_push(RzInterrupt *intr, RzInterruptEvent cb, void *user);
 RZ_API void rz_interrupt_break_pop(RzInterrupt *intr);
 RZ_API void rz_interrupt_timeout(RzInterrupt *intr, int timeout);
-
-static inline bool rz_interrupt_is_breaked(RzInterrupt *intr) {
-	if (!intr) {
-		return false;
-	}
-	return intr->is_breaked;
-}
+RZ_API void rz_interrupt_break_clear(RzInterrupt *intr);
+RZ_API bool rz_interrupt_is_breaked(RzInterrupt *intr);
+RZ_API void rz_interrupt_break_timeout(RzInterrupt *intr, int timeout);
 
 static inline void *rz_interrupt_sleep_begin(RzInterrupt *intr) {
 	if (intr && intr->sleep_begin) {
@@ -56,6 +54,12 @@ static inline void *rz_interrupt_sleep_begin(RzInterrupt *intr) {
 static inline void rz_interrupt_sleep_end(RzInterrupt *intr, void *bed) {
 	if (intr && intr->sleep_end) {
 		intr->sleep_end(intr->user, bed);
+	}
+}
+
+static inline void rz_interrupt_set_breaked(RzInterrupt *intr, bool breaked) {
+	if (intr) {
+		intr->is_breaked = breaked;
 	}
 }
 

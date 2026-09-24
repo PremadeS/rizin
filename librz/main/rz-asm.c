@@ -626,7 +626,7 @@ RZ_API int rz_main_rz_asm(int argc, const char *argv[]) {
 			} else {
 				rz_core_asm_plugins_print(core, &state, NULL);
 			}
-			rz_cmd_state_output_print(&state);
+			rz_cmd_state_output_print(&state, core->cons);
 			rz_cmd_state_output_fini(&state);
 			rz_cons_flush(core->cons);
 			core->rasm = tmp_asm;

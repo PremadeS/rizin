@@ -78,7 +78,6 @@
 #include <rz_util/rz_time.h>
 #include <rz_util/rz_tree.h>
 #include <rz_util/rz_trie.h>
-#include <rz_util/rz_tty.h>
 #include <rz_util/rz_uleb128.h>
 #include <rz_util/rz_unicode.h>
 #include <rz_util/rz_utf16.h>

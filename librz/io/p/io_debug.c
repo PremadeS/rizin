@@ -394,8 +394,8 @@ static int fork_and_ptraceme_for_unix(RzIO *io, int bits, const char *cmd) {
 			}
 			bed = rz_interrupt_sleep_begin(io->intr);
 			usleep(100000);
-			rz_interrupt_sleep_end(io->intr);
-		} while (ret != child_pid && !rz_interrupt_is_breaked());
+			rz_interrupt_sleep_end(io->intr, bed);
+		} while (ret != child_pid && !rz_interrupt_is_breaked(io->intr));
 		if (WIFSTOPPED(status)) {
 			eprintf("Process with PID %d started...\n", (int)child_pid);
 		} else if (WEXITSTATUS(status) == MAGIC_EXIT) {

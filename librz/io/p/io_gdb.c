@@ -304,7 +304,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 	if (rz_str_startswith(cmd, "pktsz")) {
 		const char *ptr = rz_str_trim_head_ro(cmd + 5);
 		if (!isdigit((ut8)*ptr)) {
-			io->cb_printf("packet size: %u bytes\n",
+			io->cb_printf(io->cb_printf_user, "packet size: %u bytes\n",
 				desc->stub_features.pkt_sz);
 			return NULL;
 		}
@@ -407,7 +407,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 	if (rz_str_startswith(cmd, "pid")) {
 		int pid = desc ? desc->pid : -1;
 		if (!cmd[3]) {
-			io->cb_printf("%d\n", pid);
+			io->cb_printf(io->cb_printf_user, "%d\n", pid);
 		}
 		return rz_str_newf("%d", pid);
 	}
@@ -457,7 +457,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 			}
 			return NULL;
 		}
-		io->cb_printf("num_retries: %d byte(s)\n", desc->page_size);
+		io->cb_printf(io->cb_printf_user, "num_retries: %d byte(s)\n", desc->page_size);
 		return NULL;
 	}
 	if (rz_str_startswith(cmd, "page_size")) {
@@ -468,7 +468,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 			}
 			return NULL;
 		}
-		io->cb_printf("page size: %d byte(s)\n", desc->page_size);
+		io->cb_printf(io->cb_printf_user, "page size: %d byte(s)\n", desc->page_size);
 		return NULL;
 	}
 	// Sets a flag that next call to get memmap will be for getting baddr

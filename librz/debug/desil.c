@@ -276,7 +276,7 @@ RZ_API ut64 rz_debug_esil_step(RzDebug *dbg, ut32 count) {
 	has_match = 0;
 	rz_interrupt_break_push(dbg->intr, NULL, NULL);
 	do {
-		if (rz_interrupt_is_breaked()) {
+		if (rz_interrupt_is_breaked(dbg->intr)) {
 			break;
 		}
 		if (has_match) {

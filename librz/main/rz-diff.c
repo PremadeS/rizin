@@ -137,7 +137,6 @@ typedef struct diff_hex_view_t {
 	RzCons *cons;
 	RzConsCanvas *canvas;
 	DiffScreen screen;
-	RzCons *cons; // TODOe: can we put this here??
 } DiffHexView;
 
 #define rz_diff_error(f, ...) \
@@ -2612,8 +2611,8 @@ static bool rz_diff_draw_tui(DiffHexView *hview, bool show_help) {
 		read_b = rz_io_pread_at(io_b->io, hview->address_b, hview->buffer_b, hview->size_b);
 	}
 
-	rz_cons_goto_origin_reset(cons);
-	rz_cons_clear(cons);
+	rz_cons_goto_origin_reset(hview->cons);
+	rz_cons_clear(hview->cons);
 	rz_cons_canvas_clear(canvas);
 	shift = seek_min_shift(hview);
 	for (ut64 h = 0, pos = 0; h < max_rows; ++h) {
@@ -2732,8 +2731,8 @@ static bool rz_diff_draw_tui(DiffHexView *hview, bool show_help) {
 		rz_cons_canvas_write(canvas, line);
 	}
 
-	rz_cons_canvas_print(cons, canvas);
-	rz_cons_flush(cons);
+	rz_cons_canvas_print(hview->cons, canvas);
+	rz_cons_flush(hview->cons);
 
 	// allow to refresh the terminal
 	// before printing again the ui

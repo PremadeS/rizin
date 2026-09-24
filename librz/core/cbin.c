@@ -480,7 +480,7 @@ RZ_API bool rz_core_bin_apply_strings(RzCore *r, RzBinFile *binfile) {
 	}
 	int va = (binfile->o && binfile->o->info && binfile->o->info->has_va) ? VA_TRUE : VA_FALSE;
 	rz_flag_space_push(r->flags, RZ_FLAGS_FS_STRINGS);
-	rz_interrupt_break_push(dbg->intr, r->cons, NULL, NULL);
+	rz_interrupt_break_push(r->intr, NULL, NULL);
 	void **iter;
 	RzBinString *string;
 	rz_pvector_foreach (l, iter) {
@@ -492,7 +492,7 @@ RZ_API bool rz_core_bin_apply_strings(RzCore *r, RzBinFile *binfile) {
 		if (!rz_bin_string_filter(r->bin, string->string, vaddr)) {
 			continue;
 		}
-		if (rz_interrupt_is_breaked(r->cons)) {
+		if (rz_interrupt_is_breaked(r->intr)) {
 			break;
 		}
 		rz_meta_set_with_subtype(r->analysis, RZ_META_TYPE_STRING, string->type, vaddr, string->size, string->string);
@@ -509,7 +509,7 @@ RZ_API bool rz_core_bin_apply_strings(RzCore *r, RzBinFile *binfile) {
 		free(f_name);
 	}
 	rz_flag_space_pop(r->flags);
-	rz_cons_break_pop(r->cons);
+	rz_interrupt_break_pop(r->intr);
 	return true;
 }
 
@@ -2020,14 +2020,14 @@ RZ_API void rz_core_bin_print_source_line_sample(RzCore *core, const RzBinSource
 RZ_API void rz_core_bin_print_source_line_info(RzCore *core, const RzBinSourceLineInfo *li, RzCmdStateOutput *state) {
 	rz_return_if_fail(core && li && state);
 	rz_cmd_state_output_array_start(state);
-	rz_interrupt_break_push(dbg->intr, core->cons, NULL, NULL);
+	rz_interrupt_break_push(core->intr, NULL, NULL);
 	for (size_t i = 0; i < li->samples_count; i++) {
-		if (rz_interrupt_is_breaked(core->cons)) {
+		if (rz_interrupt_is_breaked(core->intr)) {
 			break;
 		}
 		rz_core_bin_print_source_line_sample(core, &li->samples[i], state);
 	}
-	rz_cons_break_pop(core->cons);
+	rz_interrupt_break_pop(core->intr);
 	rz_cmd_state_output_array_end(state);
 }
 
@@ -2786,12 +2786,12 @@ static bool core_basefind_progess_status(const RzBaseFindThreadInfo *th_info, vo
 	if ((th_info->thread_idx + 1) >= th_info->n_threads) {
 		rz_cons_gotoxy(core->cons, 1, rz_cons_get_cur_line() - th_info->n_threads);
 	}
-	return !rz_interrupt_is_breaked(core->cons);
+	return !rz_interrupt_is_breaked(core->intr);
 }
 
 static bool core_basefind_check_ctrl_c(const RzBaseFindThreadInfo *th_info, void *user) {
 	RzCore *core = (RzCore *)user;
-	return !rz_interrupt_is_breaked(core->cons);
+	return !rz_interrupt_is_breaked(core->intr);
 }
 
 RZ_API bool rz_core_bin_basefind_print(RzCore *core, ut32 pointer_size, RzCmdStateOutput *state) {

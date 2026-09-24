@@ -536,10 +536,10 @@ static int rzbin_do_operation(RzBin *bin, const char *op, const char *output, co
 		if (plg && plg->signature) {
 			char *sign = plg->signature(cur, mode == RZ_OUTPUT_MODE_JSON);
 			if (sign) {
-		pj_o(state->d.pj);
-		pj_ks(state->d.pj, "signature", sign);
-		free(sign);
-
+				rz_cons_println(cons, sign);
+				rz_cons_flush(cons);
+				free(sign);
+			}
 		}
 	} break;
 	default:
@@ -621,7 +621,7 @@ static void __listPlugins(RzBin *bin, const char *plugin_name, PJ *pj, RzOutputM
 	} else {
 		// TODOe: why is there no core passed here?
 		rz_core_bin_plugins_print(core, bin, &state);
-		rz_cmd_state_output_print(&state);
+		rz_cmd_state_output_print(&state, core->cons);
 		rz_cmd_state_output_fini(&state);
 		rz_cons_flush(core->cons);
 	}

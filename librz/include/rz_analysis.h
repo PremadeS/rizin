@@ -2111,6 +2111,7 @@ RZ_API void rz_analysis_no_rtti_analysis(RZ_NONNULL RVTableContext *context, RZ_
 
 RZ_API char *rz_analysis_rtti_demangle_class_name(RzAnalysis *analysis, const char *name);
 RZ_API void rz_analysis_rtti_print_at_vtable(RzAnalysis *analysis, ut64 addr, RzOutputMode mode, RZ_NONNULL RzStrBuf *sb);
+// TODOe: just pass in cons
 RZ_API void rz_analysis_rtti_print_all(RzAnalysis *analysis, RzOutputMode mode, RZ_NONNULL RzStrBuf *sb);
 RZ_API void rz_analysis_rtti_recover_all(RzAnalysis *analysis);
 

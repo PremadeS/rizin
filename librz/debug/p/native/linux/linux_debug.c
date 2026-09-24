@@ -478,10 +478,10 @@ RzDebugReasonType linux_dbg_wait(RzDebug *dbg, int pid) {
 		// in the same process group. Otherwise, the task is running in
 		// background and SIGINT will not be propagated to the debuggee.
     // TODOe: how to handle this bih
-		if (rz_cons_context_is_main()) {
-			rz_interrupt_break_push(dbg->intr, (RzInterruptBreak)linux_dbg_wait_break_main, dbg);
+		if (rz_cons_context_is_main(dbg->cons)) {
+			rz_interrupt_break_push(dbg->intr, (RzInterruptBreakCallback)linux_dbg_wait_break_main, dbg);
 		} else {
-			rz_interrupt_break_push(dbg->intr, (RzInterruptBreak)linux_dbg_wait_break, dbg);
+			rz_interrupt_break_push(dbg->intr, (RzInterruptBreakCallback)linux_dbg_wait_break, dbg);
 		}
 		void *bed = rz_interrupt_sleep_begin(dbg->intr);
 		if (dbg->continue_all_threads) {
@@ -1017,7 +1017,7 @@ RzList /*<RzDebugPid *>*/ *linux_thread_list(RzDebug *dbg, int pid, RzList /*<Rz
 	dbg->cb_printf(dbg->user, "foo = 0x%04lx          \n", (fpregs).foo); \
 	dbg->cb_printf(dbg->user, "fos = 0x%04lx              ", (fpregs).fos)
 
-static void print_fpu(void *f) {
+static void print_fpu(RzDebug *dbg, void *f) {
 #if __x86_64__
 	struct user_fpregs_struct fpregs = *(struct user_fpregs_struct *)f;
 #if __ANDROID__
@@ -1164,7 +1164,7 @@ int linux_reg_read(RzDebug *dbg, int type, ut8 *buf, int size) {
 				return false;
 			}
 			if (showfpu) {
-				print_fpu((void *)&fpregs);
+				print_fpu(dbg, (void *)&fpregs);
 			}
 			size = RZ_MIN(sizeof(fpregs), size);
 			memcpy(buf, &fpregs, size);
@@ -1175,7 +1175,7 @@ int linux_reg_read(RzDebug *dbg, int type, ut8 *buf, int size) {
 			ret = rz_debug_ptrace(dbg, PTRACE_GETFPXREGS, pid, NULL, &fpxregs);
 			if (ret == 0) {
 				if (showfpu) {
-					print_fpu((void *)&fpxregs);
+					print_fpu(dbg, (void *)&fpxregs);
 				}
 				size = RZ_MIN(sizeof(fpxregs), size);
 				memcpy(buf, &fpxregs, size);
@@ -1183,7 +1183,7 @@ int linux_reg_read(RzDebug *dbg, int type, ut8 *buf, int size) {
 			} else {
 				ret = rz_debug_ptrace(dbg, PTRACE_GETFPREGS, pid, NULL, &fpregs);
 				if (showfpu) {
-					print_fpu((void *)&fpregs);
+					print_fpu(dbg, (void *)&fpregs);
 				}
 				if (ret != 0) {
 					rz_sys_perror("PTRACE_GETFPREGS");
@@ -1196,7 +1196,7 @@ int linux_reg_read(RzDebug *dbg, int type, ut8 *buf, int size) {
 #else
 			ret = rz_debug_ptrace(dbg, PTRACE_GETFPREGS, pid, NULL, &fpregs);
 			if (showfpu) {
-				print_fpu((void *)&fpregs);
+				print_fpu(dbg, (void *)&fpregs);
 			}
 			if (ret != 0) {
 				rz_sys_perror("PTRACE_GETFPREGS");

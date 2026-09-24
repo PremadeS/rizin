@@ -692,19 +692,19 @@ RZ_API bool rz_cons_yesno(RzCons *cons, int def, const char *fmt, ...) {
 }
 
 RZ_API char *rz_cons_input(RzCons *cons, const char *msg) {
-	char *oprompt = rz_line_get_prompt(I->line);
+	char *oprompt = rz_line_get_prompt(cons->line);
 	if (!oprompt) {
 		return NULL;
 	}
 	char buf[1024];
 	if (msg) {
-		rz_line_set_prompt(I->line, msg);
+		rz_line_set_prompt(cons->line, msg);
 	} else {
-		rz_line_set_prompt(I->line, "");
+		rz_line_set_prompt(cons->line, "");
 	}
 	buf[0] = 0;
 	rz_cons_fgets(cons, buf, sizeof(buf), 0, NULL);
-	rz_line_set_prompt(I->line, oprompt);
+	rz_line_set_prompt(cons->line, oprompt);
 	free(oprompt);
 	return rz_str_dup(buf);
 }

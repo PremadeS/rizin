@@ -69,7 +69,7 @@ RZ_API int rz_cons_less_str(RzCons *cons, const char *str, const char *exitkeys)
 		if (from < 0) {
 			from = 0;
 		}
-		pager_printpage(p, lines, mla, from, to, w);
+		pager_printpage(cons, p, lines, mla, from, to, w);
 		ch = rz_cons_readchar(cons);
 		if (exitkeys && strchr(exitkeys, ch)) {
 			for (i = 0; i < lines_count; i++) {

@@ -517,6 +517,8 @@ typedef struct rz_cmd_descriptor_t {
 typedef bool (*RzCmdForeachNameCb)(RzCmd *cmd, const RzCmdDesc *desc, void *user);
 typedef bool (*RzCmdForeachMacroCb)(RzCmd *cmd, const RzCmdMacro *macro, void *user);
 
+typedef struct rz_cons_t RzCons;
+
 #ifdef RZ_API
 RZ_API RzCmd *rz_cmd_new(RzCore *core, bool has_cons);
 RZ_API RzCmd *rz_cmd_free(RzCmd *cmd);
@@ -601,7 +603,7 @@ RZ_API void rz_cmd_state_output_set_color_selector(RzCmdStateOutput *state, RzTa
 RZ_API bool rz_cmd_state_output_init(RZ_NONNULL RzCmdStateOutput *state, RzOutputMode mode, RZ_NULLABLE const RzCore *core);
 RZ_API void rz_cmd_state_output_fini(RZ_NONNULL RzCmdStateOutput *state);
 RZ_API void rz_cmd_state_output_free(RZ_NONNULL RzCmdStateOutput *state);
-RZ_API void rz_cmd_state_output_print(RZ_NONNULL RzCmdStateOutput *state);
+RZ_API void rz_cmd_state_output_print(RZ_NONNULL RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
 
 #define rz_cmd_parsed_args_foreach_arg(args, i, arg) for ((i) = 1; (i) < (args->argc) && ((arg) = (args)->argv[i]); (i)++)
 

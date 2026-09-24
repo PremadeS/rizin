@@ -40,11 +40,6 @@ typedef struct {
 	bool noflush;
 } RzConsStack;
 
-typedef struct {
-	bool breaked;
-	RzConsEvent event_interrupt;
-	void *event_interrupt_data;
-} RzInterruptBreakStack;
 
 static void cons_grep_reset(RzConsGrep *grep);
 
@@ -52,11 +47,6 @@ static void ctx_rowcol_calc_reset(RzCons *cons) {
 	CTX(row) = 0;
 	CTX(col) = 0;
 	CTX(rowcol_calc_start) = 0;
-}
-
-static void break_stack_free(void *ptr) {
-	RzInterruptBreakStack *b = (RzInterruptBreakStack *)ptr;
-	free(b);
 }
 
 static void cons_stack_free(void *ptr) {
@@ -131,7 +121,6 @@ static void cons_stack_load(RzConsStack *data, bool free_current) {
 }
 
 static void cons_context_init(RzConsContext *context, RZ_NULLABLE RzConsContext *parent) {
-	context->breaked = false;
 	context->cmd_depth = RZ_CONS_CMD_DEPTH + 1;
 	context->buffer = NULL;
 	context->buffer_sz = 0;
@@ -139,9 +128,6 @@ static void cons_context_init(RzConsContext *context, RZ_NULLABLE RzConsContext 
 	context->buffer_len = 0;
 	context->is_interactive = false;
 	context->cons_stack = rz_stack_newf(6, cons_stack_free); // TODO:
-	context->break_stack = rz_stack_newf(6, break_stack_free);
-	context->event_interrupt = NULL;
-	context->event_interrupt_data = NULL;
 	context->pageable = true;
 	context->log_callback = NULL;
 	context->noflush = false;
@@ -160,8 +146,6 @@ static void cons_context_init(RzConsContext *context, RZ_NULLABLE RzConsContext 
 static void cons_context_deinit(RzConsContext *context) {
 	rz_stack_free(context->cons_stack);
 	context->cons_stack = NULL;
-	rz_stack_free(context->break_stack);
-	context->break_stack = NULL;
 	rz_cons_pal_free(context);
 	cons_grep_reset(&context->grep);
 	free(context->buffer);
@@ -327,70 +311,19 @@ RZ_API void rz_cons_strcat_at(RzCons *cons, const char *_str, int x, char y, int
 	free(str);
 }
 
-RZ_IPI RzCons *rz_cons_singleton(void) {
-	return &I;
-}
-
-RZ_API void rz_cons_break_clear(RzCons *cons) {
-	CTX(breaked) = false;
-}
-
-// RZ_API void rz_cons_context_break_push(RzCons *cons, RzConsContext *context, RzInterruptBreak cb, void *user, bool sig) {
-// 	if (!context->break_stack) {
-// 		return;
-// 	}
-
-// 	// if we don't have any element in the stack start the signal
-// 	RzInterruptBreakStack *b = RZ_NEW0(RzInterruptBreakStack);
-// 	if (!b) {
-// 		return;
-// 	}
-// 	if (rz_stack_is_empty(context->break_stack)) {
-// #if __UNIX__
-// 		if (sig && rz_cons_context_is_main(cons)) {
-// 			rz_sys_signal(SIGINT, __break_signal);
-// 		}
-// #endif
-// 		context->breaked = false;
-// 	}
-// 	// save the actual state
-// 	b->event_interrupt = context->event_interrupt;
-// 	b->event_interrupt_data = context->event_interrupt_data;
-// 	rz_stack_push(context->break_stack, b);
-// 	// configure break
-// 	context->event_interrupt = cb;
-// 	context->event_interrupt_data = user;
-// }
-
-RZ_API void rz_cons_context_break_pop(RzCons *cons, RzConsContext *context, bool sig) {
-	if (!context->break_stack) {
+RZ_API void rz_cons_context_break_push(RzConsContext *context, RzInterruptEvent cb, void *user) {
+	if (!context || !context->intr) {
 		return;
 	}
-	// restore old state
-	RzInterruptBreakStack *b = NULL;
-	b = rz_stack_pop(context->break_stack);
-	if (b) {
-		context->event_interrupt = b->event_interrupt;
-		context->event_interrupt_data = b->event_interrupt_data;
-		break_stack_free(b);
-	} else {
-		// there is not more elements in the stack
-#if __UNIX__
-		if (sig && rz_cons_context_is_main(cons)) {
-			rz_sys_signal(SIGINT, SIG_IGN);
-		}
-#endif
-		context->breaked = false;
-	}
+	rz_interrupt_break_push(context->intr, cb, user);
 }
 
-// RZ_API void rz_interrupt_break_push(dbg->intr, RzCons *cons, RzInterruptBreak cb, void *user) {
-// 	rz_cons_context_break_push(cons, cons->context, cb, user, true);
-// }
-
-// RZ_API void rz_cons_break_pop(RzCons *cons) {
-// 	rz_cons_context_break_pop(cons, cons->context, true);
-// }
+RZ_API void rz_cons_context_break_pop(RzConsContext *context) {
+	if (!context || !context->intr) {
+		return;
+	}
+	rz_interrupt_break_pop(context->intr);
+}
 
 RZ_API bool rz_cons_is_interactive(RzCons *cons) {
 	return CTX(is_interactive);
@@ -398,20 +331,6 @@ RZ_API bool rz_cons_is_interactive(RzCons *cons) {
 
 RZ_API bool rz_cons_default_context_is_interactive() {
 	return rz_cons_context_default.is_interactive;
-}
-
-RZ_API bool rz_interrupt_is_breaked(RzCons *cons) {
-	if (cons->cb_break) {
-		cons->cb_break(cons->user);
-	}
-	if (cons->timeout) {
-		if (rz_time_now_mono() > cons->timeout) {
-			CTX(breaked) = true;
-			eprintf("\nTimeout!\n");
-			cons->timeout = 0;
-		}
-	}
-	return CTX(breaked);
 }
 
 RZ_API int rz_cons_get_cur_line() {
@@ -448,41 +367,6 @@ RZ_API int rz_cons_get_cur_line() {
 	return curline;
 }
 
-RZ_API void rz_cons_break_timeout(RzCons *cons, int timeout) {
-	cons->timeout = (timeout && !cons->timeout)
-		? rz_time_now_mono() + ((ut64)timeout << 20)
-		: 0;
-}
-
-RZ_API void rz_cons_break_end(RzCons *cons) {
-	CTX(breaked) = false;
-	cons->timeout = 0;
-#if __UNIX__
-	rz_sys_signal(SIGINT, SIG_IGN);
-#endif
-	if (!rz_stack_is_empty(CTX(break_stack))) {
-		// free all the stack
-		rz_stack_free(CTX(break_stack));
-		// create another one
-		CTX(break_stack) = rz_stack_newf(6, break_stack_free);
-		CTX(event_interrupt_data) = NULL;
-		CTX(event_interrupt) = NULL;
-	}
-}
-
-RZ_API void *rz_cons_sleep_begin(RzCons *cons) {
-	if (!cons->cb_sleep_begin) {
-		return NULL;
-	}
-	return cons->cb_sleep_begin(cons->user);
-}
-
-RZ_API void rz_cons_sleep_end(RzCons *cons, void *user) {
-	if (cons->cb_sleep_end) {
-		cons->cb_sleep_end(cons->user, user);
-	}
-}
-
 #if __WINDOWS__
 static BOOL __w32_control(DWORD type) {
 	if (type == CTRL_C_EVENT) {
@@ -506,6 +390,7 @@ void resizeWin(RzCons *cons) {
 
 /**
  * \brief Set the property of the click event
+ * \param cons The cons reference
  * \param x The x coordinate of the position
  * \param y The y coordinate of the position
  * \param event The type of the click
@@ -705,14 +590,13 @@ RZ_API RzCons *rz_cons_new() {
 	cons->mouse = 0;
 	cons->show_vals = false;
 	rz_cons_reset(cons);
-	rz_cons_rgb_init(cons);
+	rz_cons_rgb_init();
 
 	rz_print_set_is_interrupted_cb(rz_interrupt_is_breaked);
 
 	return cons;
 }
 
-// TODO: this
 RZ_API RzCons *rz_cons_free(RzCons *cons) {
 	if (!cons) {
 		return NULL;
@@ -976,15 +860,13 @@ RZ_API bool rz_cons_context_is_main(RzCons *cons) {
 	return cons->context == &rz_cons_context_default;
 }
 
-// RZ_API void rz_cons_context_break(RzConsContext *context) {
-// 	if (!context) {
-// 		context = &rz_cons_context_default;
-// 	}
-// 	context->breaked = true;
-// 	if (context->event_interrupt) {
-// 		context->event_interrupt(context->event_interrupt_data);
-// 	}
-// }
+// TODOe: do we need these if context has the same interrupt as cons???
+RZ_API void rz_cons_context_break(RzConsContext *context) {
+	if (!context || !context->intr) {
+		return;
+	}
+	rz_interrupt_raise(context->intr);
+}
 
 RZ_API void rz_cons_last(RzCons *cons) {
 	if (!CTX(lastEnabled)) {
@@ -1100,7 +982,7 @@ RZ_API void rz_cons_flush(RzCons *cons) {
 			int len = CTX(buffer_len);
 			(CTX(buffer))[CTX(buffer_len)] = 0;
 			rz_interrupt_break_push(cons->intr, NULL, NULL); // TODOe: add intr in cons
-			while (nl && !rz_interrupt_is_breaked(cons)) {
+			while (nl && !rz_interrupt_is_breaked(cons->intr)) {
 				__cons_write(cons, ptr, nl - ptr + 1);
 				if (cons->linesleep && !(i % pagesize)) {
 					rz_sys_usleep(cons->linesleep * 1000);
@@ -1307,7 +1189,7 @@ RZ_API int rz_cons_memcat(RzCons *cons, const char *str, int len) {
 	}
 	if (cons->break_word && str && len > 0) {
 		if (rz_mem_mem((const ut8 *)str, len, (const ut8 *)cons->break_word, cons->break_word_len)) {
-			CTX(breaked) = true;
+			rz_interrupt_set_breaked(cons->intr, true);
 		}
 	}
 	return len;
@@ -1826,12 +1708,12 @@ RZ_API void rz_cons_column(RzCons *cons, int c) {
 }
 
 RZ_API void rz_cons_set_interactive(RzCons *cons, bool x) {
-	rz_cons_singleton(cons)->context->last_interactive_option = rz_cons_singleton(cons)->context->is_interactive;
-	rz_cons_singleton(cons)->context->is_interactive = x;
+	cons->context->last_interactive_option = cons->context->is_interactive;
+	cons->context->is_interactive = x;
 }
 
 RZ_API void rz_cons_set_last_interactive(RzCons *cons) {
-	rz_cons_singleton(cons)->context->is_interactive = rz_cons_singleton(cons)->context->last_interactive_option;
+	cons->context->is_interactive = cons->context->last_interactive_option;
 }
 
 RZ_API void rz_cons_set_title(RzCons *cons, const char *str) {

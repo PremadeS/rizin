@@ -3,7 +3,7 @@
 
 #include <rz_core.h>
 
-static RzCmdStatus core_lang_plugin_print(RzLangPlugin *lp, RzCmdStateOutput *state) {
+static RzCmdStatus core_lang_plugin_print(RzCons *cons, RzLangPlugin *lp, RzCmdStateOutput *state) {
 	const char *name = rz_str_get(lp->name);
 	const char *description = rz_str_get(lp->desc);
 	const char *license = rz_str_get(lp->license);
@@ -21,10 +21,10 @@ static RzCmdStatus core_lang_plugin_print(RzLangPlugin *lp, RzCmdStateOutput *st
 		pj_end(pj);
 		break;
 	case RZ_OUTPUT_MODE_STANDARD:
-		rz_cons_printf("%s: %s (%s)\n", name, description, license);
+		rz_cons_printf(cons, "%s: %s (%s)\n", name, description, license);
 		break;
 	case RZ_OUTPUT_MODE_QUIET:
-		rz_cons_println(name);
+		rz_cons_println(cons, name);
 		break;
 	default:
 		rz_warn_if_reached();
@@ -33,7 +33,8 @@ static RzCmdStatus core_lang_plugin_print(RzLangPlugin *lp, RzCmdStateOutput *st
 	return RZ_CMD_STATUS_OK;
 }
 
-RZ_API RzCmdStatus rz_core_lang_plugins_print(RzLang *lang, RzCmdStateOutput *state) {
+// TODOe: should we take this up by adding strbuf or keep it as is (RzCore* core was added for this btw)?
+RZ_API RzCmdStatus rz_core_lang_plugins_print(RzCore *core, RzLang *lang, RzCmdStateOutput *state) {
 	RzListIter *iter;
 	RzLangPlugin *lp;
 	RzCmdStatus status;
@@ -43,100 +44,11 @@ RZ_API RzCmdStatus rz_core_lang_plugins_print(RzLang *lang, RzCmdStateOutput *st
 	rz_cmd_state_output_array_start(state);
 	rz_cmd_state_output_set_columnsf(state, "sss", "name", "description", "license");
 	rz_list_foreach (lang->langs, iter, lp) {
-		status = core_lang_plugin_print(lp, state);
+		status = core_lang_plugin_print(core->cons, lp, state);
 		if (status != RZ_CMD_STATUS_OK) {
 			return status;
 		}
 	}
 	rz_cmd_state_output_array_end(state);
 	return RZ_CMD_STATUS_OK;
-}
-
-// TODOe: verify (lang_prompt)
-RZ_API int rz_core_lang_prompt(RzCore *core) {
-	char buf[1024];
-	const char *p;
-
-	RzLang *lang = core->lang;
-	if (!lang || !lang->cur) {
-		return false;
-	}
-
-	if (rz_lang_prompt(core->lang)) {
-		return true;
-	}
-
-	RzCons *cons = core->cons;
-	if (!cons || !cons->line) {
-		return false;
-	}
-
-	/* init line */
-	RzLine *line = cons->line;
-	RzLineHistory hist = line->history;
-	RzLineHistory histnull = { 0 };
-	RzLineCompletion oc = line->completion;
-	RzLineCompletion ocnull = { 0 };
-	char *prompt = rz_str_dup(line->prompt);
-	line->completion = ocnull;
-	line->history = histnull;
-
-	/* foo */
-	for (;;) {
-		rz_cons_flush(cons);
-		snprintf(buf, sizeof(buf) - 1, "%s> ", lang->cur->name);
-		rz_line_set_prompt(line, buf);
-		p = rz_line_readline(line);
-		if (!p) {
-			break;
-		}
-		rz_line_hist_add(line, p);
-		strncpy(buf, p, sizeof(buf) - 1);
-		if (*buf == '!') {
-			if (buf[1]) {
-				rz_sys_xsystem(buf + 1);
-			}
-			continue;
-		}
-		if (!memcmp(buf, ". ", 2)) {
-			char *file = rz_file_abspath(buf + 2);
-			if (file) {
-				rz_lang_run_file(lang, file);
-				free(file);
-			}
-			continue;
-		}
-		if (!strcmp(buf, "q")) {
-			free(prompt);
-			return true;
-		}
-		if (!strcmp(buf, "?")) {
-			RzLangDef *def;
-			RzListIter *iter;
-			eprintf("  ?        - show this help message\n"
-				"  !command - run system command\n"
-				"  . file   - interpret file\n"
-				"  q        - quit prompt\n");
-			eprintf("%s example:\n", lang->cur->name);
-			if (lang->cur->help) {
-				eprintf("%s", *lang->cur->help);
-			}
-			if (!rz_list_empty(lang->defs)) {
-				eprintf("variables:\n");
-			}
-			rz_list_foreach (lang->defs, iter, def) {
-				eprintf("  %s %s\n", def->type, def->name);
-			}
-		} else {
-			rz_lang_run(lang, buf, strlen(buf));
-		}
-	}
-	// XXX: leaking history
-	rz_line_set_prompt(line, prompt);
-	line->completion = oc;
-	line->history = hist;
-	clearerr(stdin);
-	printf("\n");
-	free(prompt);
-	return true;
 }

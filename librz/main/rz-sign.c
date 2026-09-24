@@ -202,7 +202,7 @@ RZ_API int rz_main_rz_sign(int argc, const char **argv) {
 		}
 		break;
 	case RZ_SIGN_OPT_DUMP_FLIRT:
-		if (!rz_core_flirt_dump_file(input_file)) {
+		if (!rz_core_flirt_dump_file(core, input_file)) {
 			ret = -1;
 		}
 		break;

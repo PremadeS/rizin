@@ -6,7 +6,7 @@
 
 static bool gethtmlrgb(RzCons *cons, const char *str, char *buf) {
 	ut8 r = 0, g = 0, b = 0;
-	if (rz_cons_rgb_parse(cons, str, &r, &g, &b, 0)) {
+	if (rz_cons_rgb_parse(str, &r, &g, &b, 0)) {
 		sprintf(buf, "#%02x%02x%02x", r, g, b);
 		return true;
 	}

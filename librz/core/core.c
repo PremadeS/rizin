@@ -248,7 +248,7 @@ static void rz_core_debug_breakpoint_hit(RzCore *core, RzBreakpointItem *bpi) {
 	const bool bpcmd_exists = (bpi->data && bpi->data[0]);
 	const bool may_output = (cmdbp_exists || bpcmd_exists);
 	if (may_output) {
-		rz_cons_push();
+		rz_cons_push(core->cons);
 	}
 	if (cmdbp_exists) {
 		rz_core_cmd0(core, cmdbp);
@@ -257,9 +257,9 @@ static void rz_core_debug_breakpoint_hit(RzCore *core, RzBreakpointItem *bpi) {
 		rz_core_cmd0(core, bpi->data);
 	}
 	if (may_output) {
-		rz_cons_set_flush(true);
-		rz_cons_flush();
-		rz_cons_pop();
+		rz_cons_set_flush(core->cons, true);
+		rz_cons_flush(core->cons);
+		rz_cons_pop(core->cons);
 	}
 }
 
@@ -268,7 +268,7 @@ static void rz_core_debug_syscall_hit(RzCore *core) {
 
 	if (cmdhit && cmdhit[0] != 0) {
 		rz_core_cmd0(core, cmdhit);
-		rz_cons_flush();
+		rz_cons_flush(core->cons);
 	}
 }
 
@@ -723,7 +723,7 @@ static ut64 num_callback(RzNum *userptr, const char *str, int *ok) {
 			free(bptr);
 			break;
 		case 'c': // $c console width
-			return rz_cons_get_size(NULL);
+			return rz_cons_get_size(core->cons, NULL);
 		case 'r': // $r
 			if (str[2] == '{') {
 				bptr = rz_str_dup(str + 3);
@@ -738,7 +738,7 @@ static ut64 num_callback(RzNum *userptr, const char *str, int *ok) {
 				return regval;
 			} else {
 				int rows;
-				(void)rz_cons_get_size(&rows);
+				(void)rz_cons_get_size(core->cons, &rows);
 				return rows;
 			}
 			break;
@@ -1389,8 +1389,8 @@ RZ_API const char *rz_core_analysis_optype_colorfor(RzCore *core, ut64 addr, boo
 	return NULL;
 }
 
-static int mywrite(const ut8 *buf, int len) {
-	return rz_cons_memcat((const char *)buf, len);
+static int mywrite(RzCons *cons, const ut8 *buf, int len) {
+	return rz_cons_memcat(cons, (const char *)buf, len);
 }
 
 static bool exists_var(RzPrint *print, ut64 func_addr, char *str) {
@@ -1694,14 +1694,13 @@ RZ_API bool rz_core_init(RzCore *core) {
 	// TODO: make it return pointer of new instance, not singleton *
 	core->cons = rz_cons_new();
 
-	if (core->cons->refcnt == 1) {
 		if (core->cons->line) {
 			core->cons->line->user = core;
 			core->cons->line->cb_editor =
 				(RzLineEditorCb)&rz_core_editor;
 			core->cons->line->cb_fkey = core->cons->cb_fkey;
 			core->cons->line->cons = core->cons;
-		}
+
 #if __EMSCRIPTEN__
 		core->cons->user_fgets = NULL;
 #else
@@ -1721,7 +1720,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->lang->cmd_str = (char *(*)(void *, const char *))rz_core_cmd_str;
 	core->lang->cmdf = (int (*)(void *, const char *, ...))rz_core_cmdf;
 	rz_core_bind_cons(core);
-	core->lang->cb_printf = rz_cons_printf;
+	core->lang->cb_printf = (PrintfCallback)rz_cons_printf;
 	core->lang->intr = core->intr;
 	rz_lang_define(core->lang, "RzCore", "core", core);
 	rz_lang_set_user_ptr(core->lang, core); // TODOe can use this for printf_cb..
@@ -1756,6 +1755,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 	rz_cons_bind(&core->bin->consb);
 	// XXX we shuold use RzConsBind instead of this hardcoded pointer
 	core->bin->cb_printf = (PrintfCallback)rz_cons_printf;
+	core->bin->cb_printf_user = core->cons;
 	rz_bin_set_user_ptr(core->bin, core);
 	core->io = rz_io_new();
 	rz_io_plugin_add(core->io, &rz_core_io_plugin_vfile);
@@ -1763,6 +1763,8 @@ RZ_API bool rz_core_init(RzCore *core) {
 	rz_event_hook(core->io->event, RZ_EVENT_IO_DESC_CLOSE, ev_iodescclose_cb, core);
 	rz_event_hook(core->io->event, RZ_EVENT_IO_MAP_DEL, ev_iomapdel_cb, core);
 	core->io->ff = 1;
+	core->io->intr = core->intr;
+	core->io->cb_printf_user = core->cons;
 	core->search = rz_search_new(RZ_SEARCH_KEYWORD);
 	core->flags = rz_flag_new();
 	core->marks = rz_mark_new();
@@ -1821,9 +1823,9 @@ RZ_API bool rz_core_init(RzCore *core) {
 	//  XXX pushing uninitialized regstate results in trashed reg values
 	//	rz_reg_arena_push (core->dbg->reg); // create a 2 level register state stack
 	// core->dbg->analysis->reg = core->analysis->reg; // XXX: dupped instance.. can cause lost pointerz
-	core->io->cb_printf = rz_cons_printf;
-	core->dbg->cb_printf = rz_cons_printf;
-	core->dbg->bp->cb_printf = rz_cons_printf;
+	core->io->cb_printf = (PrintfCallback)rz_cons_printf;
+	core->dbg->cb_printf = (PrintfCallback)rz_cons_printf;
+	core->dbg->bp->cb_printf = (PrintfCallback)rz_cons_printf;
 	core->dbg->ev = core->ev;
 	// Initialize visual modes after everything else but before config init
 	core->visual = rz_core_visual_new();
@@ -1864,11 +1866,10 @@ RZ_API bool rz_core_init(RzCore *core) {
 		// TODO: Do we need a void* user?
 		// TODO: use that stoopid typedef format so we don't need casting
 		core->intr->user = NULL;
-		core->intr->is_breaked = (bool (*)(void *))rz_interrupt_is_breaked;
-		core->intr->break_push = (void (*)(void *, void *, void *))rz_cons_break_push;
-		core->intr->break_pop = (void (*)(void *))rz_cons_break_pop;
-		core->intr->sleep_begin = (void *(*)(void *))rz_cons_sleep_begin;
-		core->intr->sleep_end = (void (*)(void *, void *))rz_cons_sleep_end;
+		core->intr->is_breaked = (RzInterruptIsBreaked)rz_interrupt_is_breaked;
+		core->intr->sleep_begin = (RzInterruptSleepBegin)rz_core_sleep_begin;
+		core->intr->sleep_end = (RzInterruptSleepEnd)rz_core_sleep_end;
+		core->intr->cb_break = (RzInterruptBreakCallback)rz_core_break;
 	}
 	rz_analysis_set_interrupt(core->analysis, core->intr);
 	rz_cons_bind(rz_analysis_get_cons_bind(core->analysis));
@@ -1894,9 +1895,6 @@ RZ_API void rz_core_bind_cons(RzCore *core) {
 	core->cons->num = core->num;
 	core->cons->cb_fkey = (RzConsFunctionKey)__cons_cb_fkey;
 	core->cons->cb_editor = (RzConsEditorCallback)rz_core_editor;
-	core->cons->cb_break = (RzInterruptBreakCallback)rz_core_break;
-	core->cons->cb_sleep_begin = (RzConsSleepBeginCallback)rz_core_sleep_begin;
-	core->cons->cb_sleep_end = (RzConsSleepEndCallback)rz_core_sleep_end;
 	core->cons->cb_task_oneshot = (RzConsQueueTaskOneshot)rz_core_task_enqueue_oneshot;
 	core->cons->user = (void *)core;
 }
@@ -1942,7 +1940,7 @@ RZ_API void rz_core_fini(RzCore *c) {
 	/* rconfig doesnt knows how to deinitialize vars, so we
 	should probably need to add a rz_config_free_payload callback */
 	c->cons->teefile = NULL; // HACK
-	rz_cons_free();
+	rz_cons_free(c->cons);
 	RZ_FREE_CUSTOM(c->search, rz_search_free);
 	RZ_FREE_CUSTOM(c->flags, rz_flag_free);
 	RZ_FREE_CUSTOM(c->egg, rz_egg_free);
@@ -2087,7 +2085,7 @@ RZ_API int rz_core_prompt(RzCore *r, int sync) {
 
 	int rnv = r->num->value;
 	set_prompt(r);
-	int ret = rz_cons_fgets(line, sizeof(line), 0, NULL);
+	int ret = rz_cons_fgets(r->cons, line, sizeof(line), 0, NULL);
 	if (ret == -2) {
 		return RZ_CORE_CMD_EXIT; // ^D
 	}
@@ -2108,10 +2106,10 @@ RZ_API int rz_core_prompt_exec(RzCore *r) {
 	int ret = rz_core_cmd(r, r->cmdqueue, true);
 	r->rc = r->num->value;
 	// int ret = rz_core_cmd (r, r->cmdqueue, true);
-	rz_cons_echo(NULL);
-	rz_cons_flush();
+	rz_cons_echo(r->cons, NULL);
+	rz_cons_flush(r->cons);
 	if (r->cons && r->cons->line && r->cons->line->zerosep) {
-		rz_cons_zero();
+		rz_cons_zero(r->cons);
 	}
 	rz_core_print_warnings_after(r);
 	return ret;
@@ -2189,7 +2187,7 @@ RZ_API int rz_core_search_cb(RzCore *core, ut64 from, ut64 to, RzCoreSearchCallb
 }
 
 RZ_API RZ_OWN char *rz_core_editor(const RzCore *core, RZ_NULLABLE const char *file, RZ_NULLABLE const char *str) {
-	const bool interactive = rz_cons_is_interactive();
+	const bool interactive = rz_cons_is_interactive(core->cons);
 	if (!interactive) {
 		return NULL;
 	}
@@ -2346,7 +2344,7 @@ RZ_API RzTable *rz_core_table(RzCore *core) {
 	return table;
 }
 
-static RzCmdStatus core_core_plugin_print(RzCorePlugin *cp, RzCmdStateOutput *state) {
+static RzCmdStatus core_core_plugin_print(RzCons *cons, RzCorePlugin *cp, RzCmdStateOutput *state) {
 	const char *name = rz_str_get(cp->name);
 	const char *desc = rz_str_get(cp->desc);
 	const char *author = rz_str_get(cp->author);
@@ -2369,12 +2367,12 @@ static RzCmdStatus core_core_plugin_print(RzCorePlugin *cp, RzCmdStateOutput *st
 		break;
 	}
 	case RZ_OUTPUT_MODE_STANDARD: {
-		rz_cons_printf("%s: %s (Made by %s, v%s, %s)\n",
+		rz_cons_printf(cons, "%s: %s (Made by %s, v%s, %s)\n",
 			name, desc, author, version, license);
 		break;
 	}
 	case RZ_OUTPUT_MODE_QUIET:
-		rz_cons_println(name);
+		rz_cons_println(cons, name);
 		break;
 	default: {
 		rz_warn_if_reached();
@@ -2395,7 +2393,7 @@ RZ_API RzCmdStatus rz_core_core_plugins_print(RzCore *core, RzCmdStateOutput *st
 	rz_cmd_state_output_set_columnsf(state, "sssss", "name", "license", "author", "version", "description");
 	rz_iterator_foreach(iter, val) {
 		RzCorePlugin *cp = *val;
-		status = core_core_plugin_print(cp, state);
+		status = core_core_plugin_print(core->cons, cp, state);
 		if (status != RZ_CMD_STATUS_OK) {
 			return status;
 		}

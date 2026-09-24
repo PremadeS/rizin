@@ -549,7 +549,7 @@ static int rzfind_open_file(RzfindOptions *ro, const char *file, const ut8 *data
 	rz_bin_options_init(&opt, 0, 0, 0, false);
 	RzBin *bin = rz_bin_new();
 	rz_io_bind(io, &bin->iob);
-	io->cb_printf = printf;
+	io->cb_printf = (PrintfCallback)printf;
 
 	if (ro->force_raw) {
 		rz_bin_force_plugin(bin, "any");
