@@ -615,7 +615,7 @@ static void __listPlugins(RzBin *bin, const char *plugin_name, PJ *pj, RzOutputM
 	} else {
 		rz_cmd_state_output_init(&state, RZ_OUTPUT_MODE_STANDARD, NULL);
 	}
-	bin->cb_printf = (PrintfCallback)printf;
+	bin->cb_printf = (PrintfCallback)rz_cb_default_printf;
 	if (plugin_name) {
 		rz_bin_list_plugin(bin, plugin_name, pj, format);
 	} else {
@@ -1247,8 +1247,8 @@ RZ_API int rz_main_rz_bin(int argc, const char **argv) {
 	}
 
 	core.bin = bin;
-	// TODO, maybe remove this cb_printf..
-	// bin->cb_printf = rz_cons_printf;
+	// TODOe, maybe remove this cb_printf..
+	bin->cb_printf = (PrintfCallback)rz_cons_printf;
 
 	filter.offset = at;
 	filter.name = name;

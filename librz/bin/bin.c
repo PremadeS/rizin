@@ -831,7 +831,7 @@ RZ_API RzBin *rz_bin_new(void) {
 	bin->force = NULL;
 	bin->filter_rules = UT64_MAX;
 	bin->sdb = sdb_new0();
-	bin->cb_printf = (PrintfCallback)rz_cb_default_printf;
+	bin->cb_printf = (PrintfCallback)rz_cb_default_printf; // TODOe: we need to override on core.c??
 	bin->strpurge = NULL;
 	bin->want_dbginfo = true;
 	bin->cur = NULL;
