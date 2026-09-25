@@ -6517,6 +6517,7 @@ static char *choose_function_name_cb(ut64 addr, void *user) {
 
 static bool cinquiry_absint_run(RzCore *core, RzSetU *fcn_entry_points) {
 	RzAbsIntDriverConfig config = {
+		.intr = core->intr,
 		.analysis = core->analysis,
 		.io = core->io,
 		.fcn_entry_points = fcn_entry_points,
