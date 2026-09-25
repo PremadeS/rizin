@@ -416,7 +416,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 		if (!isspace((ut8)cmd[7])) {
 			qrcmd = "help";
 		}
-		if (gdbr_send_qRcmd(desc, qrcmd, io->cb_printf) < 0) {
+		if (gdbr_send_qRcmd(desc, qrcmd, io->cb_printf, io->cb_printf_user) < 0) {
 			eprintf("remote error\n");
 			return NULL;
 		}
