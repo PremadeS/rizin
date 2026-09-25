@@ -1722,7 +1722,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 	if (core->intr) {
 		// TODO: Cutter might override these callbacks when multiple sessions are in place
 		// TODO: Do we need a void* user?
-		core->intr->user = NULL;
+		core->intr->user = core;
 		core->intr->sleep_begin = (RzInterruptSleepBegin)rz_core_sleep_begin;
 		core->intr->sleep_end = (RzInterruptSleepEnd)rz_core_sleep_end;
 		core->intr->cb_break = (RzInterruptBreakCallback)rz_core_break;
