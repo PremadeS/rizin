@@ -4,6 +4,7 @@
 #include <rz_types.h>
 #include <rz_util.h>
 #include <rz_bind.h>
+#include <rz_cons.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -516,8 +517,6 @@ typedef struct rz_cmd_descriptor_t {
 
 typedef bool (*RzCmdForeachNameCb)(RzCmd *cmd, const RzCmdDesc *desc, void *user);
 typedef bool (*RzCmdForeachMacroCb)(RzCmd *cmd, const RzCmdMacro *macro, void *user);
-
-typedef struct rz_cons_t RzCons;
 
 #ifdef RZ_API
 RZ_API RzCmd *rz_cmd_new(RzCore *core, bool has_cons);
