@@ -73,7 +73,7 @@ static RzDebugReasonType rz_debug_native_wait(RzDebug *dbg, int pid) {
 	do {
 		reason = xnu_wait(dbg, pid);
 		if (reason == RZ_DEBUG_REASON_MACH_RCV_INTERRUPTED) {
-			if (rz_interrupt_is_breaked()) {
+			if (rz_interrupt_is_breaked(dbg->intr)) {
 				// Perhaps check the inferior is still alive,
 				// otherwise xnu_stop will fail.
 				reason = xnu_stop(dbg, pid)

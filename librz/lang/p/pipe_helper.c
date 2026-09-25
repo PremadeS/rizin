@@ -51,7 +51,7 @@ static void lang_pipe_run_win(RzLang *lang) {
 	}
 	rz_interrupt_break_push(lang->intr, NULL, NULL);
 	do {
-		if (rz_interrupt_is_breaked()) {
+		if (rz_interrupt_is_breaked(lang->intr)) {
 			TerminateProcess(hproc, 0);
 			break;
 		}
