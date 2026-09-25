@@ -190,7 +190,7 @@ static RzIODesc *__open(RzIO *io, const char *pathname, int rw, int mode) {
 
 static void printcmd(RzIO *io, const char *cmd) {
 	char *res = runcmd(cmd);
-	io->cb_printf("%s\n", res);
+	io->cb_printf(io->cb_printf_user, "%s\n", res);
 	free(res);
 }
 
