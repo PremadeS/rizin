@@ -1727,6 +1727,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 		core->intr->sleep_end = (RzInterruptSleepEnd)rz_core_sleep_end;
 		core->intr->cb_break = (RzInterruptBreakCallback)rz_core_break;
 	}
+	core->cons->intr = core->intr;
 
 	// We save the old num ad user, in order to restore it after free
 	core->lang = rz_lang_new();

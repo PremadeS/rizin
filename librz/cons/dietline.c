@@ -1570,6 +1570,7 @@ RZ_API const char *rz_line_readline_cb(RZ_NONNULL RzLine *line, RzLineReadCallba
 		}
 	}
 	int mouse_status = cons->mouse;
+	RzInterrupt *intr = cons->intr;
 	if (line->hud && line->hud->vi) {
 		__vi_mode(NULL, &enable_yank_pop);
 		goto _end;
@@ -1593,7 +1594,6 @@ RZ_API const char *rz_line_readline_cb(RZ_NONNULL RzLine *line, RzLineReadCallba
 	if (line->echo) {
 		__print_prompt(line);
 	}
-	RzInterrupt *intr = line->cons->intr;
 	rz_interrupt_break_push(intr, NULL, NULL);
 	for (;;) {
 		line->yank_flag = false;
