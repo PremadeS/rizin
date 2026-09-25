@@ -83,7 +83,7 @@ RZ_API RzInterrupt *rz_interrupt_new(void) {
 	}
 	intr->break_stack = rz_stack_newf(6, break_stack_free);
 	if (!intr->break_stack) {
-		free(intr);
+		rz_interrupt_free(intr);
 		return NULL;
 	}
 	return intr;
@@ -177,7 +177,7 @@ RZ_API void rz_interrupt_break_clear(RzInterrupt *intr) {
 }
 
 RZ_API bool rz_interrupt_is_breaked(RzInterrupt *intr) {
-	/*return*/ false; // TODO: change
+	// /*return*/ false; // TODO: change
 	if (!intr) {
 		return false;
 	}
@@ -191,9 +191,9 @@ RZ_API bool rz_interrupt_is_breaked(RzInterrupt *intr) {
 		intr->is_breaked = true;
 	}
 
-	if (intr->current_cb) {
-		intr->current_cb(intr->current_user);
-	}
+	// if (intr->current_cb) {
+	// 	intr->current_cb(intr->current_user);
+	// }
 
 	if (intr->timeout > 0) {
 		if (rz_time_now_mono() > intr->timeout) {
