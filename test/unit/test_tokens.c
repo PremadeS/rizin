@@ -447,6 +447,7 @@ static bool test_rz_tokenize_custom_hexagon_1(void) {
 	mu_end;
 }
 
+// TODOe: verify
 static bool test_rz_colorize_generic_0(void) {
 	RzAnalysis *a = setup_arm_analysis(64);
 	RzAsm *d = setup_arm_asm(64);
@@ -474,11 +475,10 @@ static bool test_rz_colorize_generic_0(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	// rz_cons_context_free(p->cons->context);
+	rz_cons_context_free(p->cons->context);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
-	rz_cons_free(p->cons);
 	mu_end;
 }
 
