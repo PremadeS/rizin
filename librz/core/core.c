@@ -1602,18 +1602,18 @@ static void ev_binfiledel_cb(RzEvent *ev, int type, void *user, void *data) {
 }
 
 // TODOe: the logic is repeated here, same as "rz_cons_printf"
-static int cb_printf(void *user, const char *format, ...) {
-	RzCore *core = (RzCore *)user;
-	va_list ap;
-	if (!format || !*format) {
-		return -1;
-	}
-	va_start(ap, format);
-	rz_cons_printf_list(core->cons, format, ap);
-	va_end(ap);
+// static int cb_printf(void *user, const char *format, ...) {
+// 	RzCore *core = (RzCore *)user;
+// 	va_list ap;
+// 	if (!format || !*format) {
+// 		return -1;
+// 	}
+// 	va_start(ap, format);
+// 	rz_cons_printf_list(core->cons, format, ap);
+// 	va_end(ap);
 
-	return 0;
-}
+// 	return 0;
+// }
 
 RZ_API char *cb_color(void *user, int idx, int last, bool bg) {
 	RzCore *core = (RzCore *)user;
@@ -1655,7 +1655,8 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->print->num = core->num;
 	core->print->offname = rz_core_print_offname;
 	core->print->offsize = rz_core_print_offsize;
-	core->print->cb_printf = cb_printf; // TODOe: maybe rename to core_cons_printf_cb?? or sum?
+	// core->print->cb_printf = cb_printf; // TODOe: maybe rename to core_cons_printf_cb?? or sum?
+	core->print->cb_printf = (PrintfCallback)rz_cons_printf;
 	core->print->cb_color = cb_color;
 	core->print->write = mywrite;
 	core->print->exists_var = exists_var;

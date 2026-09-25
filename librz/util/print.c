@@ -1206,7 +1206,7 @@ RZ_API void rz_print_bytes(RzPrint *p, const ut8 *buf, int len, const char *fmt)
 		for (i = 0; i < len; i++) {
 			p->cb_printf(p->cons, fmt, buf[i]);
 		}
-		p->cb_printf(p->cons, "\n");
+		p->cb_printf(p->cons, "\n"); // TODOe: use cb_printf_user everywhere
 	} else {
 		for (i = 0; i < len; i++) {
 			printf(fmt, buf[i]);
