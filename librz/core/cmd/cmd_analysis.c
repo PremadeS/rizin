@@ -116,7 +116,7 @@ static int cmpaddr(const void *_a, const void *_b, void *user) {
 }
 
 static bool listOpDescriptions(void *_core, const SdbKv *kv) {
-    RzCore* core = (RzCore*)core;
+    RzCore* core = (RzCore*)_core;
     rz_cons_printf(core->cons, "%s=%s\n", sdbkv_key(kv), sdbkv_value(kv));
 	return true;
 }

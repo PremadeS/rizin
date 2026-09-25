@@ -1552,7 +1552,6 @@ RZ_API int rz_debug_continue_syscalls(RzDebug *dbg, int *sc, int n_sc) {
 		return -1;
 	}
 
-	RzCons *cons = ((RzCore *)dbg->corebind.core)->cons;
 	while (true) {
 		RzDebugReasonType reason;
 
