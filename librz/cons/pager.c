@@ -46,7 +46,8 @@ RZ_IPI void pager_color_line(const char *line, RzStrpool *p, RzPVector /*<RzRege
 	rz_strpool_append(p, line + offset);
 }
 
-RZ_IPI void pager_printpage(RzCons *cons, const char *line, int *index, RzPVector /*<RzRegexMatch *>*/ **mla, int from, int to, int w) {
+RZ_IPI void pager_printpage(void *_cons, const char *line, int *index, RzPVector /*<RzRegexMatch *>*/ **mla, int from, int to, int w) {
+	RzCons *cons = (RzCons *)_cons;
 	int i;
 
 	rz_cons_clear00(cons);
