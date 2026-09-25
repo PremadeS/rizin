@@ -463,7 +463,7 @@ RZ_API void rz_print_addr(RzPrint *p, ut64 addr) {
 	rz_strbuf_init(&sb);
 	print_addr(&sb, p, addr);
 	char *s = rz_strbuf_drain_nofree(&sb);
-	p->cb_printf("%s", s);
+	p->cb_printf(p->cons, "%s", s);
 	free(s);
 }
 
