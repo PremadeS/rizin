@@ -239,3 +239,11 @@ RZ_API const char *sdb_type(const char *k) {
 	}
 	return "string";
 }
+
+RZ_API int rz_cb_default_printf(void *user, const char *fmt, ...) {
+	va_list ap;
+	va_start(ap, fmt);
+	int ret = vprintf(fmt, ap);
+	va_end(ap);
+	return ret;
+}

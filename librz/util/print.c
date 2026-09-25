@@ -22,11 +22,12 @@
 
 static const char hex[16] = "0123456789ABCDEF";
 
-static int nullprinter(const char *a, ...) {
+// TODOe: check the static thing (is_interrupted_cb) + put user* in every PrintfCallback
+static int nullprinter(void *user, const char *a, ...) {
 	return 0;
 }
 
-static int libc_printf(const char *format, ...) {
+static int libc_printf(void *user, const char *format, ...) {
 	va_list ap;
 	va_start(ap, format);
 	vprintf(format, ap);
@@ -327,13 +328,13 @@ RZ_API void rz_print_hexii(RzPrint *rp, ut64 addr, const ut8 *buf, int len, int 
 			if (ch == 0x00) {
 				p(rp->cons, "   ");
 			} else if (ch == 0xff) {
-				p("%s ##%s", color_0xff, color_reset);
+				p(rp->cons, "%s ##%s", color_0xff, color_reset);
 			} else if (IS_PRINTABLE(ch) && !(rp->flags & RZ_PRINT_FLAGS_NODOT)) {
-				p("%s .%c%s", color_text, ch, color_reset);
+				p(rp->cons, "%s .%c%s", color_text, ch, color_reset);
 			} else if (IS_PRINTABLE(ch) && (rp->flags & RZ_PRINT_FLAGS_NODOT)) {
-				p("%s  %c%s", color_text, ch, color_reset);
+				p(rp->cons, "%s  %c%s", color_text, ch, color_reset);
 			} else {
-				p("%s %02x%s", color_other, ch, color_reset);
+				p(rp->cons, "%s %02x%s", color_other, ch, color_reset);
 			}
 		}
 		p(rp->cons, "\n");

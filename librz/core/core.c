@@ -1842,6 +1842,8 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->io->cb_printf = (PrintfCallback)rz_cons_printf;
 	core->dbg->cb_printf = (PrintfCallback)rz_cons_printf;
 	core->dbg->bp->cb_printf = (PrintfCallback)rz_cons_printf;
+	core->dbg->cons = core->cons;
+	// core->dbg->bp->user = core->cons;
 	core->dbg->ev = core->ev;
 	// Initialize visual modes after everything else but before config init
 	core->visual = rz_core_visual_new();
@@ -1875,10 +1877,12 @@ RZ_API bool rz_core_init(RzCore *core) {
 	rz_core_analysis_type_init(core);
 
 	rz_cons_bind(rz_analysis_get_cons_bind(core->analysis));
-	// TODO: add where ever we need to set interrupt aswell brev
+	// TODOe: add where ever we need to set interrupt aswell brev
 	// like the libgdbr and stuff
 	/* ========================= */
 
+	// TODOe: check this: it has user and cons... maybe replace cb_printf_user
+	core->dbg->user = core->cons;
 	return 0;
 }
 

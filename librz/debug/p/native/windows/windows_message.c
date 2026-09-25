@@ -436,7 +436,7 @@ static void print_windows(RzDebug *dbg, RzList *windows) {
 		add_window_to_table(tbl, win);
 	}
 	char *t = rz_table_tostring(tbl);
-	dbg->cb_printf(t);
+	dbg->cb_printf(dbg->cons, t);
 	free(t);
 	rz_table_free(tbl);
 }
@@ -445,7 +445,7 @@ RZ_API void rz_w32_print_windows(RzDebug *dbg) {
 	RzList *windows = get_windows(dbg);
 	if (windows) {
 		if (!windows->length) {
-			dbg->cb_printf("No windows for this process.\n");
+			dbg->cb_printf(dbg->cons, "No windows for this process.\n");
 			return;
 		}
 		print_windows(dbg, windows);

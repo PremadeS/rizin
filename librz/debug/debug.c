@@ -393,7 +393,7 @@ RZ_API RZ_OWN RzDebug *rz_debug_new(RZ_BORROW RZ_NONNULL RzBreakpointContext *bp
 	dbg->swstep = false;
 	dbg->stop_all_threads = false;
 	dbg->trace = rz_debug_trace_new();
-	dbg->cb_printf = (void *)printf;
+	dbg->cb_printf = (PrintfCallback)rz_cb_default_printf;
 	dbg->reg = rz_reg_new();
 	dbg->num = rz_num_new(rz_debug_num_callback, rz_debug_str_callback, dbg);
 	dbg->cur = NULL;
