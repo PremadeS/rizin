@@ -1635,7 +1635,7 @@ void __handleComment(RzCore *core) {
 	}
 	char buf[4095];
 	int i;
-	rz_line_set_prompt(core->cons->line, "[Comment]> ", core->cons);
+    rz_line_set_prompt(core->cons->line, "[Comment]> ");
 	strcpy(buf, "CC \"");
 	i = strlen(buf);
 	if (rz_cons_fgets(core->cons, buf + i, sizeof(buf) - i, 0, NULL) > 0) {

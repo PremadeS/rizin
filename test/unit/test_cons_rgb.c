@@ -5,10 +5,10 @@
 #include "minunit.h"
 
 bool test_rgb_tostring(void) {
-	char *s = rz_cons_rgb_tostring(255, 0, 0);
+	char *s = rz_cons_rgb_tostring( 255,  0,  0);
 	mu_assert_notnull(s, "Red string not null");
 	mu_assert_streq_free(s, "red", "RGB to string Red");
-	s = rz_cons_rgb_tostring(0, 255, 0);
+	s = rz_cons_rgb_tostring( 0,  255,  0);
 	mu_assert_notnull(s, "Green string not null");
 	mu_assert_streq_free(s, "green", "RGB to string Green");
 	mu_end;

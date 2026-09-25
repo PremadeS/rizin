@@ -20,7 +20,7 @@ static RzPrint *setup_print() {
 	p->cons->context = RZ_NEW0(RzConsContext);
 	p->cons->context->color_mode = COLOR_MODE_16;
 	rz_cons_pal_init(p->cons->context);
-	rz_cons_pal_update_event();
+	rz_cons_pal_update_event(p->cons);
 	return p;
 }
 
@@ -474,10 +474,11 @@ static bool test_rz_colorize_generic_0(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
+	rz_cons_free(p->cons);
 	mu_end;
 }
 

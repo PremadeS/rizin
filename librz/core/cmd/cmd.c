@@ -108,8 +108,8 @@ RZ_IPI bool rz_core_cmd_lastcmd_repeat(RzCore *core, bool next) {
 
 static int rz_core_cmd_nullcallback(void *data) {
 	RzCore *core = (RzCore *)data;
-	if (core->cons->context->breaked) {
-		core->cons->context->breaked = false;
+	if (rz_interrupt_is_breaked(core->intr)) {
+		rz_interrupt_set_breaked(core->intr, false);
 		return 0;
 	}
 	if (!core->cmdrepeat) {
@@ -2801,8 +2801,8 @@ DEFINE_HANDLE_TS_FCN(statements) {
 
 	RZ_LOG_DEBUG("commands with %d childs\n", child_count);
 	if (child_count == 0 && !*state->input) {
-		if (core->cons->context->breaked) {
-			core->cons->context->breaked = false;
+		if (rz_interrupt_is_breaked(core->intr)) {
+			rz_interrupt_set_breaked(core->intr, false);
 			return RZ_CMD_STATUS_INVALID;
 		}
 		if (!core->cmdrepeat) {

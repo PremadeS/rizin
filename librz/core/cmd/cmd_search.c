@@ -1797,7 +1797,7 @@ static RzCmdStatus byte_pattern_search(RzCore *core, RZ_OWN RzSearchBytesPattern
 	CMD_SEARCH_BEGIN();
 
 	bool progress = rz_search_opt_get_show_progress(search_opts) != RZ_SEARCH_PROGRESS_DISABLED;
-	if (!rz_search_opt_set_cancel_cb(search_opts, cmd_search_progress_cancel, progress ? state : core->intr)) {
+	if (!rz_search_opt_set_cancel_cb(search_opts, cmd_search_progress_cancel, progress ? (void *)state : (void *)core->intr)) {
 		RZ_LOG_ERROR("code: Failed to setup default search options.\n");
 		rz_search_bytes_pattern_free(pattern);
 		goto error;

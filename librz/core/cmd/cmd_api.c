@@ -586,8 +586,9 @@ RZ_API int rz_cmd_call(RzCmd *cmd, const char *input) {
 		const char *ji = rz_cmd_alias_get(cmd, input, 1);
 		if (ji) {
 			if (*ji == '$') {
-				// TODOe: same cmd->has_cons check?? and below
-				rz_cons_strcat(cmd->core->cons, ji + 1);
+				if (cmd->has_cons) {
+					rz_cons_strcat(cmd->core->cons, ji + 1);
+				}
 				return true;
 			} else {
 				nstr = rz_str_newf("R! %s", input);
@@ -771,7 +772,7 @@ static RzCmdStatus argv_call_cb(RzCmd *cmd, RzCmdDesc *cd, RzCmdParsedArgs *args
 				return RZ_CMD_STATUS_INVALID;
 			}
 		}
-		if (res == RZ_CMD_STATUS_OK) {
+		if (res == RZ_CMD_STATUS_OK && cmd->has_cons) {
 			rz_cmd_state_output_print(&state, cmd->core->cons);
 		}
 		rz_cmd_state_output_fini(&state);

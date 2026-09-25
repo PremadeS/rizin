@@ -594,16 +594,19 @@ static CmdTaskCtx *cmd_task_ctx_new(RzCore *core, const char *cmd, RzCoreCmdTask
 	return ctx;
 }
 
+// TODOe: verify
 static void cmd_task_runner(RzCoreTaskScheduler *sched, void *user) {
 	CmdTaskCtx *ctx = user;
 	RzCore *core = ctx->core_ctx.core;
 	RzCoreTask *task = rz_core_task_self(sched);
 	char *res_str;
+
 	if (task == sched->main_task) {
 		rz_core_cmd(core, ctx->cmd, ctx->cmd_log);
 		res_str = NULL;
 	} else {
 		res_str = rz_core_cmd_str(core, ctx->cmd);
+		rz_cons_context_reset(core->cons);
 	}
 	ctx->res = res_str;
 
@@ -681,12 +684,20 @@ static FunctionTaskCtx *function_task_ctx_new(RzCore *core, RzCoreTaskFunction f
 	return ctx;
 }
 
+// TODOe: verify
 static void function_task_runner(RzCoreTaskScheduler *sched, void *user) {
 	FunctionTaskCtx *ctx = user;
 	RzCore *core = ctx->core_ctx.core;
-	rz_cons_push(core->cons);
-	ctx->res = ctx->fcn(core, ctx->fcn_user);
-	rz_cons_pop(core->cons);
+	RzCoreTask *task = rz_core_task_self(sched);
+
+	if (task == sched->main_task) {
+		rz_cons_push(core->cons);
+		ctx->res = ctx->fcn(core, ctx->fcn_user);
+		rz_cons_pop(core->cons);
+	} else {
+		ctx->res = ctx->fcn(core, ctx->fcn_user);
+		rz_cons_context_reset(core->cons);
+	}
 }
 
 static void function_task_free(FunctionTaskCtx *ctx) {
@@ -728,6 +739,7 @@ RZ_API void *rz_core_function_task_get_result(RzCoreTask *task) {
 	return ctx->res;
 }
 
+// TODOe: verify
 RZ_IPI void rz_core_task_ctx_switch(RzCoreTask *next, void *user) {
 	CoreTaskCtx *ctx = (next && next->runner_user) ? (CoreTaskCtx *)next->runner_user : NULL;
 	RzCore *core = ctx && ctx->core ? ctx->core : (RzCore *)user;

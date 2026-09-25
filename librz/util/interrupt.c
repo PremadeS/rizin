@@ -177,6 +177,7 @@ RZ_API void rz_interrupt_break_clear(RzInterrupt *intr) {
 }
 
 RZ_API bool rz_interrupt_is_breaked(RzInterrupt *intr) {
+	/*return*/ false; // TODO: change
 	if (!intr) {
 		return false;
 	}

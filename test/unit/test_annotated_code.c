@@ -344,7 +344,7 @@ static bool test_rz_core_annotated_code_print(void) {
 	actual = rz_cons_get_buffer_dup(cons);
 	rz_cons_pop(cons);
 	mu_assert_streq(actual, expected_first, "pdg OUTPUT DOES NOT MATCH");
-	rz_cons_pop(cons);
+	// rz_cons_pop(cons); // TODOe: check
 
 	// Checking with offset - pdgo
 	RzVector *offsets = rz_annotated_code_line_offsets(code);
@@ -354,12 +354,13 @@ static bool test_rz_core_annotated_code_print(void) {
 				"    0x00001158    |    sym.imp.puts(\"Hello, World!\");\n"
 				"    0x0000115f    |    return;\n"
 				"                  |}\n";
+	rz_cons_push(cons);
 	rz_core_annotated_code_print(cons, code, offsets);
 	free(actual);
 	actual = rz_cons_get_buffer_dup(cons);
 	rz_cons_pop(cons);
 	mu_assert_streq(actual, expected_second, "pdgo OUTPUT DOES NOT MATCH");
-	rz_cons_pop(cons);
+	// rz_cons_pop(cons); // TODOe: same as above
 
 	rz_cons_free(cons);
 	free(actual);

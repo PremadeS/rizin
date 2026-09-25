@@ -1621,7 +1621,7 @@ beach:
 		free(gdb_downloaded_exe);
 	}
 	rz_cons_set_raw(r->cons, 0);
-	rz_cons_free(r->cons); // TODO: really??
+	// rz_cons_free(r->cons); // TODO: really??
 	LISTS_FREE();
 	free(debugbackend);
 	RZ_FREE(pfile);

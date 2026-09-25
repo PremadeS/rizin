@@ -8,7 +8,7 @@ bool test_cons_pipe(void) {
 	RzCons *cons = rz_cons_new();
 	const char *test_file = "/tmp/rizin_test_pipe";
 	// Redirect stdout (fd 1)
-	RzConsPipe *cpipe = rz_cons_pipe_open(test_file, 1, false);
+	RzConsPipe *cpipe = rz_cons_pipe_open( test_file,  1,  false);
 	if (!cpipe) {
 		rz_cons_free(cons);
 		mu_end;
@@ -18,7 +18,7 @@ bool test_cons_pipe(void) {
 	printf("Hello Pipe");
 	fflush(stdout);
 
-	rz_cons_pipe_close(cpipe);
+	rz_cons_pipe_close( cpipe);
 
 	char *content = rz_file_slurp(test_file, NULL);
 	mu_assert_notnull(content, "Pipe file should exist and have content");

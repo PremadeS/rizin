@@ -219,15 +219,14 @@ typedef struct step_cond_ctx_t {
 
 static bool step_cond_n(RzAnalysisILVM *vm, void *user) {
 	StepCondCtx *ctx = (StepCondCtx *)user;
-	ut64 n = ctx->val;
 	if (rz_interrupt_is_breaked(ctx->core->intr)) {
 		rz_cons_printf(ctx->core->cons, "Stepping was interrupted.\n");
 		return false;
 	}
-	if (!n) {
+	if (!ctx->val) {
 		return false;
 	}
-	(n)--;
+	ctx->val--;
 	return true;
 }
 

@@ -1930,7 +1930,7 @@ RZ_IPI RzCmdStatus rz_print_pascal_string_handler(RzCore *core, int argc, const 
 		opt.encoding = RZ_STRING_ENC_8BIT;
 		opt.stop_at_nil = true;
 		opt.stop_at_unprintable = true;
-		core_print_raw_buffer(&opt);
+        core_print_raw_buffer(&opt, core->cons);
 		break;
 	case RZ_OUTPUT_MODE_JSON:
 		print_json_string(core, core->block + offset, string_len, RZ_STRING_ENC_8BIT, true, true);
@@ -1956,7 +1956,7 @@ RZ_IPI RzCmdStatus rz_print_string_wrap_width_handler(RzCore *core, int argc, co
 	opt.length = len;
 	opt.encoding = RZ_STRING_ENC_8BIT;
 	opt.wrap_at = width;
-	core_print_raw_buffer(&opt);
+    core_print_raw_buffer(&opt, core->cons);
 	rz_core_block_size(core, blocksize);
 	return RZ_CMD_STATUS_OK;
 }
@@ -1967,7 +1967,7 @@ RZ_IPI RzCmdStatus rz_print_string_escaped_newlines_handler(RzCore *core, int ar
 	opt.length = core->blocksize;
 	opt.encoding = RZ_STRING_ENC_8BIT;
 	opt.escape_nl = true;
-	core_print_raw_buffer(&opt);
+    core_print_raw_buffer(&opt, core->cons);
 	return RZ_CMD_STATUS_OK;
 }
 
@@ -3922,7 +3922,7 @@ RZ_IPI RzCmdStatus rz_print_url_encode_handler(RzCore *core, int argc, const cha
 	opt.length = len;
 	opt.encoding = RZ_STRING_ENC_8BIT;
 	opt.urlencode = true;
-	core_print_raw_buffer(&opt);
+    core_print_raw_buffer(&opt, core->cons);
 	return RZ_CMD_STATUS_OK;
 }
 
@@ -3933,7 +3933,7 @@ RZ_IPI RzCmdStatus rz_print_url_encode_wide_handler(RzCore *core, int argc, cons
 	opt.length = len;
 	opt.encoding = RZ_STRING_ENC_UTF16LE;
 	opt.urlencode = true;
-	core_print_raw_buffer(&opt);
+    core_print_raw_buffer(&opt, core->cons);
 	return RZ_CMD_STATUS_OK;
 }
 
@@ -3946,7 +3946,7 @@ RZ_IPI RzCmdStatus rz_print_url_encode_zero_handler(RzCore *core, int argc, cons
 	opt.stop_at_unprintable = true;
 	opt.encoding = RZ_STRING_ENC_8BIT;
 	opt.urlencode = true;
-	core_print_raw_buffer(&opt);
+    core_print_raw_buffer(&opt, core->cons);
 	return RZ_CMD_STATUS_OK;
 }
 
@@ -4751,7 +4751,7 @@ RZ_IPI RzCmdStatus rz_print_columns_debug_handler(RzCore *core, int argc, const 
 	rz_cmd_debug_display_bt_handler(core, 0, NULL, &so);
 	rz_cmd_state_output_print(&so, core->cons);
 	rz_cmd_state_output_fini(&so);
-	rz_cons_canvas_write(c, rz_cons_get_buffer());
+    rz_cons_canvas_write(c, rz_cons_get_buffer(core->cons));
     rz_cons_pop(core->cons);
 
 	// Right column

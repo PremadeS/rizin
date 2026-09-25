@@ -5083,7 +5083,7 @@ static void nextword(RzCore *core, RzAGraph *g, const char *word) {
 }
 
 RZ_IPI int rz_core_visual_graph(RzCore *core, RzAGraph *g, RzAnalysisFunction *_fcn, int is_interactive) {
-	if (is_interactive && !rz_cons_is_interactive(g->cons)) {
+	if (is_interactive && !rz_cons_is_interactive(core->cons)) {
 		RZ_LOG_ERROR("core: interactive graph mode requires scr.interactive=true.\n");
 		return 0;
 	}
@@ -5107,7 +5107,7 @@ RZ_IPI int rz_core_visual_graph(RzCore *core, RzAGraph *g, RzAnalysisFunction *_
 	}
 	rz_config_hold_var(hc, "asm.pseudo", "asm.esil", "asm.cmt.right", NULL);
 
-	int h, w = rz_cons_get_size(g->cons, &h);
+	int h, w = rz_cons_get_size(core->cons, &h);
 	can = rz_cons_canvas_new(w, h);
 	if (!can) {
 		w = 80;
@@ -5175,6 +5175,7 @@ RZ_IPI int rz_core_visual_graph(RzCore *core, RzAGraph *g, RzAnalysisFunction *_
 		is_error = !ret;
 	}
 
+	g->cons = core->cons;
 	core->cons->event_resize = NULL; // avoid running old event with new data
 	core->cons->event_data = &grp_ctx;
 	core->cons->event_resize = (RzConsEvent)agraph_refresh_oneshot;

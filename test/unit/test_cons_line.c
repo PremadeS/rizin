@@ -92,6 +92,7 @@ bool test_line_multicompletion(void) {
 	cons->force_columns = 80;
 	cons->force_rows = 23;
 	RzLine *line = cons->line;
+	line->cons = cons;
 	line->ns_completion.run = multicompletion_run;
 
 	strcpy(line->buffer.data, "pd");
@@ -136,6 +137,7 @@ bool test_line_kill_word(void) {
 	cons->force_columns = 80;
 	cons->force_rows = 23;
 	RzLine *line = cons->line;
+	line->cons = cons;
 	line->ns_completion.run = multicompletion_run;
 
 	// write the string, then do ^b two times to move the index to 10, then ^d to delete the word under the cursor
@@ -156,6 +158,7 @@ bool test_line_undo(void) {
 	cons->force_columns = 80;
 	cons->force_rows = 23;
 	RzLine *line = cons->line;
+	line->cons = cons;
 
 	// write 20 chars and undo once
 	char input_concat[] = "01234567890123456789\x1f\n";
@@ -191,6 +194,7 @@ bool test_line_undo(void) {
 
 bool test_line_misc(void) {
 	RzLine *line = rz_line_new();
+	line->cons = rz_cons_new();
 	mu_assert_notnull(line, "Line object should be created");
 	rz_line_set_prompt(line, "test> ");
 	char *prompt = rz_line_get_prompt(line);
@@ -200,6 +204,7 @@ bool test_line_misc(void) {
 	rz_line_clipboard_push(line, "item1");
 	mu_assert_eq(rz_list_length(line->kill_ring), 1, "Kill ring size");
 
+	rz_cons_free(line->cons);
 	rz_line_free(line);
 	mu_end;
 }

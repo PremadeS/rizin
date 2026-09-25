@@ -102,7 +102,7 @@ static RzConsStack *cons_stack_dump(RzCons *cons, bool recreate) {
 }
 
 static void cons_stack_load(RzConsStack *data, bool free_current) {
-	rz_return_if_fail(data);
+	rz_return_if_fail(data && data->cons);
 	RzCons *cons = data->cons; // TODO: remove once CTX is changed
 	if (free_current) {
 		free(CTX(buffer));
@@ -824,6 +824,7 @@ RZ_API void rz_cons_pop(RzCons *cons) {
 		return;
 	}
 	RzConsStack *data = (RzConsStack *)rz_stack_pop(CTX(cons_stack));
+	data->cons = cons;
 	if (!data) {
 		return;
 	}

@@ -124,8 +124,8 @@ static RzANode *find_anode(RzAGraph *ag, const char *title) {
 /*
  * build_agraph: allocate an RzAGraph with the given nodes and edges.
  * The caller must keep a live RzCons (rz_cons_new) for the lifetime of the
- * graph, because set_layout calls rz_cons_is_breaked() internally.
- * The caller is responsible for rz_agraph_free() and rz_cons_free().
+ * graph, because set_layout calls rz_interrupt_is_breaked(cons->intr) internally.
+ * The caller is responsible for rz_agraph_free() and rz_cons_free(cons).
  */
 static RzAGraph *build_agraph(const char **titles, int n_titles, const char *edges[][2], int n_edges, RzCons *cons) {
 	RzAGraph *ag = rz_agraph_new(NULL, cons);
@@ -216,7 +216,7 @@ bool test_layout_back_edge_simple() {
 	mu_assert_true(nB->layer < nExit->layer, "B->exit is a forward edge");
 
 	rz_agraph_free(ag);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
@@ -290,7 +290,7 @@ bool test_layout_back_edge_complex() {
 	mu_assert_true(nC->layer < nD->layer, "C->D is a forward edge");
 
 	rz_agraph_free(ag);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 
@@ -350,7 +350,7 @@ bool test_layout_topo_sort_diamond() {
 	mu_assert_true(nC->layer < nD->layer, "topo: C < D");
 
 	rz_agraph_free(ag);
-	rz_cons_free();
+	rz_cons_free(cons);
 	mu_end;
 }
 

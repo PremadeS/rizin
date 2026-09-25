@@ -678,7 +678,7 @@ RZ_IPI void rz_core_prompt_highlight(RzCore *core) {
 		return;
 	}
 
-	rz_cons_highlight(highlight_str);
+	rz_cons_highlight(core->cons, highlight_str);
 }
 
 static RzCmdStatus prompt_handler(RzCore *core, int argc, const char **argv, bool echo) {
@@ -761,7 +761,7 @@ RZ_IPI RzCmdStatus rz_input_conditional_handler(RzCore *core, int argc, const ch
 	}
 	core->num->value = !rz_num_conditional(core->num, argv[1]);
 	rz_cons_printf(core->cons, "%s\n", rz_str_bool(!core->num->value));
-	rz_cons_set_raw(0);
+	rz_cons_set_raw(core->cons, 0);
 	return RZ_CMD_STATUS_OK;
 }
 

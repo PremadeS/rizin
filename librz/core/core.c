@@ -1715,6 +1715,19 @@ RZ_API bool rz_core_init(RzCore *core) {
 	core->print->cons = core->cons;
 	rz_cons_bind(&core->print->consbind);
 
+	/*TODO: where should we move this?*/
+	/* interrupt ============================*/
+	/*TODO: we need to allocate mem??*/
+	core->intr = rz_interrupt_new();
+	if (core->intr) {
+		// TODO: Cutter might override these callbacks when multiple sessions are in place
+		// TODO: Do we need a void* user?
+		core->intr->user = NULL;
+		core->intr->sleep_begin = (RzInterruptSleepBegin)rz_core_sleep_begin;
+		core->intr->sleep_end = (RzInterruptSleepEnd)rz_core_sleep_end;
+		core->intr->cb_break = (RzInterruptBreakCallback)rz_core_break;
+	}
+
 	// We save the old num ad user, in order to restore it after free
 	core->lang = rz_lang_new();
 	core->lang->cmd_str = (char *(*)(void *, const char *))rz_core_cmd_str;
@@ -1735,6 +1748,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 		free(sdb_types_path);
 	}
 	rz_analysis_set_event(core->analysis, core->ev);
+	rz_analysis_set_interrupt(core->analysis, core->intr);
 	RzAnalysisCallbacks *acb = rz_analysis_get_callbacks(core->analysis);
 	acb->flg_class_set = core_flg_class_set;
 	acb->flg_class_get = core_flg_class_get;
@@ -1844,6 +1858,7 @@ RZ_API bool rz_core_init(RzCore *core) {
 			rz_config_set_i(core->config, "asm.bits", 32);
 		}
 	}
+
 	rz_config_set(core->config, "asm.arch", RZ_SYS_ARCH);
 	update_sdb(core);
 	{
@@ -1857,21 +1872,6 @@ RZ_API bool rz_core_init(RzCore *core) {
 	}
 	rz_core_analysis_type_init(core);
 
-	/*TODO: where should we move this?*/
-	/* interrupt ============================*/
-	/*TODO: we need to allocate mem??*/
-	core->intr = RZ_NEW0(RzInterrupt);
-	if (core->intr) {
-		// TODO: Cutter might override these callbacks when multiple sessions are in place
-		// TODO: Do we need a void* user?
-		// TODO: use that stoopid typedef format so we don't need casting
-		core->intr->user = NULL;
-		core->intr->is_breaked = (RzInterruptIsBreaked)rz_interrupt_is_breaked;
-		core->intr->sleep_begin = (RzInterruptSleepBegin)rz_core_sleep_begin;
-		core->intr->sleep_end = (RzInterruptSleepEnd)rz_core_sleep_end;
-		core->intr->cb_break = (RzInterruptBreakCallback)rz_core_break;
-	}
-	rz_analysis_set_interrupt(core->analysis, core->intr);
 	rz_cons_bind(rz_analysis_get_cons_bind(core->analysis));
 	// TODO: add where ever we need to set interrupt aswell brev
 	// like the libgdbr and stuff
