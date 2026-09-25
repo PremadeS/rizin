@@ -526,7 +526,7 @@ RZ_API void rz_print_byte(RzPrint *p, const char *fmt, int idx, ut8 ch) {
 	rz_strbuf_init(&sb);
 	print_byte(&sb, p, fmt, idx, ch);
 	char *s = rz_strbuf_drain_nofree(&sb);
-	p->cb_printf("%s", s);
+	p->cb_printf(p->cons, "%s", s);
 	free(s);
 }
 

@@ -149,7 +149,7 @@ typedef struct rz_print_t {
 	RzPrintCommentCallback get_comments;
 	RzPrintSectionGet get_section_name;
 	Sdb *sdb_types;
-	RzCons *cons;
+	RzCons *cons; /// TODOe: remove, if not then use cb_printf_user
 	RzConsBind consbind;
 	RzNum *num;
 	RzReg *reg;
