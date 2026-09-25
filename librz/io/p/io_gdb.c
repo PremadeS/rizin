@@ -339,7 +339,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 		if (send_msg(desc, cmd + 4) >= 0) {
 			(void)read_packet(desc, false);
 			desc->data[desc->data_len] = '\0';
-			io->cb_printf("reply:\n%s\n", desc->data);
+			io->cb_printf(io->cb_printf_user, "reply:\n%s\n", desc->data);
 			if (!desc->no_ack) {
 				eprintf("[waiting for ack]\n");
 			}
@@ -352,7 +352,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 		pj_kb(pj, "reverse-continue", desc->stub_features.ReverseStep);
 		pj_kb(pj, "reverse-step", desc->stub_features.ReverseContinue);
 		pj_end(pj);
-		io->cb_printf("%s\n", pj_string(pj));
+		io->cb_printf(io->cb_printf_user, "%s\n", pj_string(pj));
 		pj_free(pj);
 		return NULL;
 	}
@@ -445,7 +445,7 @@ static char *__system(RzIO *io, RzIODesc *fd, const char *cmd) {
 		if (!file) {
 			return NULL;
 		}
-		io->cb_printf("%s\n", file);
+		io->cb_printf(io->cb_printf_user, "%s\n", file);
 		return file;
 	}
 	// These are internal, not available to user directly
