@@ -1909,8 +1909,8 @@ static bool diff_progess_status(const size_t n_left, const size_t n_matches, voi
 }
 
 static bool diff_check_ctrl_c(const size_t n_left, const size_t n_matches, void *user) {
-	RzInterrupt *intr = (RzInterrupt *)user;
-	return !rz_interrupt_is_breaked(intr);
+	RzCore *core = (RzCore *)user;
+	return !rz_interrupt_is_breaked(core->intr);
 }
 
 static RzAnalysisFunction *find_best_matching_function(RzCore *core_a, RzCore *core_b, RzAnalysisFunction *find, bool verbose) {
@@ -1929,7 +1929,7 @@ static RzAnalysisFunction *find_best_matching_function(RzCore *core_a, RzCore *c
 	opts.callback = verbose ? diff_progess_status : diff_check_ctrl_c;
 	opts.analysis_a = analysis_a;
 	opts.analysis_b = analysis_b;
-	opts.user = core_a->cons; // TODOe: they both use same interrupt; should we allow that?? or make seaparte user* for both cons??
+	opts.user = core_a; // TODOe: they both use same interrupt; should we allow that?? or make seaparte user* for both cons??
 
 	RzList *fcns_b = rz_analysis_function_list(analysis_b);
 	result = rz_analysis_match_functions(list_a, fcns_b, &opts);
@@ -1993,7 +1993,7 @@ static void core_show_function_diff(RzCore *core_a, ut64 addr_a, RzCore *core_b,
 	opts.callback = verbose ? diff_progess_status : diff_check_ctrl_c;
 	opts.analysis_a = core_a->analysis;
 	opts.analysis_b = core_b->analysis;
-	opts.user = core_a->cons;
+	opts.user = core_a;
 
 	// calculate all the matches between the basic blocks of the 2 functions.
 	result = rz_analysis_match_basic_blocks(fcn_a, fcn_b, &opts);
@@ -2174,7 +2174,7 @@ static void core_diff_show(RzCore *core_a, RzCore *core_b, const char *addr_a, D
 	opts.callback = verbose ? diff_progess_status : diff_check_ctrl_c;
 	opts.analysis_a = core_a->analysis;
 	opts.analysis_b = core_b->analysis;
-	opts.user = core_a->cons;
+	opts.user = core_a;
 
 	// calculate all the matches between the functions of the 2 different core files.
 	result = rz_analysis_match_functions(fcns_a, fcns_b, &opts);

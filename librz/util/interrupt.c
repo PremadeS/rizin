@@ -181,6 +181,7 @@ RZ_API bool rz_interrupt_is_breaked(RzInterrupt *intr) {
 	if (!intr) {
 		return false;
 	}
+	RZ_LOG_ERROR("rz_interrupt_is_breaked called with intr = %p\n", (void *)intr);
 
 	// Pull, not push: this core notices a process-wide SIGINT on its own
 	// poll, rather than the signal handler trying to reach into it.
