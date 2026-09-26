@@ -1617,12 +1617,12 @@ beach:
 	// and this fh may be come stale during the command
 	// execution.
 	// rz_core_file_close (r, fh);
-	rz_core_free(r);
 	if (gdb_downloaded_exe) {
 		rz_file_rm(gdb_downloaded_exe);
 		free(gdb_downloaded_exe);
 	}
 	rz_cons_set_raw(r->cons, 0);
+	rz_core_free(r);
 	// rz_cons_free(r->cons); // TODO: really??
 	LISTS_FREE();
 	free(debugbackend);
