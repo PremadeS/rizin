@@ -616,6 +616,7 @@ RZ_API RzCons *rz_cons_free(RzCons *cons) {
 	rz_strbuf_free(cons->echobuf);
 	cons->echobuf = NULL;
 	RZ_FREE(cons->pager);
+	RZ_FREE(cons);
 	return NULL;
 }
 

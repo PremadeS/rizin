@@ -153,6 +153,7 @@ bool test_cons_to_html() {
 		"<font color='#ff5555'>BB</font>",
 		"Reset background preserve foreground");
 
+	rz_cons_free(cons);
 	mu_end;
 }
 

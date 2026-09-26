@@ -997,10 +997,12 @@ RZ_API int rz_main_rizin(int argc, const char **argv) {
 #endif
 		ut64 scr_color = rz_config_get_i(r->config, "scr.color");
 		const char *scr_interactive = rz_config_get(r->config, "scr.interactive");
-		// TODO: check this, why free and create new??
+		// TODOe: check this, why free and create new??
 		rz_cons_free(r->cons);
 		rz_xfreopen(con_dev, "r", stdin);
-		r->cons = rz_cons_new(); // TODO: check syntax, directly save in core or create local var?
+		r->cons = rz_cons_new(); // TODOe: check syntax, directly save in core or create local var?
+		// TODOe: we need to update pointers of the objects that have cons in them???
+		r->print->cons = r->cons;
 		rz_config_set_i(r->config, "scr.color", scr_color);
 		rz_config_set(r->config, "scr.interactive", scr_interactive);
 		if (buf && sz > 0) {

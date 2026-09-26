@@ -1918,6 +1918,7 @@ RZ_API void rz_core_fini(RzCore *c) {
 	RZ_FREE_CUSTOM(c->hash, rz_hash_free);
 	RZ_FREE_CUSTOM(c->ropchain, rz_list_free);
 	RZ_FREE_CUSTOM(c->ev, rz_event_free);
+	RZ_FREE_CUSTOM(c->intr, rz_interrupt_free);
 	RZ_FREE(c->cmdlog);
 	RZ_FREE(c->lastsearch);
 	RZ_FREE(c->cons->pager);

@@ -475,7 +475,8 @@ static bool test_rz_colorize_generic_0(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
+	// rz_cons_context_free(p->cons->context);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -509,7 +510,8 @@ static bool test_rz_colorize_generic_1(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -543,7 +545,8 @@ static bool test_rz_colorize_generic_2(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -577,7 +580,8 @@ static bool test_rz_colorize_generic_3(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -611,7 +615,8 @@ static bool test_rz_colorize_generic_4(void) {
 	rz_analysis_op_free(anaop);
 	rz_asm_free(d);
 	rz_analysis_free(a);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -640,7 +645,8 @@ static bool test_rz_colorize_custom_hexagon_0(void) {
 	rz_asm_op_fini(asmop);
 	free(asmop);
 	rz_analysis_op_free(anaop);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -667,7 +673,8 @@ static bool test_rz_colorize_custom_hexagon_1(void) {
 	rz_asm_free(d);
 	rz_asm_op_fini(asmop);
 	free(asmop);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_strbuf_free(expected);
 	rz_strbuf_free(colored_asm);
@@ -710,7 +717,8 @@ static bool test_rz_colorize_custom_hexagon_2(void) {
 
 	rz_asm_op_fini(&asmop);
 	rz_asm_free(d);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	mu_end;
 }
@@ -754,7 +762,8 @@ static bool test_rz_colorize_custom_hexagon_3(void) {
 	}
 
 	rz_asm_op_fini(&asmop);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	rz_asm_free(d);
 	mu_end;
@@ -803,7 +812,8 @@ static bool test_rz_tokenize_custom_bf_0(void) {
 
 	rz_asm_op_fini(&asmop);
 	rz_asm_free(a);
-	rz_cons_context_free(p->cons->context);
+	// rz_cons_context_free(p->cons->context);
+	rz_cons_free(p->cons);
 	rz_print_free(p);
 	mu_end;
 }

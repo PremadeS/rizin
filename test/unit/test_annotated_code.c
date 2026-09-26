@@ -325,6 +325,7 @@ static bool test_rz_core_annotated_code_print_json_context_annotations(void) {
 	mu_assert_streq(actual, expected, "rz_core_annotated_code_print_json() output doesn't match with the expected output");
 	free(actual);
 	rz_annotated_code_free(code);
+	rz_cons_free(cons);
 	mu_end;
 }
 
