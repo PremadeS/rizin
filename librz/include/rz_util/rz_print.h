@@ -114,9 +114,9 @@ typedef struct rz_print_t {
 	const char *cfmt;
 	char datefmt[32];
 	int datezone;
-	int (*write)(const unsigned char *buf, int len);
+	int (*write)(RzCons *cons, const unsigned char *buf, int len);
 	PrintfCallback cb_printf;
-	char *(*cb_color)(int idx, int last, bool bg);
+	char *(*cb_color)(void *user, int idx, int last, bool bg);
 	bool scr_prompt;
 	int (*disasm)(void *p, ut64 addr);
 	PrintfCallback oprintf;
@@ -149,7 +149,7 @@ typedef struct rz_print_t {
 	RzPrintCommentCallback get_comments;
 	RzPrintSectionGet get_section_name;
 	Sdb *sdb_types;
-	RzCons *cons;
+	RzCons *cons; /// TODOe: remove, if not then use cb_printf_user
 	RzConsBind consbind;
 	RzNum *num;
 	RzReg *reg;
@@ -181,7 +181,7 @@ typedef struct rz_print_t {
 
 #ifdef RZ_API
 
-/* RzConsBreak handlers */
+/* RzInterruptBreakCallback handlers */
 typedef bool (*RzPrintIsInterruptedCallback)();
 
 RZ_API bool rz_print_is_interrupted(void);

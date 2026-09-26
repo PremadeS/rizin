@@ -11,6 +11,7 @@
 #include "rz_types_base.h"
 #include "rz_socket.h"
 #include "rz_th.h"
+#include "rz_util/rz_interrupt.h"
 
 #define MSG_OK            0
 #define MSG_NOT_SUPPORTED -1
@@ -199,7 +200,8 @@ typedef struct libgdbr_t {
 		bool valid;
 	} target;
 
-	bool isbreaked;
+	bool isbreaked; // TODO: do we need this now? we can use intr -> is_breaked
+	RzInterrupt *intr; // TODO: doc
 } libgdbr_t;
 
 /*!
@@ -228,6 +230,16 @@ char *gdbr_get_reg_profile(int arch, int bits);
  * \returns a failure code
  */
 int gdbr_set_reg_profile(libgdbr_t *g, const char *str);
+
+// TODO: check doc
+// TODO: should we just modify the init() func? why need a separate func right...??
+// or maybe keep both??
+/*!
+ * \brief Set the interrupt context for this libgdbr instance
+ * \param g libgdbr instance
+ * \param intr The RzInterrupt instance (usually passed down from RzCore)
+ */
+int gdbr_set_interrupt(libgdbr_t *g, RzInterrupt *intr);
 
 /*!
  * \brief frees all buffers and cleans the libgdbr instance stuff

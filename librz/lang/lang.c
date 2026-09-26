@@ -40,7 +40,7 @@ RZ_API RzLang *rz_lang_new(void) {
 		return NULL;
 	}
 	lang->defs->free = (RzListFree)rz_lang_def_free;
-	lang->cb_printf = (PrintfCallback)printf;
+	lang->cb_printf = (PrintfCallback)rz_cb_default_printf;
 	for (int i = 0; i < RZ_ARRAY_SIZE(lang_static_plugins); i++) {
 		rz_lang_plugin_add(lang, lang_static_plugins[i]);
 	}
@@ -220,4 +220,12 @@ RZ_API int rz_lang_run_file(RzLang *lang, const char *file) {
 		}
 	}
 	return ret;
+}
+
+// TODOe: verify that this works.
+RZ_API int rz_lang_prompt(RzLang *lang) {
+	if (!lang || !lang->cur || !lang->cur->prompt) {
+		return false;
+	}
+	return lang->cur->prompt(lang);
 }

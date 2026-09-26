@@ -204,9 +204,10 @@ RZ_API int rz_bin_pdb_download(RZ_NONNULL RzBin *bin, RZ_NULLABLE PJ *pj, int is
 		pj_ks(pj, "path", path);
 		pj_kb(pj, "download", (bool)path);
 		pj_end(pj);
+	} else if (path) {
+		RZ_LOG_INFO("PDB \"%s\" download success\n", opt.dbg_file);
 	} else {
-		rz_cons_printf("PDB \"%s\" download %s\n",
-			opt.dbg_file, path ? "success" : "failed");
+		RZ_LOG_ERROR("PDB \"%s\" download failed\n", opt.dbg_file);
 	}
 	free(path);
 	return !path;

@@ -416,6 +416,11 @@ RZ_API RZ_BORROW RzBinBind *rz_analysis_get_bin_bind(RZ_NONNULL RzAnalysis *anal
 	return &analysis->binb;
 }
 
+RZ_API RZ_BORROW RzConsBind *rz_analysis_get_cons_bind(RZ_NONNULL RzAnalysis *analysis) {
+	rz_return_val_if_fail(analysis, NULL);
+	return &analysis->consb;
+}
+
 RZ_API RZ_BORROW RzTypeDB *rz_analysis_get_type_db(RZ_NONNULL RzAnalysis *analysis) {
 	rz_return_val_if_fail(analysis, NULL);
 	return analysis->typedb;
@@ -1411,4 +1416,9 @@ RZ_DEPRECATE RZ_API RZ_BORROW RzAnalysisEsil *rz_analysis_get_esil(RZ_NONNULL Rz
 RZ_DEPRECATE RZ_API void rz_analysis_set_esil(RZ_NONNULL RzAnalysis *analysis, RZ_NULLABLE RzAnalysisEsil *esil) {
 	rz_return_if_fail(analysis);
 	analysis->esil = esil;
+}
+
+RZ_API void rz_analysis_set_interrupt(RZ_NONNULL RzAnalysis *analysis, RzInterrupt *intr) {
+	rz_return_if_fail(analysis);
+	analysis->intr = intr;
 }

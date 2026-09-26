@@ -1,0 +1,1870 @@
+ninja: Entering directory `../build/Desktop_Qt_6_11_1_Debug'
+[1/2] Generating gittip_file with a custom command
+[1/2] Running all tests
+  1/158 rizin:unit / addr_interval                         OK              0.07s
+  2/158 rizin:unit / base16                                OK              0.07s
+  3/158 rizin:unit / base32                                OK              0.06s
+  4/158 rizin:unit / analysis_hints                        OK              0.21s
+  5/158 rizin:unit / base36                                OK              0.05s
+  6/158 rizin:unit / analysis_cc                           OK              0.25s
+  7/158 rizin:unit / analysis_meta                         OK              0.24s
+  8/158 rizin:unit / analysis_xrefs                        OK              0.23s
+  9/158 rizin:unit / base64                                OK              0.05s
+ 10/158 rizin:unit / annotated_code                        OK              0.24s
+ 11/158 rizin:unit / bin_mach0                             OK              0.02s
+ 12/158 rizin:unit / base85                                OK              0.06s
+ 13/158 rizin:unit / bitvector                             OK              0.06s
+ 14/158 rizin:unit / bits                                  OK              0.06s
+ 15/158 rizin:unit / marks                                 OK              0.06s
+ 16/158 rizin:unit / analysis_function                     OK              0.36s
+ 17/158 rizin:unit / analysis_coverage                     OK              0.39s
+ 18/158 rizin:unit / analysis_class_graph                  OK              0.41s
+ 19/158 rizin:unit / config                                OK              0.06s
+ 20/158 rizin:unit / cons                                  OK              0.05s
+ 21/158 rizin:unit / cons_bar                              OK              0.04s
+ 22/158 rizin:unit / cons_canvas                           OK              0.06s
+ 23/158 rizin:unit / cons_grep                             OK              0.06s
+ 24/158 rizin:unit / cons_html                             OK              0.06s
+ 25/158 rizin:unit / cons_histogram                        OK              0.07s
+ 26/158 rizin:unit / cons_hud                              OK              0.05s
+ 27/158 rizin:unit / cons_line                             OK              0.05s
+ 28/158 rizin:unit / cons_pal                              OK              0.05s
+ 29/158 rizin:unit / cons_pager                            OK              0.05s
+ 30/158 rizin:unit / bin_lines                             OK              0.30s
+ 31/158 rizin:unit / cons_rgb                              OK              0.05s
+ 32/158 rizin:unit / contrbtree                            OK              0.05s
+ 33/158 rizin:unit / cons_pipe                             OK              0.08s
+ 34/158 rizin:unit / analysis_var                          OK              0.58s
+ 35/158 rizin:unit / buf                                   OK              0.38s
+ 36/158 rizin:unit / agraph                                FAIL            0.74s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=14 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_agraph
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stdout:
+[1mtest_graph_to_agraph[0m [32mOK[0m
+[1mtest_layout_back_edge_simple[0m [32mOK[0m
+[1mtest_layout_back_edge_complex[0m [32mOK[0m
+[1mtest_layout_topo_sort_diamond[0m [32mOK[0m
+[1mtest_layout_topo_sort_chain[0m [32mOK[0m
+stderr:
+
+=================================================================
+==63005==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff654ef4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7ff64990ef54 in agraph_edge_data_new ../../librz/core/agraph.c:186
+    #2 0x7ff649911ff6 in agraph_add_graph_edge_ex ../../librz/core/agraph.c:533
+    #3 0x7ff649938931 in create_dummy_nodes ../../librz/core/agraph.c:1294
+    #4 0x7ff649940ae2 in set_layout ../../librz/core/agraph.c:2702
+    #5 0x56088e34b677 in test_layout_back_edge_simple ../../test/unit/test_agraph.c:187
+    #6 0x56088e350bbb in all_tests ../../test/unit/test_agraph.c:407
+    #7 0x7ff648435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff654ef4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7ff64990ef54 in agraph_edge_data_new ../../librz/core/agraph.c:186
+    #2 0x7ff649911ff6 in agraph_add_graph_edge_ex ../../librz/core/agraph.c:533
+    #3 0x7ff6499388a8 in create_dummy_nodes ../../librz/core/agraph.c:1283
+    #4 0x7ff649940ae2 in set_layout ../../librz/core/agraph.c:2702
+    #5 0x56088e34cf15 in test_layout_back_edge_complex ../../test/unit/test_agraph.c:267
+    #6 0x56088e350c13 in all_tests ../../test/unit/test_agraph.c:408
+    #7 0x7ff648435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff654ef4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7ff64990ef54 in agraph_edge_data_new ../../librz/core/agraph.c:186
+    #2 0x7ff649911ff6 in agraph_add_graph_edge_ex ../../librz/core/agraph.c:533
+    #3 0x7ff649938931 in create_dummy_nodes ../../librz/core/agraph.c:1294
+    #4 0x7ff649940ae2 in set_layout ../../librz/core/agraph.c:2702
+    #5 0x56088e34cf15 in test_layout_back_edge_complex ../../test/unit/test_agraph.c:267
+    #6 0x56088e350c13 in all_tests ../../test/unit/test_agraph.c:408
+    #7 0x7ff648435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff654ef4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7ff64990ef54 in agraph_edge_data_new ../../librz/core/agraph.c:186
+    #2 0x7ff649911ff6 in agraph_add_graph_edge_ex ../../librz/core/agraph.c:533
+    #3 0x7ff6499388a8 in create_dummy_nodes ../../librz/core/agraph.c:1283
+    #4 0x7ff649940ae2 in set_layout ../../librz/core/agraph.c:2702
+    #5 0x56088e34b677 in test_layout_back_edge_simple ../../test/unit/test_agraph.c:187
+    #6 0x56088e350bbb in all_tests ../../test/unit/test_agraph.c:407
+    #7 0x7ff648435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 96 byte(s) leaked in 4 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+ 37/158 rizin:unit / crypto                                OK              0.06s
+ 38/158 rizin:unit / debruijn                              OK              0.05s
+ 39/158 rizin:unit / core_analysis_stats                   OK              0.30s
+ 40/158 rizin:unit / compare                               OK              0.53s
+ 41/158 rizin:unit / cmd                                   FAIL            0.58s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=120 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_cmd
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+[1mtest_parsed_args_onearg[0m [32mOK[0m
+[1mtest_parsed_args_args[0m [32mOK[0m
+[1mtest_parsed_args_nospace[0m [32mOK[0m
+[1mtest_parsed_args_newcmd[0m [32mOK[0m
+[1mtest_parsed_args_newargs[0m [32mOK[0m
+[1mtest_cmd_descriptor_argv[0m [32mOK[0m
+[1mtest_cmd_descriptor_argv_nested[0m [32mOK[0m
+[1mtest_cmd_descriptor_tree[0m [32mOK[0m
+[1mtest_cmd_descriptor_group[0m [32mOK[0m
+[1mtest_cmd_get_desc[0m [32mOK[0m
+[1mtest_cmd_call_desc[0m [32mOK[0m
+[1mtest_cmd_help[0m [32mOK[0m
+[1mtest_cmd_group_help[0m [32mOK[0m
+[1mtest_cmd_group_exec_help[0m [32mOK[0m
+[1mtest_remove_cmd[0m [32mOK[0m
+[1mtest_cmd_args[0m [32mOK[0m
+[1mtest_cmd_argv_modes[0m [32mOK[0m
+[1mtest_cmd_argv_state[0m [32mOK[0m
+[1mtest_cmd_group_argv_modes[0m [32mOK[0m
+[1mtest_foreach_cmdname[0m [32mOK[0m
+[1mtest_foreach_cmdname_begin[0m [32mOK[0m
+[1mtest_arg_escaping[0m [32mOK[0m
+[1mtest_double_quoted_arg_escaping[0m [32mOK[0m
+[1mtest_single_quoted_arg_escaping[0m [32mOK[0m
+[1mtest_arg_flags[0m [32mOK[0m
+[1mtest_get_arg[0m [32mOK[0m
+[1mtest_parent_details[0m [32mOK[0m
+[1mtest_default_value[0m [32mOK[0m
+[1mtest_sort_subcommands[0m [32mOK[0m
+[1mtest_state_output_concat_standard[0m [32mOK[0m
+[1mtest_state_output_concat_table[0m [32mOK[0m
+[1mtest_state_output_concat_mix[0m [32mOK[0m
+[1mtest_state_output_concat_json[0m [32mOK[0m
+[1mtest_default_mode[0m [32mOK[0m
+[1mtest_details_cb[0m [32mOK[0m
+[1mtest_get_best_match[0m [32mOK[0m
+[1mtest_no_macros[0m [32mOK[0m
+[1mtest_simple_macros[0m [32mOK[0m
+[1mtest_remove_macros[0m [32mOK[0m
+[1mtest_call_macros[0m [32mOK[0m
+[1mtest_call_multiple_macros[0m [32mOK[0m
+[1mtest_cmd_descriptor_folder_arg[0m [32mOK[0m
+stderr:
+WARNING: (../../librz/core/cmd/cmd_api.c:131):cmd_desc_set_parent: code should not be reached
+WARNING: (../../librz/core/cmd/cmd_api.c:131):cmd_desc_set_parent: code should not be reached
+ERROR: Command 'c' does not exist.
+ERROR: Macro 'macro2' expects 2 args, not 3
+
+=================================================================
+==63046==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4016 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1085cf4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x55eac3eca9f5 in test_call_macros ../../test/unit/test_cmd.c:1371
+    #2 0x55eac3ecd021 in all_tests ../../test/unit/test_cmd.c:1506
+    #3 0x7f1080235ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 4016 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1085cf4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x55eac3ecb47e in test_call_multiple_macros ../../test/unit/test_cmd.c:1409
+    #2 0x55eac3ecd077 in all_tests ../../test/unit/test_cmd.c:1507
+    #3 0x7f1080235ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 120 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1085cf4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f1081c103f0 in create_cmd_desc ../../librz/core/cmd/cmd_api.c:174
+    #2 0x7f1081c1b1fd in argv_new ../../librz/core/cmd/cmd_api.c:2012
+    #3 0x7f1081c1b1fd in rz_cmd_desc_argv_new ../../librz/core/cmd/cmd_api.c:2024
+    #4 0x55eac3eb5fa1 in test_cmd_get_desc ../../test/unit/test_cmd.c:220
+    #5 0x55eac3ecc60d in all_tests ../../test/unit/test_cmd.c:1476
+    #6 0x7f1080235ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 120 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1085cf4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f1081c103f0 in create_cmd_desc ../../librz/core/cmd/cmd_api.c:174
+    #2 0x7f1081c1b1fd in argv_new ../../librz/core/cmd/cmd_api.c:2012
+    #3 0x7f1081c1b1fd in rz_cmd_desc_argv_new ../../librz/core/cmd/cmd_api.c:2024
+    #4 0x55eac3ec8f44 in test_get_best_match ../../test/unit/test_cmd.c:1300
+    #5 0x55eac3eccec9 in all_tests ../../test/unit/test_cmd.c:1502
+    #6 0x7f1080235ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1085ceed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f1081c1042e in create_cmd_desc ../../librz/core/cmd/cmd_api.c:179
+    #2 0x7f1081c1b1fd in argv_new ../../librz/core/cmd/cmd_api.c:2012
+    #3 0x7f1081c1b1fd in rz_cmd_desc_argv_new ../../librz/core/cmd/cmd_api.c:2024
+    #4 0x55eac3ec8f44 in test_get_best_match ../../test/unit/test_cmd.c:1300
+    #5 0x55eac3eccec9 in all_tests ../../test/unit/test_cmd.c:1502
+    #6 0x7f1080235ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1085ceed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f1081c1042e in create_cmd_desc ../../librz/core/cmd/cmd_api.c:179
+    #2 0x7f1081c1b1fd in argv_new ../../librz/core/cmd/cmd_api.c:2012
+    #3 0x7f1081c1b1fd in rz_cmd_desc_argv_new ../../librz/core/cmd/cmd_api.c:2024
+    #4 0x55eac3eb5fa1 in test_cmd_get_desc ../../test/unit/test_cmd.c:220
+    #5 0x55eac3ecc60d in all_tests ../../test/unit/test_cmd.c:1476
+    #6 0x7f1080235ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 8282 byte(s) leaked in 6 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+ 42/158 rizin:unit / diff                                  OK              0.06s
+ 43/158 rizin:unit / endian                                OK              0.02s
+ 44/158 rizin:unit / ebcdic                                OK              0.05s
+ 45/158 rizin:unit / debug                                 OK              0.18s
+ 46/158 rizin:unit / encodings                             OK              0.07s
+ 47/158 rizin:unit / event                                 OK              0.05s
+ 48/158 rizin:unit / debug_session                         OK              0.18s
+ 49/158 rizin:unit / file                                  OK              0.06s
+ 50/158 rizin:unit / flags                                 OK              0.06s
+ 51/158 rizin:unit / float                                 OK              0.08s
+ 52/158 rizin:unit / graph                                 OK              0.05s
+ 53/158 rizin:unit / glob                                  OK              0.06s
+ 54/158 rizin:unit / flirt                                 OK              0.15s
+ 55/158 rizin:unit / graph_new_cfg                         OK              0.06s
+ 56/158 rizin:unit / core_task                             OK              0.52s
+ 57/158 rizin:unit / hash                                  OK              0.07s
+ 58/158 rizin:unit / hex                                   OK              0.06s
+ 59/158 rizin:unit / id_storage                            OK              0.06s
+ 60/158 rizin:unit / idpool                                OK              0.05s
+ 61/158 rizin:unit / idstorage                             OK              0.04s
+ 62/158 rizin:unit / il_definitions                        OK              0.05s
+ 63/158 rizin:unit / inflate_deflate                       OK              0.06s
+ 64/158 rizin:unit / il_reg                                OK              0.07s
+ 65/158 rizin:unit / ht                                    OK              0.19s
+ 66/158 rizin:unit / graph_new                             OK              0.27s
+ 67/158 rizin:unit / il_vm                                 OK              0.09s
+ 68/158 rizin:unit / il_helpers                            OK              0.07s
+ 69/158 rizin:unit / core_plugin                           OK              0.84s
+ 70/158 rizin:unit / io                                    OK              0.06s
+ 71/158 rizin:unit / json                                  OK              0.04s
+ 72/158 rizin:unit / core_addr                             OK              0.97s
+ 73/158 rizin:unit / leb128                                OK              0.03s
+ 74/158 rizin:unit / list                                  OK              0.04s
+ 75/158 rizin:unit / io_ihex                               OK              0.15s
+ 76/158 rizin:unit / log                                   OK              0.04s
+ 77/158 rizin:unit / math                                  OK              0.05s
+ 78/158 rizin:unit / lzma                                  OK              0.07s
+ 79/158 rizin:unit / mem                                   OK              0.06s
+ 80/158 rizin:unit / ovf                                   OK              0.03s
+ 81/158 rizin:unit / il_validate                           FAIL            0.36s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=9 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_il_validate
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+WARNING: (../../librz/il/il_validate.c:456):validate_pure_cmp: code should not be reached
+WARNING: (../../librz/il/il_validate.c:459):validate_pure_cmp: code should not be reached
+WARNING: (../../librz/il/il_validate.c:468):validate_pure_cast: code should not be reached
+WARNING: (../../librz/il/il_validate.c:471):validate_pure_cast: code should not be reached
+WARNING: (../../librz/il/il_validate.c:474):validate_pure_cast: code should not be reached
+WARNING: (../../librz/il/il_validate.c:484):validate_pure_append: code should not be reached
+WARNING: (../../librz/il/il_validate.c:487):validate_pure_append: code should not be reached
+WARNING: (../../librz/il/il_validate.c:502):validate_pure_load: code should not be reached
+WARNING: (../../librz/il/il_validate.c:496):validate_pure_load: code should not be reached
+WARNING: (../../librz/il/il_validate.c:518):validate_pure_loadw: code should not be reached
+WARNING: (../../librz/il/il_validate.c:513):validate_pure_loadw: code should not be reached
+WARNING: (../../librz/il/il_validate.c:510):validate_pure_loadw: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1124):validate_effect: code should not be reached
+WARNING: (../../librz/il/il_validate.c:949):validate_effect_store: code should not be reached
+WARNING: (../../librz/il/il_validate.c:955):validate_effect_store: code should not be reached
+WARNING: (../../librz/il/il_validate.c:954):validate_effect_store: code should not be reached
+WARNING: (../../librz/il/il_validate.c:960):validate_effect_store: code should not be reached
+WARNING: (../../librz/il/il_validate.c:959):validate_effect_store: code should not be reached
+WARNING: (../../librz/il/il_validate.c:970):validate_effect_storew: code should not be reached
+WARNING: (../../librz/il/il_validate.c:975):validate_effect_storew: code should not be reached
+WARNING: (../../librz/il/il_validate.c:974):validate_effect_storew: code should not be reached
+WARNING: (../../librz/il/il_validate.c:979):validate_effect_storew: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1022):validate_effect_jmp: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1021):validate_effect_jmp: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1047):validate_effect_seq: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1022):validate_effect_jmp: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1060):validate_effect_blk: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1057):validate_effect_blk: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1069):validate_effect_repeat: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:299):validate_pure_var: code should not be reached
+WARNING: (../../librz/il/il_validate.c:346):validate_pure_bitv_binop: code should not be reached
+WARNING: (../../librz/il/il_validate.c:1094):validate_effect_branch: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:991):validate_effect_set: code should not be reached
+WARNING: (../../librz/il/il_validate.c:299):validate_pure_var: code should not be reached
+WARNING: (../../librz/il/il_validate.c:299):validate_pure_var: code should not be reached
+WARNING: (../../librz/il/il_validate.c:539):validate_pure_fbits: code should not be reached
+WARNING: (../../librz/il/il_validate.c:550):validate_pure_float_bool_uop: code should not be reached
+WARNING: (../../librz/il/il_validate.c:560):validate_pure_float_uop: code should not be reached
+WARNING: (../../librz/il/il_validate.c:692):validate_pure_float_uop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:658):validate_pure_forder: code should not be reached
+WARNING: (../../librz/il/il_validate.c:661):validate_pure_forder: code should not be reached
+WARNING: (../../librz/il/il_validate.c:665):validate_pure_forder: code should not be reached
+WARNING: (../../librz/il/il_validate.c:717):validate_pure_float_binop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:719):validate_pure_float_binop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:744):validate_pure_float_terop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:747):validate_pure_float_terop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:750):validate_pure_float_terop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:776):validate_pure_float_hybridop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:778):validate_pure_float_hybridop_with_round: code should not be reached
+WARNING: (../../librz/il/il_validate.c:589):validate_pure_fcast_to_int: code should not be reached
+WARNING: (../../librz/il/il_validate.c:590):validate_pure_fcast_to_int: code should not be reached
+WARNING: (../../librz/il/il_validate.c:603):validate_pure_icast_to_float: code should not be reached
+WARNING: (../../librz/il/il_validate.c:647):validate_pure_fconvert: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:613):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:631):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:617):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:625):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:623):validate_float_rmode: code should not be reached
+WARNING: (../../librz/il/il_validate.c:644):validate_pure_fconvert: code should not be reached
+
+=================================================================
+==63215==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 13 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc0fc6f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fc0fa99cb6a in rz_str_newf ../../librz/util/str.c:849
+    #2 0x7fc0f98dea1d in rz_il_sort_pure_stringify ../../librz/il/il_export_string.c:1368
+    #3 0x7fc0f99187ed in validate_pure_ite ../../librz/il/il_validate.c:362
+    #4 0x7fc0f991f4db in rz_il_validate_pure ../../librz/il/il_validate.c:884
+    #5 0x55c33dc7b150 in test_il_validate_pure_ite ../../test/unit/test_il_validate.c:87
+    #6 0x55c33dca2f0b in all_tests ../../test/unit/test_il_validate.c:1903
+    #7 0x55c33dc7961a in main ../../test/unit/test_il_validate.c:1947
+    #8 0x7fc0f9647ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 13 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc0fc6f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fc0fa99cb6a in rz_str_newf ../../librz/util/str.c:849
+    #2 0x7fc0f98dea1d in rz_il_sort_pure_stringify ../../librz/il/il_export_string.c:1368
+    #3 0x7fc0f99187c9 in validate_pure_ite ../../librz/il/il_validate.c:362
+    #4 0x7fc0f991f4db in rz_il_validate_pure ../../librz/il/il_validate.c:884
+    #5 0x55c33dc7b150 in test_il_validate_pure_ite ../../test/unit/test_il_validate.c:87
+    #6 0x55c33dca2f0b in all_tests ../../test/unit/test_il_validate.c:1903
+    #7 0x55c33dc7961a in main ../../test/unit/test_il_validate.c:1947
+    #8 0x7fc0f9647ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 26 byte(s) leaked in 2 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+ 82/158 rizin:unit / itv                                   FAIL            0.27s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=242 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_itv
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+ERROR: Failed to parse: '{0x111,1]'.
+ERROR: a > b is not defined.
+
+=================================================================
+==63230==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 497 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff5c70f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7ff5c557f1ed in pcre2_compile_8 ../../subprojects/pcre2-10.48/src/pcre2_compile.c:10944
+    #2 0x7ff5c537f7c7 in regex_new ../../librz/util/regex.c:88
+    #3 0x7ff5c532dbe4 in rz_itv_str_to_bounded_itv_ut64 ../../librz/util/itv.c:39
+    #4 0x56503b81ab19 in test_rz_itv_str_to_bounded ../../test/unit/test_itv.c:101
+    #5 0x56503b81c422 in all_tests ../../test/unit/test_itv.c:138
+    #6 0x56503b8151e8 in main ../../test/unit/test_itv.c:142
+    #7 0x7ff5c3a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 497 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff5c70f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7ff5c557f1ed in pcre2_compile_8 ../../subprojects/pcre2-10.48/src/pcre2_compile.c:10944
+    #2 0x7ff5c537f7c7 in regex_new ../../librz/util/regex.c:88
+    #3 0x7ff5c532dbe4 in rz_itv_str_to_bounded_itv_ut64 ../../librz/util/itv.c:39
+    #4 0x56503b81a8e9 in test_rz_itv_str_to_bounded ../../test/unit/test_itv.c:96
+    #5 0x56503b81c422 in all_tests ../../test/unit/test_itv.c:138
+    #6 0x56503b8151e8 in main ../../test/unit/test_itv.c:142
+    #7 0x7ff5c3a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 497 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff5c70f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7ff5c557f1ed in pcre2_compile_8 ../../subprojects/pcre2-10.48/src/pcre2_compile.c:10944
+    #2 0x7ff5c537f7c7 in regex_new ../../librz/util/regex.c:88
+    #3 0x7ff5c532dbe4 in rz_itv_str_to_bounded_itv_ut64 ../../librz/util/itv.c:39
+    #4 0x56503b81a695 in test_rz_itv_str_to_bounded ../../test/unit/test_itv.c:85
+    #5 0x56503b81c422 in all_tests ../../test/unit/test_itv.c:138
+    #6 0x56503b8151e8 in main ../../test/unit/test_itv.c:142
+    #7 0x7ff5c3a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 80 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff5c70f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7ff5c574a614 in pcre2_jit_malloc ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:72
+    #2 0x7ff5c574a614 in jit_compile ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:14238
+    #3 0x7ff5c57501f5 in pcre2_jit_compile_8 ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:14391
+    #4 0x7ff5c537f7e8 in regex_new ../../librz/util/regex.c:101
+    #5 0x7ff5c532dbe4 in rz_itv_str_to_bounded_itv_ut64 ../../librz/util/itv.c:39
+    #6 0x56503b81ab19 in test_rz_itv_str_to_bounded ../../test/unit/test_itv.c:101
+    #7 0x56503b81c422 in all_tests ../../test/unit/test_itv.c:138
+    #8 0x56503b8151e8 in main ../../test/unit/test_itv.c:142
+    #9 0x7ff5c3a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 80 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff5c70f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7ff5c574a614 in pcre2_jit_malloc ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:72
+    #2 0x7ff5c574a614 in jit_compile ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:14238
+    #3 0x7ff5c57501f5 in pcre2_jit_compile_8 ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:14391
+    #4 0x7ff5c537f7e8 in regex_new ../../librz/util/regex.c:101
+    #5 0x7ff5c532dbe4 in rz_itv_str_to_bounded_itv_ut64 ../../librz/util/itv.c:39
+    #6 0x56503b81a8e9 in test_rz_itv_str_to_bounded ../../test/unit/test_itv.c:96
+    #7 0x56503b81c422 in all_tests ../../test/unit/test_itv.c:138
+    #8 0x56503b8151e8 in main ../../test/unit/test_itv.c:142
+    #9 0x7ff5c3a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 80 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff5c70f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7ff5c574a614 in pcre2_jit_malloc ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:72
+    #2 0x7ff5c574a614 in jit_compile ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:14238
+    #3 0x7ff5c57501f5 in pcre2_jit_compile_8 ../../subprojects/pcre2-10.48/src/pcre2_jit_compile.c:14391
+    #4 0x7ff5c537f7e8 in regex_new ../../librz/util/regex.c:101
+    #5 0x7ff5c532dbe4 in rz_itv_str_to_bounded_itv_ut64 ../../librz/util/itv.c:39
+    #6 0x56503b81a695 in test_rz_itv_str_to_bounded ../../test/unit/test_itv.c:85
+    #7 0x56503b81c422 in all_tests ../../test/unit/test_itv.c:138
+    #8 0x56503b8151e8 in main ../../test/unit/test_itv.c:142
+    #9 0x7ff5c3a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1731 byte(s) leaked in 6 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+ 83/158 rizin:unit / pj                                    OK              0.05s
+ 84/158 rizin:unit / pf                                    OK              0.08s
+ 85/158 rizin:unit / parse                                 OK              0.13s
+ 86/158 rizin:unit / reg                                   OK              0.08s
+ 87/158 rizin:unit / rbtree                                OK              0.13s
+ 88/158 rizin:unit / intervaltree                          OK              0.46s
+ 89/158 rizin:unit / run                                   OK              0.05s
+ 90/158 rizin:unit / rz_test                               OK              0.05s
+ 91/158 rizin:unit / sdb_array                             OK              0.06s
+ 92/158 rizin:unit / sdb_diff                              OK              0.06s
+ 93/158 rizin:unit / core_cmd                              OK              1.34s
+ 94/158 rizin:unit / analysis_block                        OK              1.94s
+ 95/158 rizin:unit / sdb_util                              OK              0.05s
+ 96/158 rizin:unit / core_seek                             OK              1.36s
+ 97/158 rizin:unit / sdb_sdb                               OK              0.13s
+ 98/158 rizin:unit / serialize_mark                        OK              0.06s
+ 99/158 rizin:unit / serialize_config                      OK              0.06s
+100/158 rizin:unit / serialize_flag                        OK              0.06s
+101/158 rizin:unit / regex                                 FAIL            0.33s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=31 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_regex
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+
+=================================================================
+==63298==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 172 byte(s) in 1 object(s) allocated from:
+    #0 0x7f91084f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f91067b0bf6 in rz_str_utf8_to_utf32 ../../librz/util/str.c:3138
+    #2 0x5592a8d66d14 in test_rz_regex_match_all_native_utf32 ../../test/unit/test_regex.c:345
+    #3 0x5592a8d576fd in main ../../test/unit/test_regex.c:413
+    #4 0x7f9104e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 98 byte(s) in 1 object(s) allocated from:
+    #0 0x7f91084f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f91067b0941 in rz_str_utf8_to_utf16 ../../librz/util/str.c:3110
+    #2 0x5592a8d63f44 in test_rz_regex_match_all_native_utf16 ../../test/unit/test_regex.c:282
+    #3 0x5592a8d576a7 in main ../../test/unit/test_regex.c:412
+    #4 0x7f9104e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 270 byte(s) leaked in 2 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+102/158 rizin:unit / serialize_spaces                      OK              0.07s
+103/158 rizin:unit / skiplist                              OK              0.05s
+104/158 rizin:unit / skyline                               OK              0.06s
+105/158 rizin:unit / spaces                                OK              0.04s
+106/158 rizin:unit / sparse                                OK              0.05s
+107/158 rizin:unit / stack                                 OK              0.04s
+108/158 rizin:unit / str                                   OK              0.06s
+109/158 rizin:unit / c6x_packet                            OK              0.05s
+110/158 rizin:unit / socket                                OK              0.17s
+111/158 rizin:unit / strbuf                                OK              0.04s
+112/158 rizin:unit / structured_data                       OK              0.05s
+113/158 rizin:unit / str_search                            OK              0.07s
+114/158 rizin:unit / syscall                               OK              0.05s
+115/158 rizin:unit / table                                 OK              0.05s
+116/158 rizin:unit / serialize_analysis                    OK              0.47s
+117/158 rizin:unit / tms320_dwarf_regs                     OK              0.02s
+118/158 rizin:unit / serialize_types                       FAIL            0.48s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=76 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_serialize_types
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+
+Direct leak of 8 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c2fa in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c2fa in test_types_save ../../test/unit/test_serialize_types.c:157
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 8 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c2cb in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c2cb in test_types_save ../../test/unit/test_serialize_types.c:156
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c4aa in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c4aa in test_types_save ../../test/unit/test_serialize_types.c:166
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c23e in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c23e in test_types_save ../../test/unit/test_serialize_types.c:153
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c4d9 in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c4d9 in test_types_save ../../test/unit/test_serialize_types.c:167
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 6 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c44c in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c44c in test_types_save ../../test/unit/test_serialize_types.c:164
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 6 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c20f in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c20f in test_types_save ../../test/unit/test_serialize_types.c:152
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c47b in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c47b in test_types_save ../../test/unit/test_serialize_types.c:165
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0aa50 in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c735 in test_types_save ../../test/unit/test_serialize_types.c:172
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c508 in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c508 in test_types_save ../../test/unit/test_serialize_types.c:168
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0c3eb in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c3eb in test_types_save ../../test/unit/test_serialize_types.c:162
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 3 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0aa50 in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c881 in test_types_save ../../test/unit/test_serialize_types.c:174
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 3 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0aa50 in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c5eb in test_types_save ../../test/unit/test_serialize_types.c:170
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x7f61d8eeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x564caff0aa50 in sdb_has_record ../../test/unit/test_serialize_types.c:42
+    #2 0x564caff0c545 in test_types_save ../../test/unit/test_serialize_types.c:169
+    #3 0x564caff13293 in all_tests ../../test/unit/test_serialize_types.c:332
+    #4 0x7f61d5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 195 byte(s) leaked in 23 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+119/158 rizin:unit / serialize_debug                       OK              0.53s
+120/158 rizin:unit / task                                  OK              0.18s
+121/158 rizin:unit / serialize_seek                        OK              0.53s
+122/158 rizin:unit / subprocess                            OK              0.28s
+123/158 rizin:unit / tree                                  OK              0.05s
+124/158 rizin:unit / trie                                  OK              0.06s
+125/158 rizin:unit / rop                                   OK              0.84s
+126/158 rizin:unit / core_bin                              OK              2.00s
+127/158 rizin:unit / uleb128                               OK              0.07s
+128/158 rizin:unit / util                                  OK              0.06s
+129/158 rizin:unit / vector                                OK              0.05s
+130/158 rizin:unit / rop_constraint                        OK              0.84s
+131/158 rizin:unit / yank                                  OK              0.69s
+132/158 rizin:unit / tokens                                FAIL            0.95s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=17 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_tokens
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #4 0x7f09be0ed3f3 in rz_cons_new ../../librz/cons/cons.c:555
+    #5 0x55dbc455237f in setup_print ../../test/unit/test_tokens.c:19
+    #6 0x55dbc455b8fd in test_rz_colorize_custom_hexagon_1 ../../test/unit/test_tokens.c:659
+    #7 0x55dbc4551983 in all_tests ../../test/unit/test_tokens.c:954
+    #8 0x55dbc4551983 in main ../../test/unit/test_tokens.c:967
+    #9 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f09bf3914e7 in rz_stack_new ../../librz/util/stack.c:11
+    #2 0x7f09bf391612 in rz_stack_newf ../../librz/util/stack.c:22
+    #3 0x7f09be0e993b in cons_context_init ../../librz/cons/cons.c:130
+    #4 0x7f09be0ed3f3 in rz_cons_new ../../librz/cons/cons.c:555
+    #5 0x55dbc455237f in setup_print ../../test/unit/test_tokens.c:19
+    #6 0x55dbc455b42d in test_rz_colorize_custom_hexagon_0 ../../test/unit/test_tokens.c:629
+    #7 0x55dbc455192c in all_tests ../../test/unit/test_tokens.c:953
+    #8 0x55dbc455192c in main ../../test/unit/test_tokens.c:967
+    #9 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f09bf3914e7 in rz_stack_new ../../librz/util/stack.c:11
+    #2 0x7f09bf391612 in rz_stack_newf ../../librz/util/stack.c:22
+    #3 0x7f09be0e993b in cons_context_init ../../librz/cons/cons.c:130
+    #4 0x7f09be0ed3f3 in rz_cons_new ../../librz/cons/cons.c:555
+    #5 0x55dbc455237f in setup_print ../../test/unit/test_tokens.c:19
+    #6 0x55dbc456273a in test_rz_colorize_generic_4 ../../test/unit/test_tokens.c:594
+    #7 0x55dbc45518d5 in all_tests ../../test/unit/test_tokens.c:952
+    #8 0x55dbc45518d5 in main ../../test/unit/test_tokens.c:967
+    #9 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f09bf3914e7 in rz_stack_new ../../librz/util/stack.c:11
+    #2 0x7f09bf391612 in rz_stack_newf ../../librz/util/stack.c:22
+    #3 0x7f09be0e993b in cons_context_init ../../librz/cons/cons.c:130
+    #4 0x7f09be0ed3f3 in rz_cons_new ../../librz/cons/cons.c:555
+    #5 0x55dbc455237f in setup_print ../../test/unit/test_tokens.c:19
+    #6 0x55dbc4562dfa in test_rz_colorize_generic_3 ../../test/unit/test_tokens.c:559
+    #7 0x55dbc455187e in all_tests ../../test/unit/test_tokens.c:951
+    #8 0x55dbc455187e in main ../../test/unit/test_tokens.c:967
+    #9 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f09bf3914e7 in rz_stack_new ../../librz/util/stack.c:11
+    #2 0x7f09bf391612 in rz_stack_newf ../../librz/util/stack.c:22
+    #3 0x7f09be0e993b in cons_context_init ../../librz/cons/cons.c:130
+    #4 0x7f09be0ed3f3 in rz_cons_new ../../librz/cons/cons.c:555
+    #5 0x55dbc455237f in setup_print ../../test/unit/test_tokens.c:19
+    #6 0x55dbc45634d5 in test_rz_colorize_generic_2 ../../test/unit/test_tokens.c:524
+    #7 0x55dbc4551827 in all_tests ../../test/unit/test_tokens.c:950
+    #8 0x55dbc4551827 in main ../../test/unit/test_tokens.c:967
+    #9 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 48 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f09bf3914e7 in rz_stack_new ../../librz/util/stack.c:11
+    #2 0x7f09bf391612 in rz_stack_newf ../../librz/util/stack.c:22
+    #3 0x7f09be0e993b in cons_context_init ../../librz/cons/cons.c:130
+    #4 0x7f09be0ed3f3 in rz_cons_new ../../librz/cons/cons.c:555
+    #5 0x55dbc455237f in setup_print ../../test/unit/test_tokens.c:19
+    #6 0x55dbc4568605 in test_rz_colorize_generic_1 ../../test/unit/test_tokens.c:489
+    #7 0x55dbc45517d0 in all_tests ../../test/unit/test_tokens.c:949
+    #8 0x55dbc45517d0 in main ../../test/unit/test_tokens.c:967
+    #9 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 39 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7f09bf3c7352 in rz_strbuf_setbin ../../librz/util/strbuf.c:90
+    #2 0x7f09bf3c8e89 in rz_strbuf_set ../../librz/util/strbuf.c:145
+    #3 0x7f09bf3c8f7b in rz_strbuf_new ../../librz/util/strbuf.c:11
+    #4 0x7f09b96de374 in rz_asm_token_string_new ../../librz/arch/asm.c:1586
+    #5 0x7f09b96dedd1 in rz_asm_tokenize_asm_regex ../../librz/arch/asm.c:1830
+    #6 0x7f09b8d2447b in copy_asm_ana_ops ../../librz/arch/isa/hexagon/hexagon_arch.c:1081
+    #7 0x7f09b8d2447b in hexagon_reverse_opcode ../../librz/arch/isa/hexagon/hexagon_arch.c:1326
+    #8 0x7f09b94b5e65 in disassemble ../../librz/arch/p/asm/asm_hexagon.c:194
+    #9 0x7f09b96d7100 in rz_asm_disassemble ../../librz/arch/asm.c:819
+    #10 0x55dbc455c8f7 in test_rz_colorize_custom_hexagon_2 ../../test/unit/test_tokens.c:709
+    #11 0x55dbc45519da in all_tests ../../test/unit/test_tokens.c:955
+    #12 0x55dbc45519da in main ../../test/unit/test_tokens.c:967
+    #13 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 36 byte(s) in 1 object(s) allocated from:
+    #0 0x7f09c10f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7f09bf3c7352 in rz_strbuf_setbin ../../librz/util/strbuf.c:90
+    #2 0x7f09bf3c8e89 in rz_strbuf_set ../../librz/util/strbuf.c:145
+    #3 0x7f09bf3c8f7b in rz_strbuf_new ../../librz/util/strbuf.c:11
+    #4 0x7f09b96de374 in rz_asm_token_string_new ../../librz/arch/asm.c:1586
+    #5 0x7f09b96dedd1 in rz_asm_tokenize_asm_regex ../../librz/arch/asm.c:1830
+    #6 0x7f09b8d2447b in copy_asm_ana_ops ../../librz/arch/isa/hexagon/hexagon_arch.c:1081
+    #7 0x7f09b8d2447b in hexagon_reverse_opcode ../../librz/arch/isa/hexagon/hexagon_arch.c:1326
+    #8 0x7f09b94b5e65 in disassemble ../../librz/arch/p/asm/asm_hexagon.c:194
+    #9 0x7f09b96d7100 in rz_asm_disassemble ../../librz/arch/asm.c:819
+    #10 0x55dbc455d0b3 in test_rz_colorize_custom_hexagon_3 ../../test/unit/test_tokens.c:754
+    #11 0x55dbc4551a31 in all_tests ../../test/unit/test_tokens.c:956
+    #12 0x55dbc4551a31 in main ../../test/unit/test_tokens.c:967
+    #13 0x7f09b6635ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 32782 byte(s) leaked in 221 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+133/158 rizin:unit / type                                  FAIL            0.90s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=94 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_type
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #11 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #12 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #13 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #14 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #15 0x5599b5fe8411 in test_type_as_pretty_string ../../test/unit/test_type.c:780
+    #16 0x5599b602ce7d in all_tests ../../test/unit/test_type.c:2138
+    #17 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 2 object(s) allocated from:
+    #0 0x7f1721aeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f171eaf9818 in rz_type_callable_arg_clone ../../librz/type/function.c:92
+    #2 0x7f171eaf9cd8 in rz_type_callable_clone ../../librz/type/function.c:45
+    #3 0x7f171eb102fc in type_clone ../../librz/type/type.c:1232
+    #4 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #5 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #6 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #7 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #8 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #9 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #10 0x5599b60076e0 in test_struct_func_types ../../test/unit/test_type.c:928
+    #11 0x5599b602d0d7 in all_tests ../../test/unit/test_type.c:2145
+    #12 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1721aeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f171eb1015c in type_clone ../../librz/type/type.c:1218
+    #2 0x7f171eaf9876 in rz_type_callable_arg_clone ../../librz/type/function.c:93
+    #3 0x7f171eaf9cd8 in rz_type_callable_clone ../../librz/type/function.c:45
+    #4 0x7f171eb102fc in type_clone ../../librz/type/type.c:1232
+    #5 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #6 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #7 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #8 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #9 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #10 0x5599b60063fc in test_struct_func_types ../../test/unit/test_type.c:888
+    #11 0x5599b602d0d7 in all_tests ../../test/unit/test_type.c:2145
+    #12 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 2 object(s) allocated from:
+    #0 0x7f1721aeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f171eaf9818 in rz_type_callable_arg_clone ../../librz/type/function.c:92
+    #2 0x7f171eaf9cd8 in rz_type_callable_clone ../../librz/type/function.c:45
+    #3 0x7f171eb102fc in type_clone ../../librz/type/type.c:1232
+    #4 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #5 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #6 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #7 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x5599b60063fc in test_struct_func_types ../../test/unit/test_type.c:888
+    #10 0x5599b602d0d7 in all_tests ../../test/unit/test_type.c:2145
+    #11 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1721aeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f171eaf9b17 in rz_type_callable_clone ../../librz/type/function.c:40
+    #2 0x7f171eb102fc in type_clone ../../librz/type/type.c:1232
+    #3 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #4 0x7f171eb1025d in type_clone ../../librz/type/type.c:1223
+    #5 0x7f171eb1025d in type_clone ../../librz/type/type.c:1223
+    #6 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #7 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #8 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #9 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #10 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #11 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #12 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #13 0x5599b5fe8411 in test_type_as_pretty_string ../../test/unit/test_type.c:780
+    #14 0x5599b602ce7d in all_tests ../../test/unit/test_type.c:2138
+    #15 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f1721aeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f171eb1015c in type_clone ../../librz/type/type.c:1218
+    #2 0x7f171eaf9876 in rz_type_callable_arg_clone ../../librz/type/function.c:93
+    #3 0x7f171eaf9cd8 in rz_type_callable_clone ../../librz/type/function.c:45
+    #4 0x7f171eb102fc in type_clone ../../librz/type/type.c:1232
+    #5 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #6 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #7 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #8 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #9 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #10 0x5599b5fe6d69 in test_type_as_pretty_string ../../test/unit/test_type.c:692
+    #11 0x5599b602ce7d in all_tests ../../test/unit/test_type.c:2138
+    #12 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 2 object(s) allocated from:
+    #0 0x7f1721aeed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f171eaf9818 in rz_type_callable_arg_clone ../../librz/type/function.c:92
+    #2 0x7f171eaf9cd8 in rz_type_callable_clone ../../librz/type/function.c:45
+    #3 0x7f171eb102fc in type_clone ../../librz/type/type.c:1232
+    #4 0x7f171eb0ff03 in type_clone ../../librz/type/type.c:1228
+    #5 0x7f171eb27790 in parse_struct_node ../../librz/type/parser/types_parser.c:590
+    #6 0x7f171eb29080 in parse_type_node_single ../../librz/type/parser/types_parser.c:1257
+    #7 0x7f171eb30fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7f171eb20b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x5599b5fe6d69 in test_type_as_pretty_string ../../test/unit/test_type.c:692
+    #10 0x5599b602ce7d in all_tests ../../test/unit/test_type.c:2138
+    #11 0x7f171e035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1285 byte(s) leaked in 62 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+134/158 rizin:unit / analysis_op                           OK              0.97s
+135/158 rizin:integration / bin_symbols                    OK              0.12s
+136/158 rizin:integration / bin                            OK              0.27s
+137/158 rizin:unit / inquiry_absint                        OK              2.30s
+138/158 rizin:integration / bin_vfiles                     OK              0.11s
+139/158 rizin:integration / analysis_global_var            FAIL            1.24s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=201 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_analysis_global_var
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92b693321d in c_parser_new_primitive_type ../../librz/type/parser/types_storage.c:178
+    #2 0x7f92b69233b0 in parse_primitive_type ../../librz/type/parser/types_parser.c:124
+    #3 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #4 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #5 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #6 0x559f8713504f in test_flag_confusion_delete ../../test/integration/test_analysis_global_var.c:220
+    #7 0x559f871365eb in all_tests ../../test/integration/test_analysis_global_var.c:263
+    #8 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92c0ca2a18 in dupkey ../../librz/util/ht/ht_inc.c:191
+    #2 0x7f92c0ca2a18 in insert_update ../../librz/util/ht/ht_inc.c:692
+    #3 0x7f92c0ca3332 in ht_sp_insert ../../librz/util/ht/ht_inc.c:719
+    #4 0x7f92b6932610 in c_parser_base_type_store ../../librz/type/parser/types_storage.c:46
+    #5 0x7f92b69233ce in parse_primitive_type ../../librz/type/parser/types_parser.c:130
+    #6 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #7 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x559f871345ff in test_flag_confusion_addr ../../test/integration/test_analysis_global_var.c:197
+    #10 0x559f87136593 in all_tests ../../test/integration/test_analysis_global_var.c:262
+    #11 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92b693321d in c_parser_new_primitive_type ../../librz/type/parser/types_storage.c:178
+    #2 0x7f92b69233b0 in parse_primitive_type ../../librz/type/parser/types_parser.c:124
+    #3 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #4 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #5 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #6 0x559f87133a61 in test_flag_confusion_space_name ../../test/integration/test_analysis_global_var.c:168
+    #7 0x559f8713653b in all_tests ../../test/integration/test_analysis_global_var.c:261
+    #8 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92b693321d in c_parser_new_primitive_type ../../librz/type/parser/types_storage.c:178
+    #2 0x7f92b69233b0 in parse_primitive_type ../../librz/type/parser/types_parser.c:124
+    #3 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #4 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #5 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #6 0x559f871345ff in test_flag_confusion_addr ../../test/integration/test_analysis_global_var.c:197
+    #7 0x559f87136593 in all_tests ../../test/integration/test_analysis_global_var.c:262
+    #8 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92c0ca2a18 in dupkey ../../librz/util/ht/ht_inc.c:191
+    #2 0x7f92c0ca2a18 in insert_update ../../librz/util/ht/ht_inc.c:692
+    #3 0x7f92c0ca3332 in ht_sp_insert ../../librz/util/ht/ht_inc.c:719
+    #4 0x7f92b6932610 in c_parser_base_type_store ../../librz/type/parser/types_storage.c:46
+    #5 0x7f92b69233ce in parse_primitive_type ../../librz/type/parser/types_parser.c:130
+    #6 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #7 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x559f8713504f in test_flag_confusion_delete ../../test/integration/test_analysis_global_var.c:220
+    #10 0x559f871365eb in all_tests ../../test/integration/test_analysis_global_var.c:263
+    #11 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92c0ca2a18 in dupkey ../../librz/util/ht/ht_inc.c:191
+    #2 0x7f92c0ca2a18 in insert_update ../../librz/util/ht/ht_inc.c:692
+    #3 0x7f92c0ca3332 in ht_sp_insert ../../librz/util/ht/ht_inc.c:719
+    #4 0x7f92b6932610 in c_parser_base_type_store ../../librz/type/parser/types_storage.c:46
+    #5 0x7f92b69233ce in parse_primitive_type ../../librz/type/parser/types_parser.c:130
+    #6 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #7 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x559f87133a61 in test_flag_confusion_space_name ../../test/integration/test_analysis_global_var.c:168
+    #10 0x559f8713653b in all_tests ../../test/integration/test_analysis_global_var.c:261
+    #11 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92c0ca2a18 in dupkey ../../librz/util/ht/ht_inc.c:191
+    #2 0x7f92c0ca2a18 in insert_update ../../librz/util/ht/ht_inc.c:692
+    #3 0x7f92c0ca3332 in ht_sp_insert ../../librz/util/ht/ht_inc.c:719
+    #4 0x7f92b6932610 in c_parser_base_type_store ../../librz/type/parser/types_storage.c:46
+    #5 0x7f92b69233ce in parse_primitive_type ../../librz/type/parser/types_parser.c:130
+    #6 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #7 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x559f8712f1dd in test_rz_analysis_global_var ../../test/integration/test_analysis_global_var.c:23
+    #10 0x559f871364e3 in all_tests ../../test/integration/test_analysis_global_var.c:260
+    #11 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f92c28eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7f92b693321d in c_parser_new_primitive_type ../../librz/type/parser/types_storage.c:178
+    #2 0x7f92b69233b0 in parse_primitive_type ../../librz/type/parser/types_parser.c:124
+    #3 0x7f92b6929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #4 0x7f92b6930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #5 0x7f92b6920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #6 0x559f8712f1dd in test_rz_analysis_global_var ../../test/integration/test_analysis_global_var.c:23
+    #7 0x559f871364e3 in all_tests ../../test/integration/test_analysis_global_var.c:260
+    #8 0x7f92b5e35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 4640 byte(s) leaked in 28 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+140/158 rizin:integration / dwarf_info                     OK              0.14s
+141/158 rizin:integration / analysis_il                    OK              1.38s
+142/158 rizin:integration / basefind                       OK              0.92s
+143/158 rizin:integration / dwarf                          FAIL            0.91s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=46 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_dwarf
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #8 0x7fc891278fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fc89124bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fc89125ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fc89125c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x5569e58faec4 in test_dwarf_cpp_empty_line_info ../../test/integration/test_dwarf.c:428
+    #13 0x5569e5910b05 in all_tests ../../test/integration/test_dwarf.c:1481
+    #14 0x5569e58e242a in main ../../test/integration/test_dwarf.c:1494
+    #15 0x7fc88fc35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc895ef4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fc89431d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fc89431d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fc894313538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fc891801519 in Pe32_bin_pe_init_overlay ../../librz/bin/format/pe/pe_overlay.c:72
+    #5 0x7fc8917defeb in bin_pe_init ../../librz/bin/format/pe/pe.c:74
+    #6 0x7fc8917defeb in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fc8913693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fc891278fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fc89124bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fc89125ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fc89125c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x5569e590e80d in test_dwarf4_loclists ../../test/integration/test_dwarf.c:1420
+    #13 0x5569e5910e0b in all_tests ../../test/integration/test_dwarf.c:1490
+    #14 0x5569e58e242a in main ../../test/integration/test_dwarf.c:1494
+    #15 0x7fc88fc35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc895ef4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fc89431d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fc89431d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fc894313538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fc891804bf1 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:175
+    #5 0x7fc8917def2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fc8917def2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fc8913693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fc891278fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fc89124bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fc89125ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fc89125c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x5569e590e80d in test_dwarf4_loclists ../../test/integration/test_dwarf.c:1420
+    #13 0x5569e5910e0b in all_tests ../../test/integration/test_dwarf.c:1490
+    #14 0x5569e58e242a in main ../../test/integration/test_dwarf.c:1494
+    #15 0x7fc88fc35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc895ef4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fc89431d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fc89431d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fc894313538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fc891804bf1 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:175
+    #5 0x7fc8917def2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fc8917def2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fc8913693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fc891278fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fc89124bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fc89125ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fc89125c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x5569e58faec4 in test_dwarf_cpp_empty_line_info ../../test/integration/test_dwarf.c:428
+    #13 0x5569e5910b05 in all_tests ../../test/integration/test_dwarf.c:1481
+    #14 0x5569e58e242a in main ../../test/integration/test_dwarf.c:1494
+    #15 0x7fc88fc35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc895ef4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fc89431d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fc89431d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fc894313538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fc891804871 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:134
+    #5 0x7fc8917def2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fc8917def2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fc8913693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fc891278fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fc89124bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fc89125ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fc89125c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x5569e590e80d in test_dwarf4_loclists ../../test/integration/test_dwarf.c:1420
+    #13 0x5569e5910e0b in all_tests ../../test/integration/test_dwarf.c:1490
+    #14 0x5569e58e242a in main ../../test/integration/test_dwarf.c:1494
+    #15 0x7fc88fc35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x7fc895ef4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fc89431d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fc89431d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fc894313538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fc891804871 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:134
+    #5 0x7fc8917def2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fc8917def2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fc8913693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fc891278fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fc89124bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fc89125ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fc89125c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x5569e58faec4 in test_dwarf_cpp_empty_line_info ../../test/integration/test_dwarf.c:428
+    #13 0x5569e5910b05 in all_tests ../../test/integration/test_dwarf.c:1481
+    #14 0x5569e58e242a in main ../../test/integration/test_dwarf.c:1494
+    #15 0x7fc88fc35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 32124 byte(s) leaked in 84 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+144/158 rizin:integration / glibc_version                  OK              1.25s
+145/158 rizin:integration / open_analyse_save_load_project FAIL            1.26s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=25 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_open_analyse_save_load_project
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #0 0x7fab1daf4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fab1bd34c44 in json_new ../../librz/util/json_parser.c:26
+    #2 0x7fab1bd34c44 in create_json ../../librz/util/json_parser.c:30
+    #3 0x7fab1bd36446 in parse_value ../../librz/util/json_parser.c:307
+    #4 0x7fab1bd3629f in parse_value ../../librz/util/json_parser.c:246
+    #5 0x7fab1bd37904 in rz_json_parse ../../librz/util/json_parser.c:385
+    #6 0x7fab165aefa2 in global_var_load_cb ../../librz/arch/serialize_analysis.c:959
+    #7 0x7fab1beb9485 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #8 0x7fab1bf2314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #9 0x7fab1bf212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #10 0x7fab165c36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #11 0x7fab165c7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #12 0x7fab12ca56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #13 0x7fab12c67971 in rz_project_load ../../librz/core/project.c:160
+    #14 0x7fab12c67b11 in rz_project_load_file ../../librz/core/project.c:175
+    #15 0x55e7debfc00d in test_open_analyse_save ../../test/integration/test_open_analyse_save_load_project.c:59
+    #16 0x55e7debfc5e0 in all_tests ../../test/integration/test_open_analyse_save_load_project.c:78
+    #17 0x7fab11435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 66 byte(s) in 1 object(s) allocated from:
+    #0 0x7fab1daf4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fab1bd47faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fab165aef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fab1beb9485 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fab1bf2314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fab1bf212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fab165c36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fab165c7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fab12ca56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fab12c67971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fab12c67b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55e7debfc00d in test_open_analyse_save ../../test/integration/test_open_analyse_save_load_project.c:59
+    #12 0x55e7debfc5e0 in all_tests ../../test/integration/test_open_analyse_save_load_project.c:78
+    #13 0x7fab11435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 64 byte(s) in 1 object(s) allocated from:
+    #0 0x7fab1daf4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fab1bd47faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fab165aef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fab1beb9365 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fab1bf2314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fab1bf212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fab165c36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fab165c7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fab12ca56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fab12c67971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fab12c67b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55e7debfc00d in test_open_analyse_save ../../test/integration/test_open_analyse_save_load_project.c:59
+    #12 0x55e7debfc5e0 in all_tests ../../test/integration/test_open_analyse_save_load_project.c:78
+    #13 0x7fab11435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 62 byte(s) in 1 object(s) allocated from:
+    #0 0x7fab1daf4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fab1bd47faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fab165aef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fab1beb8f75 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fab1bf2314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fab1bf212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fab165c36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fab165c7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fab12ca56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fab12c67971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fab12c67b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55e7debfc00d in test_open_analyse_save ../../test/integration/test_open_analyse_save_load_project.c:59
+    #12 0x55e7debfc5e0 in all_tests ../../test/integration/test_open_analyse_save_load_project.c:78
+    #13 0x7fab11435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 62 byte(s) in 1 object(s) allocated from:
+    #0 0x7fab1daf4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fab1bd47faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fab165aef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fab1beb8e55 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fab1bf2314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fab1bf212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fab165c36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fab165c7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fab12ca56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fab12c67971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fab12c67b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55e7debfc00d in test_open_analyse_save ../../test/integration/test_open_analyse_save_load_project.c:59
+    #12 0x55e7debfc5e0 in all_tests ../../test/integration/test_open_analyse_save_load_project.c:78
+    #13 0x7fab11435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 58 byte(s) in 1 object(s) allocated from:
+    #0 0x7fab1daf4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fab1bd47faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fab165aef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fab1beb8ee5 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fab1bf2314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fab1bf212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fab165c36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fab165c7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fab12ca56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fab12c67971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fab12c67b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55e7debfc00d in test_open_analyse_save ../../test/integration/test_open_analyse_save_load_project.c:59
+    #12 0x55e7debfc5e0 in all_tests ../../test/integration/test_open_analyse_save_load_project.c:78
+    #13 0x7fab11435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1272 byte(s) leaked in 25 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+146/158 rizin:integration / stabs                          OK              0.11s
+147/158 rizin:integration / pdb                            FAIL            1.23s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=240 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_pdb
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc8ddb0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9fb55 in test_pdb_type_save ../../test/integration/test_pdb.c:395
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc8ddb0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9fa89 in test_pdb_type_save ../../test/integration/test_pdb.c:394
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 10 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc8ddb0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9f8ea in test_pdb_type_save ../../test/integration/test_pdb.c:392
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 9 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc8ddb0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9f817 in test_pdb_type_save ../../test/integration/test_pdb.c:391
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 9 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc8ddb0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9f9bd in test_pdb_type_save ../../test/integration/test_pdb.c:393
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 8 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc8ddb0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9fc21 in test_pdb_type_save ../../test/integration/test_pdb.c:396
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 8 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabc9ebd0 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabc9ebd0 in test_pdb_type_save ../../test/integration/test_pdb.c:374
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7facf40eed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7facf23c9b89 in drain ../../librz/util/strbuf.c:337
+    #2 0x7facf23c9b89 in rz_strbuf_drain ../../librz/util/strbuf.c:349
+    #3 0x7face7b18e4d in type_as_pretty_string ../../librz/type/type.c:1147
+    #4 0x7face7b17206 in rz_type_as_pretty_string ../../librz/type/type.c:1172
+    #5 0x55bbabca03b4 in has_union_member_type ../../test/integration/test_types.h:53
+    #6 0x55bbabca03b4 in test_pdb_type_save ../../test/integration/test_pdb.c:375
+    #7 0x55bbabcb84ed in all_tests ../../test/integration/test_pdb.c:874
+    #8 0x55bbabc8d55a in main ../../test/integration/test_pdb.c:880
+    #9 0x7face7035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 180 byte(s) leaked in 13 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+148/158 rizin:integration / cpu_platform_profiles          FAIL            1.83s   killed by signal 6 SIGABRT
+>>> MALLOC_PERTURB_=117 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_cpu_platform_profiles
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #7 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 1072 byte(s) in 56 object(s) allocated from:
+    #0 0x7efcc1af4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7efcbfd9cb6a in rz_str_newf ../../librz/util/str.c:849
+    #2 0x7efcba58e772 in sdb_load_platform_profile ../../librz/arch/platform_target_index.c:82
+    #3 0x7efcba58e772 in sdb_load_arch_platform_by_path ../../librz/arch/platform_target_index.c:102
+    #4 0x7efcba58e772 in rz_platform_target_index_load_sdb ../../librz/arch/platform_target_index.c:119
+    #5 0x55df29e11c0c in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:83
+    #6 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #7 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x7efcc1af4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7efcbfe3e243 in rz_pvector_new ../../librz/util/vector.c:668
+    #2 0x7efcbff216e3 in sdb_get_items ../../librz/util/sdb/src/sdb.c:603
+    #3 0x7efcba58e496 in sdb_load_platform_profile ../../librz/arch/platform_target_index.c:63
+    #4 0x7efcba58e496 in sdb_load_arch_platform_by_path ../../librz/arch/platform_target_index.c:102
+    #5 0x7efcba58e496 in rz_platform_target_index_load_sdb ../../librz/arch/platform_target_index.c:119
+    #6 0x55df29e11c0c in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:83
+    #7 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #8 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7efcc1af4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7efcbfd9cb6a in rz_str_newf ../../librz/util/str.c:849
+    #2 0x7efcbfcdf9bb in rz_file_temp ../../librz/util/file.c:1083
+    #3 0x55df29e11bab in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:79
+    #4 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #5 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7efcc1af4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7efcbfd9cb6a in rz_str_newf ../../librz/util/str.c:849
+    #2 0x7efcbfcdf9bb in rz_file_temp ../../librz/util/file.c:1083
+    #3 0x55df29e10abb in test_cpu_profiles ../../test/integration/test_cpu_platform_profiles.c:21
+    #4 0x55df29e12723 in all_tests ../../test/integration/test_cpu_platform_profiles.c:129
+    #5 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4080 byte(s) in 170 object(s) allocated from:
+    #0 0x7efcc1af4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7efcbff1cf04 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:461
+    #2 0x7efcbff1e2a8 in sdbkv_dup ../../librz/util/sdb/src/sdb.c:498
+    #3 0x7efcbff1e2a8 in get_items_cb ../../librz/util/sdb/src/sdb.c:579
+    #4 0x7efcbff2118b in sdb_foreach_cdb ../../librz/util/sdb/src/sdb.c:721
+    #5 0x7efcbff2118b in sdb_foreach ../../librz/util/sdb/src/sdb.c:738
+    #6 0x7efcbff21701 in sdb_get_items ../../librz/util/sdb/src/sdb.c:607
+    #7 0x7efcba58e496 in sdb_load_platform_profile ../../librz/arch/platform_target_index.c:63
+    #8 0x7efcba58e496 in sdb_load_arch_platform_by_path ../../librz/arch/platform_target_index.c:102
+    #9 0x7efcba58e496 in rz_platform_target_index_load_sdb ../../librz/arch/platform_target_index.c:119
+    #10 0x55df29e11c0c in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:83
+    #11 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #12 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 2788 byte(s) in 170 object(s) allocated from:
+    #0 0x7efcc1af4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7efcbff1cf55 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:463
+    #2 0x7efcbff1e2a8 in sdbkv_dup ../../librz/util/sdb/src/sdb.c:498
+    #3 0x7efcbff1e2a8 in get_items_cb ../../librz/util/sdb/src/sdb.c:579
+    #4 0x7efcbff2118b in sdb_foreach_cdb ../../librz/util/sdb/src/sdb.c:721
+    #5 0x7efcbff2118b in sdb_foreach ../../librz/util/sdb/src/sdb.c:738
+    #6 0x7efcbff21701 in sdb_get_items ../../librz/util/sdb/src/sdb.c:607
+    #7 0x7efcba58e496 in sdb_load_platform_profile ../../librz/arch/platform_target_index.c:63
+    #8 0x7efcba58e496 in sdb_load_arch_platform_by_path ../../librz/arch/platform_target_index.c:102
+    #9 0x7efcba58e496 in rz_platform_target_index_load_sdb ../../librz/arch/platform_target_index.c:119
+    #10 0x55df29e11c0c in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:83
+    #11 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #12 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 2489 byte(s) in 170 object(s) allocated from:
+    #0 0x7efcc1af4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7efcbff1d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7efcbff1e2a8 in sdbkv_dup ../../librz/util/sdb/src/sdb.c:498
+    #3 0x7efcbff1e2a8 in get_items_cb ../../librz/util/sdb/src/sdb.c:579
+    #4 0x7efcbff2118b in sdb_foreach_cdb ../../librz/util/sdb/src/sdb.c:721
+    #5 0x7efcbff2118b in sdb_foreach ../../librz/util/sdb/src/sdb.c:738
+    #6 0x7efcbff21701 in sdb_get_items ../../librz/util/sdb/src/sdb.c:607
+    #7 0x7efcba58e496 in sdb_load_platform_profile ../../librz/arch/platform_target_index.c:63
+    #8 0x7efcba58e496 in sdb_load_arch_platform_by_path ../../librz/arch/platform_target_index.c:102
+    #9 0x7efcba58e496 in rz_platform_target_index_load_sdb ../../librz/arch/platform_target_index.c:119
+    #10 0x55df29e11c0c in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:83
+    #11 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #12 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 1448 byte(s) in 1 object(s) allocated from:
+    #0 0x7efcc1af3b58 in realloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:85
+    #1 0x7efcbfe3c31a in rz_vector_push ../../librz/util/vector.c:468
+    #2 0x7efcbff1e2ea in rz_pvector_push ../../librz/include/rz_vector.h:371
+    #3 0x7efcbff1e2ea in get_items_cb ../../librz/util/sdb/src/sdb.c:583
+    #4 0x7efcbff2118b in sdb_foreach_cdb ../../librz/util/sdb/src/sdb.c:721
+    #5 0x7efcbff2118b in sdb_foreach ../../librz/util/sdb/src/sdb.c:738
+    #6 0x7efcbff21701 in sdb_get_items ../../librz/util/sdb/src/sdb.c:607
+    #7 0x7efcba58e496 in sdb_load_platform_profile ../../librz/arch/platform_target_index.c:63
+    #8 0x7efcba58e496 in sdb_load_arch_platform_by_path ../../librz/arch/platform_target_index.c:102
+    #9 0x7efcba58e496 in rz_platform_target_index_load_sdb ../../librz/arch/platform_target_index.c:119
+    #10 0x55df29e11c0c in test_platform_profiles ../../test/integration/test_cpu_platform_profiles.c:83
+    #11 0x55df29e1277b in all_tests ../../test/integration/test_cpu_platform_profiles.c:130
+    #12 0x7efcb5435ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 13053 byte(s) leaked in 626 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+149/158 rizin:integration / str_search                     FAIL            0.61s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=10 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_str_search
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+WARNING: Neither hash nor gnu_hash exist. Falling back to heuristics for deducing the number of dynamic symbols...
+WARNING: Neither hash nor gnu_hash exist. Falling back to heuristics for deducing the number of dynamic symbols...
+WARNING: Neither hash nor gnu_hash exist. Falling back to heuristics for deducing the number of dynamic symbols...
+
+=================================================================
+==64514==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x7fe380ef4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fe37f20fd19 in rz_atomic_bool_new ../../librz/util/thread_types.c:25
+    #2 0x7fe380d8f7f5 in rz_search_on_io ../../librz/search/search.c:719
+    #3 0x55fe452420b4 in test_rz_str_search_io_simple ../../test/integration/test_str_search.c:179
+    #4 0x55fe45244834 in all_tests ../../test/integration/test_str_search.c:294
+    #5 0x7fe37b835ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x7fe380ef4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fe37f207154 in rz_th_lock_new ../../librz/util/thread_lock.c:15
+    #2 0x7fe37f20fd2c in rz_atomic_bool_new ../../librz/util/thread_types.c:29
+    #3 0x7fe380d8f7f5 in rz_search_on_io ../../librz/search/search.c:719
+    #4 0x55fe452420b4 in test_rz_str_search_io_simple ../../test/integration/test_str_search.c:179
+    #5 0x55fe45244834 in all_tests ../../test/integration/test_str_search.c:294
+    #6 0x7fe37b835ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 56 byte(s) leaked in 2 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+150/158 rizin:integration / rzpipe                         OK              0.81s
+151/158 rizin:integration / analysis_fcn                   OK              4.43s
+152/158 rizin:integration / dwarf_integration              FAIL            3.54s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=51 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_dwarf_integration
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #1 0x7fee2951cf55 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:463
+    #2 0x7fee2951d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fee20004ac5 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:152
+    #4 0x7fee1ffdef2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #5 0x7fee1ffdef2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #6 0x7fee1fb693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #7 0x7fee1fa78fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #8 0x7fee1fa4bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #9 0x7fee1fa5ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #10 0x7fee1fa5c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #11 0x55a5b91bd002 in test_parse_dwarf_types ../../test/integration/test_dwarf_integration.c:40
+    #12 0x55a5b91c52a1 in all_tests ../../test/integration/test_dwarf_integration.c:272
+    #13 0x7fee1c035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 11 byte(s) in 1 object(s) allocated from:
+    #0 0x7fee2b0f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fee2951d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fee2951d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fee29513538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fee20004e1e in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:200
+    #5 0x7fee1ffdef2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fee1ffdef2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fee1fb693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fee1fa78fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fee1fa4bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fee1fa5ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fee1fa5c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x55a5b91bd002 in test_parse_dwarf_types ../../test/integration/test_dwarf_integration.c:40
+    #13 0x55a5b91c52a1 in all_tests ../../test/integration/test_dwarf_integration.c:272
+    #14 0x7fee1c035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 8 byte(s) in 1 object(s) allocated from:
+    #0 0x7fee2b0f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fee2951d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fee2951d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fee29513538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fee200014be in Pe32_bin_pe_init_overlay ../../librz/bin/format/pe/pe_overlay.c:71
+    #5 0x7fee1ffdefeb in bin_pe_init ../../librz/bin/format/pe/pe.c:74
+    #6 0x7fee1ffdefeb in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fee1fb693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fee1fa78fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fee1fa4bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fee1fa5ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fee1fa5c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x55a5b91bd002 in test_parse_dwarf_types ../../test/integration/test_dwarf_integration.c:40
+    #13 0x55a5b91c52a1 in all_tests ../../test/integration/test_dwarf_integration.c:272
+    #14 0x7fee1c035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7fee2b0f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fee2951d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fee2951d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fee29513538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fee20001519 in Pe32_bin_pe_init_overlay ../../librz/bin/format/pe/pe_overlay.c:72
+    #5 0x7fee1ffdefeb in bin_pe_init ../../librz/bin/format/pe/pe.c:74
+    #6 0x7fee1ffdefeb in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fee1fb693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fee1fa78fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fee1fa4bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fee1fa5ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fee1fa5c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x55a5b91bd002 in test_parse_dwarf_types ../../test/integration/test_dwarf_integration.c:40
+    #13 0x55a5b91c52a1 in all_tests ../../test/integration/test_dwarf_integration.c:272
+    #14 0x7fee1c035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7fee2b0f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fee2951d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fee2951d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fee29513538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fee20004bf1 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:175
+    #5 0x7fee1ffdef2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fee1ffdef2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fee1fb693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fee1fa78fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fee1fa4bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fee1fa5ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fee1fa5c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x55a5b91bd002 in test_parse_dwarf_types ../../test/integration/test_dwarf_integration.c:40
+    #13 0x55a5b91c52a1 in all_tests ../../test/integration/test_dwarf_integration.c:272
+    #14 0x7fee1c035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x7fee2b0f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fee2951d057 in sdbkv_new2 ../../librz/util/sdb/src/sdb.c:471
+    #2 0x7fee2951d681 in sdb_set_internal ../../librz/util/sdb/src/sdb.c:559
+    #3 0x7fee29513538 in sdb_num_set ../../librz/util/sdb/src/num.c:29
+    #4 0x7fee20004871 in Pe32_bin_pe_init_hdr ../../librz/bin/format/pe/pe_hdr.c:134
+    #5 0x7fee1ffdef2c in bin_pe_init ../../librz/bin/format/pe/pe.c:54
+    #6 0x7fee1ffdef2c in Pe32_rz_bin_pe_new_buf ../../librz/bin/format/pe/pe.c:116
+    #7 0x7fee1fb693cf in pe_load_buffer ../../librz/bin/p/bin_pe.inc:25
+    #8 0x7fee1fa78fe5 in rz_bin_object_new ../../librz/bin/bobj.c:514
+    #9 0x7fee1fa4bf24 in rz_bin_file_new_from_buffer ../../librz/bin/bfile.c:180
+    #10 0x7fee1fa5ae46 in rz_bin_open_buf ../../librz/bin/bin.c:295
+    #11 0x7fee1fa5c6b8 in rz_bin_open_io ../../librz/bin/bin.c:354
+    #12 0x55a5b91bd002 in test_parse_dwarf_types ../../test/integration/test_dwarf_integration.c:40
+    #13 0x55a5b91c52a1 in all_tests ../../test/integration/test_dwarf_integration.c:272
+    #14 0x7fee1c035ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 15971 byte(s) leaked in 36 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+153/158 rizin:unit / big                                   OK              7.69s
+154/158 rizin:integration / autocmplt                      FAIL            5.20s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=49 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_autocmplt
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #4 0x7fb8cf920098 in rz_type_parser_new ../../librz/type/parser/c_cpp_parser.c:101
+    #5 0x55806bb2aea3 in test_autocmplt_global ../../test/integration/test_autocmplt.c:502
+    #6 0x55806bb3ee47 in all_tests ../../test/integration/test_autocmplt.c:1155
+    #7 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #8 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 416 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb8dbcf4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fb8da097d3d in internal_ht_new ../../librz/util/ht/ht_inc.c:316
+    #2 0x7fb8da0a7e47 in ht_sp_new ../../librz/util/ht/ht_sp.c:45
+    #3 0x7fb8cf91f8c2 in c_parser_state_new ../../librz/type/parser/c_cpp_parser.c:41
+    #4 0x7fb8cf920098 in rz_type_parser_new ../../librz/type/parser/c_cpp_parser.c:101
+    #5 0x55806bb2aea3 in test_autocmplt_global ../../test/integration/test_autocmplt.c:502
+    #6 0x55806bb3ee47 in all_tests ../../test/integration/test_autocmplt.c:1155
+    #7 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #8 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 408 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb8dbcf3b58 in realloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:85
+    #1 0x7fb8da03c31a in rz_vector_push ../../librz/util/vector.c:468
+    #2 0x7fb8d0c35e82 in rz_pvector_push ../../librz/include/rz_vector.h:371
+    #3 0x7fb8d0c35e82 in rz_core_get_themes ../../librz/core/cmd/cmd_eval.c:162
+    #4 0x7fb8d0c35fb5 in rz_core_autocomplete_rotate_theme ../../librz/core/cmd/cmd_eval.c:106
+    #5 0x7fb8d0802ecf in autocmplt_cmd_arg_choices ../../librz/core/cautocmpl.c:825
+    #6 0x7fb8d0802ecf in autocmplt_cmd_arg ../../librz/core/cautocmpl.c:1006
+    #7 0x7fb8d0802ecf in rz_core_autocomplete_rzshell ../../librz/core/cautocmpl.c:1444
+    #8 0x55806bb1f488 in test_autocmplt_eco_themes ../../test/integration/test_autocmplt.c:773
+    #9 0x55806bb3f0a1 in all_tests ../../test/integration/test_autocmplt.c:1162
+    #10 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #11 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 228 byte(s) in 34 object(s) allocated from:
+    #0 0x7fb8dbceed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7fb8da0a2a18 in dupkey ../../librz/util/ht/ht_inc.c:191
+    #2 0x7fb8da0a2a18 in insert_update ../../librz/util/ht/ht_inc.c:692
+    #3 0x7fb8da0a3332 in ht_sp_insert ../../librz/util/ht/ht_inc.c:719
+    #4 0x7fb8d0c34ca0 in list_themes_in_path ../../librz/core/cmd/cmd_eval.c:85
+    #5 0x7fb8d0c35e01 in rz_core_get_themes ../../librz/core/cmd/cmd_eval.c:147
+    #6 0x7fb8d0c35fb5 in rz_core_autocomplete_rotate_theme ../../librz/core/cmd/cmd_eval.c:106
+    #7 0x7fb8d0802ecf in autocmplt_cmd_arg_choices ../../librz/core/cautocmpl.c:825
+    #8 0x7fb8d0802ecf in autocmplt_cmd_arg ../../librz/core/cautocmpl.c:1006
+    #9 0x7fb8d0802ecf in rz_core_autocomplete_rzshell ../../librz/core/cautocmpl.c:1444
+    #10 0x55806bb1f488 in test_autocmplt_eco_themes ../../test/integration/test_autocmplt.c:773
+    #11 0x55806bb3f0a1 in all_tests ../../test/integration/test_autocmplt.c:1162
+    #12 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #13 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 96 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb8dbcf4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fb8cf8ef83e in rz_type_base_type_new ../../librz/type/base.c:243
+    #2 0x7fb8cf933209 in c_parser_new_primitive_type ../../librz/type/parser/types_storage.c:173
+    #3 0x7fb8cf9233b0 in parse_primitive_type ../../librz/type/parser/types_parser.c:124
+    #4 0x7fb8cf929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #5 0x7fb8cf930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #6 0x7fb8cf920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #7 0x55806bb2af3d in test_autocmplt_global ../../test/integration/test_autocmplt.c:505
+    #8 0x55806bb3ee47 in all_tests ../../test/integration/test_autocmplt.c:1155
+    #9 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #10 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 8 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb8dbceed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7fb8d0c35e51 in rz_core_get_themes ../../librz/core/cmd/cmd_eval.c:162
+    #2 0x7fb8d0c35fb5 in rz_core_autocomplete_rotate_theme ../../librz/core/cmd/cmd_eval.c:106
+    #3 0x7fb8d0802ecf in autocmplt_cmd_arg_choices ../../librz/core/cautocmpl.c:825
+    #4 0x7fb8d0802ecf in autocmplt_cmd_arg ../../librz/core/cautocmpl.c:1006
+    #5 0x7fb8d0802ecf in rz_core_autocomplete_rzshell ../../librz/core/cautocmpl.c:1444
+    #6 0x55806bb1f488 in test_autocmplt_eco_themes ../../test/integration/test_autocmplt.c:773
+    #7 0x55806bb3f0a1 in all_tests ../../test/integration/test_autocmplt.c:1162
+    #8 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #9 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb8dbceed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7fb8da0a2a18 in dupkey ../../librz/util/ht/ht_inc.c:191
+    #2 0x7fb8da0a2a18 in insert_update ../../librz/util/ht/ht_inc.c:692
+    #3 0x7fb8da0a3332 in ht_sp_insert ../../librz/util/ht/ht_inc.c:719
+    #4 0x7fb8cf932610 in c_parser_base_type_store ../../librz/type/parser/types_storage.c:46
+    #5 0x7fb8cf9233ce in parse_primitive_type ../../librz/type/parser/types_parser.c:130
+    #6 0x7fb8cf929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #7 0x7fb8cf930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #8 0x7fb8cf920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #9 0x55806bb2af3d in test_autocmplt_global ../../test/integration/test_autocmplt.c:505
+    #10 0x55806bb3ee47 in all_tests ../../test/integration/test_autocmplt.c:1155
+    #11 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #12 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb8dbceed60 in strdup ../../../../src/libsanitizer/asan/asan_interceptors.cpp:578
+    #1 0x7fb8cf93321d in c_parser_new_primitive_type ../../librz/type/parser/types_storage.c:178
+    #2 0x7fb8cf9233b0 in parse_primitive_type ../../librz/type/parser/types_parser.c:124
+    #3 0x7fb8cf929238 in parse_type_node_single ../../librz/type/parser/types_parser.c:1282
+    #4 0x7fb8cf930fb0 in parse_type_descriptor_single ../../librz/type/parser/types_parser.c:1858
+    #5 0x7fb8cf920b05 in rz_type_parse_string_single ../../librz/type/parser/c_cpp_parser.c:370
+    #6 0x55806bb2af3d in test_autocmplt_global ../../test/integration/test_autocmplt.c:505
+    #7 0x55806bb3ee47 in all_tests ../../test/integration/test_autocmplt.c:1155
+    #8 0x55806bb1763a in main ../../test/integration/test_autocmplt.c:1178
+    #9 0x7fb8cee35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1860 byte(s) leaked in 44 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+155/158 rizin:integration / project_migrate                FAIL            5.06s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=183 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_project_migrate
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #4 0x7fac6b73629f in parse_value ../../librz/util/json_parser.c:246
+    #5 0x7fac6b737904 in rz_json_parse ../../librz/util/json_parser.c:385
+    #6 0x7fac65faefa2 in global_var_load_cb ../../librz/arch/serialize_analysis.c:959
+    #7 0x7fac6b8b9125 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #8 0x7fac6b92314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #9 0x7fac6b9212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #10 0x7fac65fc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #11 0x7fac65fc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #12 0x7fac626a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #13 0x7fac62667971 in rz_project_load ../../librz/core/project.c:160
+    #14 0x7fac62667b11 in rz_project_load_file ../../librz/core/project.c:175
+    #15 0x55b3ef0aab6d in test_load_v4_types ../../test/integration/test_project_migrate.c:925
+    #16 0x55b3ef0c40af in all_tests ../../test/integration/test_project_migrate.c:1238
+    #17 0x7fac60a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 144 byte(s) in 3 object(s) allocated from:
+    #0 0x7fac6d4f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7fac6b734c44 in json_new ../../librz/util/json_parser.c:26
+    #2 0x7fac6b734c44 in create_json ../../librz/util/json_parser.c:30
+    #3 0x7fac6b736446 in parse_value ../../librz/util/json_parser.c:307
+    #4 0x7fac6b73629f in parse_value ../../librz/util/json_parser.c:246
+    #5 0x7fac6b737904 in rz_json_parse ../../librz/util/json_parser.c:385
+    #6 0x7fac65faefa2 in global_var_load_cb ../../librz/arch/serialize_analysis.c:959
+    #7 0x7fac6b8b9125 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #8 0x7fac6b92314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #9 0x7fac6b9212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #10 0x7fac65fc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #11 0x7fac65fc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #12 0x7fac626a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #13 0x7fac62667971 in rz_project_load ../../librz/core/project.c:160
+    #14 0x7fac62667b11 in rz_project_load_file ../../librz/core/project.c:175
+    #15 0x55b3ef0ae7d5 in test_load_v3_typelink ../../test/integration/test_project_migrate.c:912
+    #16 0x55b3ef0c4057 in all_tests ../../test/integration/test_project_migrate.c:1237
+    #17 0x7fac60a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 65 byte(s) in 1 object(s) allocated from:
+    #0 0x7fac6d4f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fac6b747faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fac65faef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fac6b8b9125 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fac6b92314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fac6b9212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fac65fc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fac65fc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fac626a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fac62667971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fac62667b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55b3ef0aab6d in test_load_v4_types ../../test/integration/test_project_migrate.c:925
+    #12 0x55b3ef0c40af in all_tests ../../test/integration/test_project_migrate.c:1238
+    #13 0x7fac60a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 65 byte(s) in 1 object(s) allocated from:
+    #0 0x7fac6d4f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fac6b747faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fac65faef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fac6b8b9125 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fac6b92314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fac6b9212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fac65fc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fac65fc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fac626a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fac62667971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fac62667b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55b3ef0ae7d5 in test_load_v3_typelink ../../test/integration/test_project_migrate.c:912
+    #12 0x55b3ef0c4057 in all_tests ../../test/integration/test_project_migrate.c:1237
+    #13 0x7fac60a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 63 byte(s) in 1 object(s) allocated from:
+    #0 0x7fac6d4f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fac6b747faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fac65faef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fac6b8b95a5 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fac6b92314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fac6b9212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fac65fc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fac65fc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fac626a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fac62667971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fac62667b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55b3ef0ad7cd in test_load_v2_typelink ../../test/integration/test_project_migrate.c:856
+    #12 0x55b3ef0c3fa7 in all_tests ../../test/integration/test_project_migrate.c:1235
+    #13 0x7fac60a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 63 byte(s) in 1 object(s) allocated from:
+    #0 0x7fac6d4f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fac6b747faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fac65faef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fac6b8b95a5 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fac6b92314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fac6b9212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fac65fc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fac65fc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fac626a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fac62667971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fac62667b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x55b3ef0bac99 in test_load_v2_callables ../../test/integration/test_project_migrate.c:870
+    #12 0x55b3ef0c3f4f in all_tests ../../test/integration/test_project_migrate.c:1234
+    #13 0x7fac60a35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1025 byte(s) leaked in 21 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+156/158 rizin:integration / analysis_graph                 FAIL            7.21s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=98 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/integration/test_analysis_graph
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+Listing only the last 100 lines from a long log.
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 73 byte(s) in 1 object(s) allocated from:
+    #0 0x7fbf990f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fbf97347faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fbf91baef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fbf974b9365 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fbf9752314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fbf975212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fbf91bc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fbf91bc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fbf8e2a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fbf8e267971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fbf8e267b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x557e51658ae6 in test_analysis_graph ../../test/integration/test_analysis_graph.c:92
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 60 byte(s) in 1 object(s) allocated from:
+    #0 0x7fbf990f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fbf97347faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fbf91baef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fbf974b9636 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fbf9752314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fbf975212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fbf91bc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fbf91bc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fbf8e2a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fbf8e267971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fbf8e267b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x557e51658ae6 in test_analysis_graph ../../test/integration/test_analysis_graph.c:92
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x7fbf990f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fbf97347faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fbf91baef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fbf974b95a5 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fbf9752314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fbf975212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fbf91bc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fbf91bc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fbf8e2a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fbf8e267971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fbf8e267b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x557e51658ae6 in test_analysis_graph ../../test/integration/test_analysis_graph.c:92
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x7fbf990f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fbf97347faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fbf91baef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fbf974b9515 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fbf9752314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fbf975212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fbf91bc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fbf91bc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fbf8e2a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fbf8e267971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fbf8e267b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x557e51658ae6 in test_analysis_graph ../../test/integration/test_analysis_graph.c:92
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x7fbf990f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fbf97347faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fbf91baef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fbf974b9485 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fbf9752314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fbf975212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fbf91bc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fbf91bc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fbf8e2a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fbf8e267971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fbf8e267b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x557e51658ae6 in test_analysis_graph ../../test/integration/test_analysis_graph.c:92
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x7fbf990f4c57 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x7fbf97347faa in rz_mem_dup ../../librz/util/mem.c:252
+    #2 0x7fbf91baef8e in global_var_load_cb ../../librz/arch/serialize_analysis.c:955
+    #3 0x7fbf974b91b5 in ht_ss_foreach_kv ../../librz/util/ht/ht_inc.c:943
+    #4 0x7fbf9752314f in sdb_ht_foreach_kv ../../librz/util/sdb/src/sdbht.c:98
+    #5 0x7fbf975212a3 in sdb_foreach ../../librz/util/sdb/src/sdb.c:742
+    #6 0x7fbf91bc36d7 in rz_serialize_analysis_global_var_load ../../librz/arch/serialize_analysis.c:1067
+    #7 0x7fbf91bc7beb in rz_serialize_analysis_load ../../librz/arch/serialize_analysis.c:2188
+    #8 0x7fbf8e2a56ea in rz_serialize_core_load ../../librz/core/serialize_core.c:104
+    #9 0x7fbf8e267971 in rz_project_load ../../librz/core/project.c:160
+    #10 0x7fbf8e267b11 in rz_project_load_file ../../librz/core/project.c:175
+    #11 0x557e51658ae6 in test_analysis_graph ../../test/integration/test_analysis_graph.c:92
+    #12 0x557e516612a3 in all_tests ../../test/integration/test_analysis_graph.c:420
+    #13 0x7fbf8ca35ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1779 byte(s) leaked in 35 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+157/158 rizin:unit / unum                                  FAIL            9.00s   killed by signal 6 SIGABRT
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=215 LD_LIBRARY_PATH=/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/inquiry:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/diff:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/lang:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/arch:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/egg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/sign:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/hash:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/config:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/type:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/cons:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/il:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/debug:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/reg:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/socket:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/crypto:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/syscall:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/core:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/util:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/flag:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/search:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/magic:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/io:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/bin:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/mark:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/main:/home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/librz/demangler UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/test/unit/test_unum
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+rz_num_math error: (division by zero) in (1 / 0)
+
+=================================================================
+==63514==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1144 byte(s) in 1 object(s) allocated from:
+    #0 0x7f80c06f4610 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x7f80bea26f16 in rz_num_new ../../librz/util/unum.c:204
+    #2 0x560e846c4f2e in main ../../test/unit/test_unum.c:2672
+    #3 0x7f80bd647ca7 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 1144 byte(s) leaked in 1 allocation(s).
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+158/158 rizin:unit / threads                               OK             13.11s
+
+Summary of Failures:
+
+ 36/158 rizin:unit / agraph                                FAIL            0.74s   killed by signal 6 SIGABRT
+ 41/158 rizin:unit / cmd                                   FAIL            0.58s   killed by signal 6 SIGABRT
+ 81/158 rizin:unit / il_validate                           FAIL            0.36s   killed by signal 6 SIGABRT
+ 82/158 rizin:unit / itv                                   FAIL            0.27s   killed by signal 6 SIGABRT
+101/158 rizin:unit / regex                                 FAIL            0.33s   killed by signal 6 SIGABRT
+118/158 rizin:unit / serialize_types                       FAIL            0.48s   killed by signal 6 SIGABRT
+132/158 rizin:unit / tokens                                FAIL            0.95s   killed by signal 6 SIGABRT
+133/158 rizin:unit / type                                  FAIL            0.90s   killed by signal 6 SIGABRT
+139/158 rizin:integration / analysis_global_var            FAIL            1.24s   killed by signal 6 SIGABRT
+143/158 rizin:integration / dwarf                          FAIL            0.91s   killed by signal 6 SIGABRT
+145/158 rizin:integration / open_analyse_save_load_project FAIL            1.26s   killed by signal 6 SIGABRT
+147/158 rizin:integration / pdb                            FAIL            1.23s   killed by signal 6 SIGABRT
+148/158 rizin:integration / cpu_platform_profiles          FAIL            1.83s   killed by signal 6 SIGABRT
+149/158 rizin:integration / str_search                     FAIL            0.61s   killed by signal 6 SIGABRT
+152/158 rizin:integration / dwarf_integration              FAIL            3.54s   killed by signal 6 SIGABRT
+154/158 rizin:integration / autocmplt                      FAIL            5.20s   killed by signal 6 SIGABRT
+155/158 rizin:integration / project_migrate                FAIL            5.06s   killed by signal 6 SIGABRT
+156/158 rizin:integration / analysis_graph                 FAIL            7.21s   killed by signal 6 SIGABRT
+157/158 rizin:unit / unum                                  FAIL            9.00s   killed by signal 6 SIGABRT
+
+Ok:                 139 
+Expected Fail:      0   
+Fail:               19  
+Unexpected Pass:    0   
+Skipped:            0   
+Timeout:            0   
+
+Full log written to /home/premades/Documents/rizinorg/rizin/build/Desktop_Qt_6_11_1_Debug/meson-logs/testlog.txt
+FAILED: meson-internal__test 
+/usr/bin/meson test --no-rebuild --print-errorlogs
+ninja: build stopped: subcommand failed.

@@ -97,6 +97,10 @@ struct rz_analysis_t {
 	ut64 lea_jmptbl_ip; ///< jump table x86 lea ip
 	ut64 gnu_thumb1_case_uqi_addr; ///< address of a `__gnu_thumb1_case_uqi_addr` function (specific to ARM / Thumb-1)
 	HtSP /*<const char *, RzSetU *>*/ *ht_virtual_xrefs; ///< addresses of virtual function calls
+
+	// TODO: make this normal struct instead of pointer and use rz_analysis_get_interrupt to bind and stuff in core
+	RzInterrupt *intr; ///< TODOe: do we need pointer? better to add struct? also docs
+	RzConsBind consb; ///< TODOe: why is this not present in first place??
 };
 
 #endif // RZ_ANALYSIS_PRIVATE_H

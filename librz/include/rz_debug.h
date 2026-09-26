@@ -236,6 +236,7 @@ typedef struct rz_debug_tracepoint_t {
 } RzDebugTracepoint;
 
 typedef struct rz_debug_t {
+	void *user; // TODOe: initialize this with core/cons
 	char *arch;
 	RZ_DEPRECATE int bits; ///< bad indicator for the bitness of the debuggee
 	int hitinfo;
@@ -265,7 +266,7 @@ typedef struct rz_debug_t {
 	bool create_new_console; /* Create a new console window for the debugee on debug start */
 	char *glob_libs; /* stop on lib load */
 	char *glob_unlibs; /* stop on lib unload */
-	bool consbreak; /* SIGINT handle for attached processes */
+	bool consbreak; /* SIGINT handle for attached processes */ //TODOe: rename this??
 	bool continue_all_threads;
 
 	/* tracking debugger state */
@@ -318,6 +319,9 @@ typedef struct rz_debug_t {
 	bool nt_x86_xstate_supported; ///< Track whether X86_FEATURE_XSAVE feature is supported on current kernel
 	size_t RtlpHpHeapGlobalsOffset; ///< Related to windows heap
 	size_t RtlpLFHKeyOffset; ///< Related to windows heap
+
+	RzInterrupt *intr; ///< TODOe: initialize this bih
+	RzCons *cons; ///< TODOe: initialize this bih
 } RzDebug;
 
 typedef struct rz_debug_desc_plugin_t {

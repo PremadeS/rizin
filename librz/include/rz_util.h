@@ -42,6 +42,7 @@
 #include <rz_util/rz_graph.h>
 #include <rz_util/rz_hex.h>
 #include <rz_util/rz_idpool.h>
+#include <rz_util/rz_interrupt.h>
 #include <rz_util/rz_intervaltree.h>
 #include <rz_util/rz_iterator.h>
 #include <rz_util/rz_itv.h>
@@ -91,6 +92,10 @@ extern "C" {
 #endif
 
 RZ_LIB_VERSION_HEADER(rz_util);
+
+// TODOe: can we put this here?
+// also better name?
+RZ_API int rz_cb_default_printf(void *user, const char *fmt, ...) RZ_PRINTF_CHECK(2, 3);
 
 #ifdef __cplusplus
 }

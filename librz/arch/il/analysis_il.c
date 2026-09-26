@@ -343,7 +343,7 @@ static void il_events(RzILVM *vm, RzStrBuf *sb) {
 
 static RzAnalysisILStepResult analysis_il_vm_step_while(
 	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg,
-	bool with_events, RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NULLABLE void *user) {
+	RZ_NULLABLE RzStrBuf *sb_out, RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NULLABLE void *user) {
 
 	rz_return_val_if_fail(analysis && vm, false);
 	RzAnalysisPlugin *cur = analysis->cur;
@@ -374,7 +374,7 @@ static RzAnalysisILStepResult analysis_il_vm_step_while(
 			break;
 		}
 
-		if (!with_events) {
+		if (!sb_out) {
 			rz_analysis_op_fini(&op);
 			continue;
 		}
@@ -385,12 +385,12 @@ static RzAnalysisILStepResult analysis_il_vm_step_while(
 		rz_strbuf_append(&sb, "\n");
 		il_events(vm->vm, &sb);
 
-		rz_cons_printf("0x%08" PFMT64x " [", addr);
+		rz_strbuf_appendf(sb_out, "0x%08" PFMT64x " [", addr);
 		for (int i = 0; i < op.size; ++i) {
-			rz_cons_printf("%02x", code[i]);
+			rz_strbuf_appendf(sb_out, "%02x", code[i]);
 		}
-		rz_cons_printf("] %s\n%s\n", op.mnemonic, rz_strbuf_get(&sb));
-		rz_cons_flush();
+		rz_strbuf_appendf(sb_out, "] %s\n%s\n", op.mnemonic, rz_strbuf_get(&sb));
+		// rz_cons_flush(); // TODO: we are ignoring this (for now) - could add a callback for flush but it seems messy
 		rz_strbuf_fini(&sb);
 		rz_analysis_op_fini(&op);
 	}
@@ -421,7 +421,7 @@ static RzAnalysisILStepResult analysis_il_vm_step_while(
 RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step_while(
 	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg,
 	RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NULLABLE void *user) {
-	return analysis_il_vm_step_while(analysis, vm, reg, false, cond, user);
+	return analysis_il_vm_step_while(analysis, vm, reg, NULL, cond, user);
 }
 
 /**
@@ -444,8 +444,8 @@ RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step_while(
  */
 RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step_while_with_events(
 	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg,
-	RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NULLABLE void *user) {
-	return analysis_il_vm_step_while(analysis, vm, reg, true, cond, user);
+	RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NONNULL RzStrBuf *sb_out, RZ_NULLABLE void *user) {
+	return analysis_il_vm_step_while(analysis, vm, reg, sb_out, cond, user);
 }
 
 static bool step_cond_once(RzAnalysisILVM *vm, void *user) {
