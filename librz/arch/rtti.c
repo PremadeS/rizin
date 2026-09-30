@@ -14,7 +14,7 @@ RZ_API char *rz_analysis_rtti_demangle_class_name(RzAnalysis *analysis, const ch
 	return rz_analysis_rtti_itanium_demangle_class_name(&context, name);
 }
 
-RZ_API void rz_analysis_rtti_print_at_vtable(RzAnalysis *analysis, ut64 addr, RzOutputMode mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_rtti_print_at_vtable(RzAnalysis *analysis, ut64 addr, RzOutputMode mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	bool use_json = mode == RZ_OUTPUT_MODE_JSON;
 	if (use_json) {
 		rz_cons_print(cons, "[");
@@ -33,7 +33,7 @@ RZ_API void rz_analysis_rtti_print_at_vtable(RzAnalysis *analysis, ut64 addr, Rz
 	}
 }
 
-RZ_API void rz_analysis_rtti_print_all(RzAnalysis *analysis, RzOutputMode mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_rtti_print_all(RzAnalysis *analysis, RzOutputMode mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	RVTableContext context;
 	rz_analysis_vtable_begin(analysis, &context);
 

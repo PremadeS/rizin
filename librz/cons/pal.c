@@ -276,7 +276,7 @@ RZ_API void rz_cons_pal_copy(RzConsContext *dst, RzConsContext *src) {
 	__cons_pal_update_event(dst);
 }
 
-RZ_API void rz_cons_pal_random(RZ_NONNULL RzCons *cons) {
+RZ_API void rz_cons_pal_random(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	int i;
 	RzColor *rcolor;
 	for (i = 0; keys[i].name; i++) {
@@ -287,7 +287,7 @@ RZ_API void rz_cons_pal_random(RZ_NONNULL RzCons *cons) {
 }
 
 /* Return NULL if outcol is given */
-RZ_API char *rz_cons_pal_parse(RZ_NONNULL RzCons *cons, const char *str, RzColor *outcol) {
+RZ_API char *rz_cons_pal_parse(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str, RzColor *outcol) {
 	int i;
 	RzColor rcolor = (RzColor)RzColor_BLACK;
 	rcolor.id16 = -1;
@@ -507,7 +507,7 @@ static void rz_cons_pal_show_rgb(RzCons *cons) {
 	}
 }
 
-RZ_API void rz_cons_pal_show(RZ_NONNULL RzCons *cons) {
+RZ_API void rz_cons_pal_show(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	for (size_t i = 0; colors[i].name; i++) {
 		rz_cons_printf(cons, "%s%s__" Color_RESET " %s\n",
 			colors[i].code,
@@ -534,7 +534,7 @@ RZ_API void rz_cons_pal_show(RZ_NONNULL RzCons *cons) {
  * \param cons The cons instance
  * \param pj  The JSON structure to write to.
  */
-RZ_API void rz_cons_pal_list_as_json(RZ_NONNULL RzCons *cons, RZ_NONNULL PJ *pj) {
+RZ_API void rz_cons_pal_list_as_json(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NONNULL PJ *pj) {
 	rz_return_if_fail(pj);
 
 	pj_o(pj); // {
@@ -575,7 +575,7 @@ RZ_API void rz_cons_pal_list_as_json(RZ_NONNULL RzCons *cons, RZ_NONNULL PJ *pj)
  * \param cons The cons instance
  * \param name_prefix The name prefix to apply.
  */
-RZ_API void rz_cons_pal_list_as_css(RZ_NONNULL RzCons *cons, RZ_NULLABLE const char *name_prefix) {
+RZ_API void rz_cons_pal_list_as_css(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NULLABLE const char *name_prefix) {
 	rz_return_if_fail(cons);
 	if (RZ_STR_ISEMPTY(name_prefix)) {
 		name_prefix = "";
@@ -614,7 +614,7 @@ RZ_API void rz_cons_pal_list_as_css(RZ_NONNULL RzCons *cons, RZ_NULLABLE const c
 /**
  * \brief Prints the palette visually on the console output
  */
-RZ_API void rz_cons_pal_list_visual(RZ_NONNULL RzCons *cons) {
+RZ_API void rz_cons_pal_list_visual(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	for (size_t i = 0; keys[i].name; i++) {
 		RzColor *color = RZCOLOR_AT(i);
 		rz_cons_printf(cons, " r:%-3u g:%-3u b:%-3u  %s", (ut32)color->r, (ut32)color->g, (ut32)color->b, keys[i].name);
@@ -640,7 +640,7 @@ RZ_API void rz_cons_pal_list_visual(RZ_NONNULL RzCons *cons) {
 /* Modify the palette to set a color value.
  * rz_cons_pal_update_event () must be called after this function
  * so the changes take effect. */
-RZ_API int rz_cons_pal_set(RZ_NONNULL RzCons *cons, const char *key, const char *val) {
+RZ_API int rz_cons_pal_set(RZ_NONNULL RZ_BORROW RzCons *cons, const char *key, const char *val) {
 	int i;
 	RzColor *rcolor;
 	for (i = 0; keys[i].name; i++) {
@@ -655,7 +655,7 @@ RZ_API int rz_cons_pal_set(RZ_NONNULL RzCons *cons, const char *key, const char 
 }
 
 /* Get the named RzColor */
-RZ_API RzColor rz_cons_pal_get(RZ_NONNULL RzCons *cons, const char *key) {
+RZ_API RzColor rz_cons_pal_get(RZ_NONNULL RZ_BORROW RzCons *cons, const char *key) {
 	int i;
 	RzColor *rcolor;
 	for (i = 0; keys[i].name; i++) {
@@ -668,12 +668,12 @@ RZ_API RzColor rz_cons_pal_get(RZ_NONNULL RzCons *cons, const char *key) {
 }
 
 /* Get the RzColor at specified index */
-RZ_API RzColor rz_cons_pal_get_i(RZ_NONNULL RzCons *cons, int index) {
+RZ_API RzColor rz_cons_pal_get_i(RZ_NONNULL RZ_BORROW RzCons *cons, int index) {
 	return *(RZCOLOR_AT(index));
 }
 
 /* Get color name at index */
-RZ_API const char *rz_cons_pal_get_name(RZ_NONNULL RzCons *cons, int index) {
+RZ_API const char *rz_cons_pal_get_name(RZ_NONNULL RZ_BORROW RzCons *cons, int index) {
 	return (index >= 0 && index < keys_len) ? keys[index].name : NULL;
 }
 
@@ -681,7 +681,7 @@ RZ_API int rz_cons_pal_len(void) {
 	return keys_len;
 }
 
-RZ_API void rz_cons_pal_update_event(RZ_NONNULL RzCons *cons) {
+RZ_API void rz_cons_pal_update_event(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	__cons_pal_update_event(cons->context);
 }
 
@@ -702,7 +702,7 @@ RZ_API void rz_cons_rainbow_free(RzConsContext *ctx) {
 	RZ_FREE(ctx->pal.rainbow);
 }
 
-RZ_API char *rz_cons_rainbow_get(RZ_NONNULL RzCons *cons, int idx, int last, bool bg) {
+RZ_API char *rz_cons_rainbow_get(RZ_NONNULL RZ_BORROW RzCons *cons, int idx, int last, bool bg) {
 	if (last < 0) {
 		last = cons->context->pal.rainbow_sz;
 	}

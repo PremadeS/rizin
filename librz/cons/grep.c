@@ -194,7 +194,7 @@ static const char *help_detail_tilde[] = {
 	NULL
 };
 
-RZ_API void rz_cons_grep_help(RzCons *cons) {
+RZ_API void rz_cons_grep_help(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_cons_cmd_help(cons, help_detail_tilde, true);
 }
 
@@ -542,7 +542,7 @@ static char *preprocess_filter_expr(char *cmd, const char *quotes) {
 	return ns;
 }
 
-RZ_API void rz_cons_grep_parsecmd(RZ_NONNULL RzCons *cons, char *cmd, const char *quotestr) {
+RZ_API void rz_cons_grep_parsecmd(RZ_NONNULL RZ_BORROW RzCons *cons, char *cmd, const char *quotestr) {
 	rz_return_if_fail(cmd && quotestr);
 	char *ptr = preprocess_filter_expr(cmd, quotestr);
 	if (ptr) {
@@ -562,7 +562,7 @@ RZ_API char *rz_cons_grep_strip(char *cmd, const char *quotestr) {
 	return ptr;
 }
 
-RZ_API void rz_cons_grep_process(RZ_NONNULL RzCons *cons, RZ_OWN char *grep) {
+RZ_API void rz_cons_grep_process(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_OWN char *grep) {
 	if (!grep) {
 		return;
 	}
@@ -607,7 +607,7 @@ static int cmp(const void *a, const void *b, void *user) {
 	return strcmp(a, b);
 }
 
-RZ_API void rz_cons_grepbuf(RZ_NONNULL RzCons *cons) {
+RZ_API void rz_cons_grepbuf(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	cons->context->row = 0;
 	cons->context->col = 0;
 	cons->context->rowcol_calc_start = 0;
@@ -878,7 +878,7 @@ RZ_API void rz_cons_grepbuf(RZ_NONNULL RzCons *cons) {
 	}
 }
 
-RZ_API int rz_cons_grep_line(RZ_NONNULL RzCons *cons, char *buf, int len) {
+RZ_API int rz_cons_grep_line(RZ_NONNULL RZ_BORROW RzCons *cons, char *buf, int len) {
 	RzConsGrep *grep = &cons->context->grep;
 	const char *delims = " |,;=\t";
 	char *tok = NULL;
@@ -1001,7 +1001,7 @@ RZ_API int rz_cons_grep_line(RZ_NONNULL RzCons *cons, char *buf, int len) {
 	return len;
 }
 
-RZ_API void rz_cons_grep(RZ_NONNULL RzCons *cons, const char *grep) {
+RZ_API void rz_cons_grep(RZ_NONNULL RZ_BORROW RzCons *cons, const char *grep) {
 	parse_grep_expression(cons, grep);
 	rz_cons_grepbuf(cons);
 }

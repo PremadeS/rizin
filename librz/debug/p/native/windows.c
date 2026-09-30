@@ -88,7 +88,7 @@ static bool tracelib(RzDebug *dbg, const char *mode, PLIB_ITEM item) {
 		case 'u': needle = dbg->glob_unlibs; break;
 		}
 	}
-	dbg->cb_printf(dbg->cb_printf_user, "(%d) %sing library at 0x%p (%s) %s\n", item->pid, mode,
+	rz_cons_printf(dbg->cons, "(%d) %sing library at 0x%p (%s) %s\n", item->pid, mode,
 		item->BaseOfDll, item->Path, item->Name);
 	rz_cons_flush(dbg->cons);
 	if (needle && strlen(needle)) {

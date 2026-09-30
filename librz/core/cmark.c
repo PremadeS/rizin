@@ -111,11 +111,11 @@ static void mark_print(RzMark *b, RzCmdStateOutput *state,
 	}
 }
 
-RZ_IPI void rz_core_mark_print(RzMark *b, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_IPI void rz_core_mark_print(RzMark *b, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	mark_print(b, state, UT64_MAX, UT64_MAX, false, cons);
 }
 
 RZ_IPI void rz_core_mark_range_print(RzMark *b, RzCmdStateOutput *state,
-	ut64 range_from, ut64 range_to, RZ_NONNULL RzCons *cons) {
+	ut64 range_from, ut64 range_to, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	mark_print(b, state, range_from, range_to, true, cons);
 }

@@ -3,7 +3,7 @@
 
 #include <rz_core.h>
 
-RZ_API RzCmdStatus rz_core_parser_plugin_print(RzParsePlugin *plugin, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API RzCmdStatus rz_core_parser_plugin_print(RzParsePlugin *plugin, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	const char *name = rz_str_get(plugin->name);
 	const char *desc = rz_str_get(plugin->desc);
 
@@ -31,7 +31,7 @@ RZ_API RzCmdStatus rz_core_parser_plugin_print(RzParsePlugin *plugin, RzCmdState
 	return RZ_CMD_STATUS_OK;
 }
 
-RZ_API RzCmdStatus rz_core_parser_plugins_print(RzParse *parser, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API RzCmdStatus rz_core_parser_plugins_print(RzParse *parser, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	RzListIter *iter;
 	RzParsePlugin *plugin;
 	if (!parser) {

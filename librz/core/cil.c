@@ -387,7 +387,7 @@ static inline void emit_span_to_strbuf(const char *s, size_t n, const char *colo
  * Emits only the body (no address prefix, no newline) with the same palette
  * as \c plf. A NULL or empty \p il_stmt emits nothing.
  */
-RZ_IPI void rz_core_il_colorize_body(RZ_NONNULL RzConsContext *ctx, RZ_NULLABLE const char *il_stmt, RZ_NONNULL RzCons *cons) {
+RZ_IPI void rz_core_il_colorize_body(RZ_NONNULL RzConsContext *ctx, RZ_NULLABLE const char *il_stmt, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(ctx);
 	if (RZ_STR_ISEMPTY(il_stmt)) {
 		return;

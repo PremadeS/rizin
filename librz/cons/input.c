@@ -10,7 +10,7 @@
 #endif
 #include "i/private.h"
 
-RZ_API int rz_cons_controlz(RzCons *cons, int ch) {
+RZ_API int rz_cons_controlz(RZ_NONNULL RZ_BORROW RzCons *cons, int ch) {
 #if __UNIX__
 	if (ch == 0x1a) {
 		rz_cons_show_cursor(cons, true);
@@ -69,7 +69,7 @@ static int __parseMouseEvent(RzCons *cons) {
 	return 0;
 }
 
-RZ_API int rz_cons_arrow_to_hjkl(RzCons *cons, int ch) {
+RZ_API int rz_cons_arrow_to_hjkl(RZ_NONNULL RZ_BORROW RzCons *cons, int ch) {
 	cons->mouse_event = MOUSE_NONE;
 	/* emacs */
 	switch ((ut8)ch) {
@@ -314,7 +314,7 @@ RZ_API int rz_cons_arrow_to_hjkl(RzCons *cons, int ch) {
 }
 
 // XXX no control for max length here?!?!
-RZ_API int rz_cons_fgets(RzCons *cons, char *buf, int len, int argc, const char **argv) {
+RZ_API int rz_cons_fgets(RZ_NONNULL RZ_BORROW RzCons *cons, char *buf, int len, int argc, const char **argv) {
 #define RETURN(x) \
 	{ \
 		ret = x; \
@@ -363,7 +363,7 @@ beach:
 	return ret;
 }
 
-RZ_API int rz_cons_any_key(RzCons *cons, const char *msg) {
+RZ_API int rz_cons_any_key(RZ_NONNULL RZ_BORROW RzCons *cons, const char *msg) {
 	if (msg && *msg) {
 		rz_cons_printf(cons, "\n-- %s --\n", msg);
 	} else {
@@ -553,7 +553,7 @@ static int __cons_readchar_w32(ut32 usec) {
 }
 #endif
 
-RZ_API int rz_cons_readchar_timeout(RzCons *cons, ut32 usec) {
+RZ_API int rz_cons_readchar_timeout(RZ_NONNULL RZ_BORROW RzCons *cons, ut32 usec) {
 	char ch;
 	if (rz_cons_readbuffer_readchar(cons, &ch)) {
 		return ch;
@@ -578,7 +578,7 @@ RZ_API int rz_cons_readchar_timeout(RzCons *cons, ut32 usec) {
 #endif
 }
 
-RZ_API bool rz_cons_readpush(RzCons *cons, const char *str, int len) {
+RZ_API bool rz_cons_readpush(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str, int len) {
 	char *res = (len + cons->input->readbuffer_length > 0) ? realloc(cons->input->readbuffer, len + cons->input->readbuffer_length) : NULL;
 	if (res) {
 		cons->input->readbuffer = res;
@@ -589,12 +589,12 @@ RZ_API bool rz_cons_readpush(RzCons *cons, const char *str, int len) {
 	return false;
 }
 
-RZ_API void rz_cons_readflush(RzCons *cons) {
+RZ_API void rz_cons_readflush(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	RZ_FREE(cons->input->readbuffer);
 	cons->input->readbuffer_length = 0;
 }
 
-RZ_API void rz_cons_switchbuf(RzCons *cons, bool active) {
+RZ_API void rz_cons_switchbuf(RZ_NONNULL RZ_BORROW RzCons *cons, bool active) {
 	cons->input->bufactive = active;
 }
 
@@ -602,7 +602,7 @@ RZ_API void rz_cons_switchbuf(RzCons *cons, bool active) {
 extern volatile sig_atomic_t sigwinchFlag;
 #endif
 
-RZ_API bool rz_cons_readbuffer_readchar(RzCons *cons, char *ch) {
+RZ_API bool rz_cons_readbuffer_readchar(RZ_NONNULL RZ_BORROW RzCons *cons, char *ch) {
 	if (cons->input->readbuffer_length <= 0) {
 		return false;
 	}
@@ -612,7 +612,7 @@ RZ_API bool rz_cons_readbuffer_readchar(RzCons *cons, char *ch) {
 	return true;
 }
 
-RZ_API int rz_cons_readchar(RzCons *cons) {
+RZ_API int rz_cons_readchar(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	char buf[2], ch;
 	buf[0] = -1;
 	if (rz_cons_readbuffer_readchar(cons, &ch)) {
@@ -659,7 +659,7 @@ RZ_API int rz_cons_readchar(RzCons *cons) {
 #endif
 }
 
-RZ_API bool rz_cons_yesno(RzCons *cons, int def, const char *fmt, ...) {
+RZ_API bool rz_cons_yesno(RZ_NONNULL RZ_BORROW RzCons *cons, int def, const char *fmt, ...) {
 	va_list ap;
 	ut8 key = (ut8)def;
 	va_start(ap, fmt);
@@ -689,7 +689,7 @@ RZ_API bool rz_cons_yesno(RzCons *cons, int def, const char *fmt, ...) {
 	return false;
 }
 
-RZ_API char *rz_cons_input(RzCons *cons, const char *msg) {
+RZ_API char *rz_cons_input(RZ_NONNULL RZ_BORROW RzCons *cons, const char *msg) {
 	char *oprompt = rz_line_get_prompt(cons->line);
 	if (!oprompt) {
 		return NULL;

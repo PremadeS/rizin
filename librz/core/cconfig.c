@@ -1796,7 +1796,7 @@ static bool core_config_print_iterator(const RzConfigEntry *entry, void *user) {
  * \param state reference to RzCmdStateOutput
  * \param cons reference to RzCons
  */
-RZ_API void rz_core_config_print_all(RzConfig *cfg, const char *str, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_core_config_print_all(RzConfig *cfg, const char *str, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(cfg);
 	CoreConfigPrint ccp = { 0 };
 	ccp.state = state;

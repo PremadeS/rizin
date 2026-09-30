@@ -337,7 +337,7 @@ RZ_API bool rz_core_esil_continue_back(RZ_NONNULL RzCore *core) {
 	return true;
 }
 
-RZ_API bool rz_core_esil_dumpstack(RzAnalysisEsil *esil, RZ_NONNULL RzCons *cons) {
+RZ_API bool rz_core_esil_dumpstack(RzAnalysisEsil *esil, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(esil, false);
 	int i;
 	if (esil->trap) {

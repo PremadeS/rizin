@@ -421,7 +421,7 @@ RZ_API char *rz_analysis_rtti_msvc_demangle_class_name(RVTableContext *context, 
 	return ret;
 }
 
-RZ_API void rz_analysis_rtti_msvc_print_complete_object_locator(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_rtti_msvc_print_complete_object_locator(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rtti_complete_object_locator col;
 	if (!rtti_msvc_read_complete_object_locator(context, addr, &col)) {
 		RZ_LOG_ERROR("Failed to parse complete object locator at 0x%08" PFMT64x "\n", addr);
@@ -441,7 +441,7 @@ RZ_API void rz_analysis_rtti_msvc_print_complete_object_locator(RVTableContext *
 	}
 }
 
-RZ_API void rz_analysis_rtti_msvc_print_type_descriptor(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_rtti_msvc_print_type_descriptor(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rtti_type_descriptor td = { 0 };
 	if (!rtti_msvc_read_type_descriptor(context, addr, &td)) {
 		RZ_LOG_ERROR("Failed to parse type descriptor at 0x%08" PFMT64x "\n", addr);
@@ -463,7 +463,7 @@ RZ_API void rz_analysis_rtti_msvc_print_type_descriptor(RVTableContext *context,
 	rtti_type_descriptor_fini(&td);
 }
 
-RZ_API void rz_analysis_rtti_msvc_print_class_hierarchy_descriptor(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_rtti_msvc_print_class_hierarchy_descriptor(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rtti_class_hierarchy_descriptor chd;
 	if (!rtti_msvc_read_class_hierarchy_descriptor(context, addr, &chd)) {
 		RZ_LOG_ERROR("Failed to parse class hierarchy descriptor at 0x%08" PFMT64x "\n", addr);
@@ -483,7 +483,7 @@ RZ_API void rz_analysis_rtti_msvc_print_class_hierarchy_descriptor(RVTableContex
 	}
 }
 
-RZ_API void rz_analysis_rtti_msvc_print_base_class_descriptor(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_rtti_msvc_print_base_class_descriptor(RVTableContext *context, ut64 addr, int mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rtti_base_class_descriptor bcd;
 	if (!rtti_msvc_read_base_class_descriptor(context, addr, &bcd)) {
 		RZ_LOG_ERROR("Failed to parse base class descriptor at 0x%08" PFMT64x "\n", addr);
@@ -622,7 +622,7 @@ static bool rtti_msvc_print_complete_object_locator_recurse(RVTableContext *cont
 	return true;
 }
 
-RZ_API bool rz_analysis_rtti_msvc_print_at_vtable(RVTableContext *context, ut64 addr, RzOutputMode mode, bool strict, RZ_NONNULL RzCons *cons) {
+RZ_API bool rz_analysis_rtti_msvc_print_at_vtable(RVTableContext *context, ut64 addr, RzOutputMode mode, bool strict, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	return rtti_msvc_print_complete_object_locator_recurse(context, addr, mode, strict, cons);
 }
 

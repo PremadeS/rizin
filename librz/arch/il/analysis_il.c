@@ -419,7 +419,7 @@ static RzAnalysisILStepResult analysis_il_vm_step_while(
  *             - RZ_ANALYSIS_IL_STEP_INVALID: Invalid arguments or state resulted in undefined behavior.
  */
 RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step_while(
-	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg, RZ_NONNULL RzCons *cons,
+	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg, RZ_NONNULL RZ_BORROW RzCons *cons,
 	RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NULLABLE void *user) {
 	return analysis_il_vm_step_while(analysis, vm, reg, false, cons, cond, user);
 }
@@ -443,7 +443,7 @@ RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step_while(
  *             - RZ_ANALYSIS_IL_STEP_INVALID: Invalid arguments or state resulted in undefined behavior.
  */
 RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step_while_with_events(
-	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg, RZ_NONNULL RzCons *cons,
+	RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg, RZ_NONNULL RZ_BORROW RzCons *cons,
 	RZ_NONNULL RzAnalysisILVMCondCallback cond, RZ_NULLABLE void *user) {
 	return analysis_il_vm_step_while(analysis, vm, reg, true, cons, cond, user);
 }
@@ -466,7 +466,7 @@ static bool step_cond_once(RzAnalysisILVM *vm, void *user) {
  *
  * \return and indicator for which error occured, if any
  */
-RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step(RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg, RZ_NONNULL RzCons *cons) {
+RZ_API RzAnalysisILStepResult rz_analysis_il_vm_step(RZ_NONNULL RzAnalysis *analysis, RZ_NONNULL RzAnalysisILVM *vm, RZ_NULLABLE RzReg *reg, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	bool stepped = false;
 	return rz_analysis_il_vm_step_while(analysis, vm, reg, cons, step_cond_once, &stepped);
 }

@@ -15,7 +15,7 @@
  * \param code Pointer to a RzAnnotatedCode.
  * \param cons Poitner to RzCons.
  */
-RZ_API void rz_core_annotated_code_print_json(RZ_NONNULL RzAnnotatedCode *code, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_core_annotated_code_print_json(RZ_NONNULL RzAnnotatedCode *code, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(code);
 
 	PJ *pj = pj_new();
@@ -303,7 +303,7 @@ static bool foreach_offset_annotation(void *user, const ut64 offset, const void 
  *
  * \param code Pointer to a RzAnnotatedCode.
  */
-RZ_API void rz_core_annotated_code_print_comment_cmds(RZ_NONNULL RzCons *cons, RZ_NONNULL RzAnnotatedCode *code) {
+RZ_API void rz_core_annotated_code_print_comment_cmds(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NONNULL RzAnnotatedCode *code) {
 	rz_return_if_fail(cons && code);
 
 	RzCodeAnnotation *annotation;

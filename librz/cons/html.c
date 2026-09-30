@@ -45,7 +45,7 @@ static const char *gethtmlbrightcolor(const char ptrch) {
 }
 
 // TODO: move into rz_util/str
-RZ_API char *rz_cons_html_filter(RZ_NONNULL RzCons *cons, const char *ptr, int *newlen) {
+RZ_API char *rz_cons_html_filter(RZ_NONNULL RZ_BORROW RzCons *cons, const char *ptr, int *newlen) {
 	const char *str = ptr;
 	int esc = 0;
 	bool inv = false;

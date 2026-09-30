@@ -36,7 +36,7 @@ static RzCmdStatus core_crypto_plugin_print(RzCons *cons, RzCmdStateOutput *stat
 	return RZ_CMD_STATUS_OK;
 }
 
-RZ_API RzCmdStatus rz_core_crypto_plugins_print(RzCrypto *cry, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API RzCmdStatus rz_core_crypto_plugins_print(RzCrypto *cry, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(cry, RZ_CMD_STATUS_ERROR);
 
 	rz_cmd_state_output_array_start(state);

@@ -435,7 +435,7 @@ static void print_windows(RzDebug *dbg, RzList *windows) {
 		add_window_to_table(tbl, win);
 	}
 	char *t = rz_table_tostring(tbl);
-	dbg->cb_printf(dbg->cons, t);
+	dbg->cb_printf(dbg->cb_printf_user, t);
 	free(t);
 	rz_table_free(tbl);
 }
@@ -444,7 +444,7 @@ RZ_API void rz_w32_print_windows(RzDebug *dbg) {
 	RzList *windows = get_windows(dbg);
 	if (windows) {
 		if (!windows->length) {
-			dbg->cb_printf(dbg->cons, "No windows for this process.\n");
+			dbg->cb_printf(dbg->cb_printf_user, "No windows for this process.\n");
 			return;
 		}
 		print_windows(dbg, windows);
@@ -466,7 +466,7 @@ RZ_API bool rz_w32_add_winmsg_breakpoint(RzDebug *dbg, const char *msg_name, con
 	if (window_id) {
 		RzList *windows = get_windows(dbg);
 		if (windows && !windows->length) {
-			dbg->cb_printf("No windows for this process.\n");
+			dbg->cb_printf(dbg->cb_printf_user, "No windows for this process.\n");
 		}
 		ut64 win_h = rz_num_math(NULL, window_id);
 		RzListIter *it;
@@ -478,7 +478,7 @@ RZ_API bool rz_w32_add_winmsg_breakpoint(RzDebug *dbg, const char *msg_name, con
 			}
 		}
 		if (!offset) {
-			dbg->cb_printf("Window not found, try these:\n");
+			dbg->cb_printf(dbg->cb_printf_user, "Window not found, try these:\n");
 			print_windows(dbg, windows);
 		}
 		rz_list_free(windows);

@@ -6,7 +6,7 @@
 #include "i/private.h"
 
 // Display the content of a file in the hud
-RZ_API char *rz_cons_hud_file(RzCons *cons, const char *f) {
+RZ_API char *rz_cons_hud_file(RZ_NONNULL RZ_BORROW RzCons *cons, const char *f) {
 	char *s = rz_file_slurp(f, NULL);
 	if (s) {
 		char *ret = rz_cons_hud_string(cons, s);
@@ -18,7 +18,7 @@ RZ_API char *rz_cons_hud_file(RzCons *cons, const char *f) {
 
 // Display a buffer in the hud (splitting it line-by-line and ignoring
 // the lines starting with # )
-RZ_API char *rz_cons_hud_string(RZ_NONNULL RzCons *cons, const char *s) {
+RZ_API char *rz_cons_hud_string(RZ_NONNULL RZ_BORROW RzCons *cons, const char *s) {
 	if (!rz_cons_is_interactive(cons)) {
 		eprintf("Hud mode requires scr.interactive=true.\n");
 		return NULL;
@@ -193,7 +193,7 @@ static RzList /*<char *>*/ *hud_filter(RzCons *cons, RzList /*<char *>*/ *list, 
 // Display a list of entries in the hud, filtered and emphasized based on the user input.
 
 #define HUD_CACHE 0
-RZ_API char *rz_cons_hud(RZ_NONNULL RzCons *cons, RzList /*<char *>*/ *list, const char *prompt) {
+RZ_API char *rz_cons_hud(RZ_NONNULL RZ_BORROW RzCons *cons, RzList /*<char *>*/ *list, const char *prompt) {
 	char user_input[HUD_BUF_SIZE + 1];
 	char *selected_entry = NULL;
 	RzListIter *iter;
@@ -277,7 +277,7 @@ _beach:
 }
 
 // Display the list of files in a directory
-RZ_API char *rz_cons_hud_path(RZ_NONNULL RzCons *cons, const char *path, int dir) {
+RZ_API char *rz_cons_hud_path(RZ_NONNULL RZ_BORROW RzCons *cons, const char *path, int dir) {
 	char *tmp, *ret = NULL;
 	RzList *files;
 	if (path) {
@@ -313,7 +313,7 @@ RZ_API char *rz_cons_hud_path(RZ_NONNULL RzCons *cons, const char *path, int dir
 	return tmp;
 }
 
-RZ_API void rz_cons_message(RZ_NONNULL RzCons *cons, RZ_NONNULL const char *msg) {
+RZ_API void rz_cons_message(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NONNULL const char *msg) {
 	rz_return_if_fail(msg);
 	int len = strlen(msg);
 	int rows, cols = rz_cons_get_size(cons, &rows);

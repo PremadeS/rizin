@@ -706,19 +706,19 @@ RZ_API RZ_OWN RzILOpPure *rz_core_il_lift(RZ_NONNULL RzCore *core, RZ_NONNULL co
 	RZ_OUT RZ_NULLABLE char **error_msg);
 
 /* chash.c */
-RZ_API RzCmdStatus rz_core_hash_plugins_print(RZ_NONNULL RZ_BORROW RzHash *hash, RZ_OUT RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
+RZ_API RzCmdStatus rz_core_hash_plugins_print(RZ_NONNULL RZ_BORROW RzHash *hash, RZ_OUT RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons);
 
 /* ccrypto.c */
-RZ_API RzCmdStatus rz_core_crypto_plugins_print(RzCrypto *cry, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
+RZ_API RzCmdStatus rz_core_crypto_plugins_print(RzCrypto *cry, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons);
 
 /* cio.c */
-RZ_API RzCmdStatus rz_core_io_plugins_print(RZ_NONNULL RZ_BORROW RzIO *io, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
+RZ_API RzCmdStatus rz_core_io_plugins_print(RZ_NONNULL RZ_BORROW RzIO *io, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons);
 
 /* cio.c */
-RZ_API RzCmdStatus rz_core_parser_plugins_print(RzParse *parser, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
+RZ_API RzCmdStatus rz_core_parser_plugins_print(RzParse *parser, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons);
 
 /* fortune */
-RZ_API void rz_core_fortune_list_types(RZ_NONNULL RzCons *cons);
+RZ_API void rz_core_fortune_list_types(RZ_NONNULL RZ_BORROW RzCons *cons);
 RZ_API void rz_core_fortune_list(RzCore *core);
 RZ_API RZ_OWN char *rz_core_fortune_get_random(RzCore *core);
 RZ_API void rz_core_fortune_print_random(RzCore *core);
@@ -775,7 +775,7 @@ RZ_API void rz_core_analysis_esil(RzCore *core, ut64 addr, ut64 size, RZ_NULLABL
 RZ_API bool rz_core_esil_cmd(RzAnalysisEsil *esil, const char *cmd, ut64 a1, ut64 a2);
 RZ_API int rz_core_esil_step(RzCore *core, ut64 until_addr, const char *until_expr, ut64 *prev_addr, bool stepOver);
 RZ_API int rz_core_esil_step_back(RzCore *core);
-RZ_API bool rz_core_esil_dumpstack(RzAnalysisEsil *esil, RZ_NONNULL RzCons *cons);
+RZ_API bool rz_core_esil_dumpstack(RzAnalysisEsil *esil, RZ_NONNULL RZ_BORROW RzCons *cons);
 RZ_API bool rz_core_esil_continue_back(RZ_NONNULL RzCore *core);
 RZ_API void rz_core_analysis_esil_step_over(RZ_NONNULL RzCore *core);
 RZ_API void rz_core_analysis_esil_reinit(RZ_NONNULL RzCore *core);
@@ -822,8 +822,8 @@ RZ_API void rz_core_analysis_fcn_merge(RzCore *core, ut64 addr, ut64 addr2);
 RZ_API const char *rz_core_analysis_optype_colorfor(RzCore *core, ut64 addr, bool verbose);
 RZ_API ut64 rz_core_analysis_address(RzCore *core, ut64 addr);
 RZ_API void rz_core_analysis_undefine(RzCore *core, ut64 off);
-RZ_API void rz_core_analysis_hint_print(RzAnalysis *a, ut64 addr, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
-RZ_API void rz_core_analysis_hint_list_print(RzAnalysis *a, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons);
+RZ_API void rz_core_analysis_hint_print(RzAnalysis *a, ut64 addr, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons);
+RZ_API void rz_core_analysis_hint_list_print(RzAnalysis *a, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons);
 RZ_API int rz_core_analysis_search(RzCore *core, ut64 from, ut64 to, ut64 ref, int mode);
 RZ_API int rz_core_analysis_search_xrefs(RZ_NONNULL RzCore *core, ut64 from, ut64 to);
 RZ_API void rz_core_analysis_data(RZ_NONNULL RzCore *core, ut64 addr, ut32 count, ut32 depth, ut32 wordsize);
@@ -1405,9 +1405,9 @@ RZ_API ut16 rz_core_flirt_os_from_option_list(RZ_NONNULL const char *os_list);
 RZ_API ut16 rz_core_flirt_app_from_option_list(RZ_NONNULL const char *app_list);
 
 /* DECOMPILER PRINTING FUNCTIONS */
-RZ_API void rz_core_annotated_code_print_json(RZ_NONNULL RzAnnotatedCode *code, RZ_NONNULL RzCons *cons);
+RZ_API void rz_core_annotated_code_print_json(RZ_NONNULL RzAnnotatedCode *code, RZ_NONNULL RZ_BORROW RzCons *cons);
 RZ_API void rz_core_annotated_code_print(RZ_NONNULL RzCons *cons, RZ_NONNULL RzAnnotatedCode *code, RZ_NULLABLE RzVector /*<ut64>*/ *line_offsets);
-RZ_API void rz_core_annotated_code_print_comment_cmds(RZ_NONNULL RzCons *cons, RZ_NONNULL RzAnnotatedCode *code);
+RZ_API void rz_core_annotated_code_print_comment_cmds(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NONNULL RzAnnotatedCode *code);
 
 /* serialize */
 

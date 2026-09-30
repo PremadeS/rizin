@@ -185,7 +185,7 @@ static inline void __cons_write(RzCons *cons, const char *obuf, int olen) {
 	}
 }
 
-RZ_API RzColor rz_cons_color_random(RzCons *cons, ut8 alpha) {
+RZ_API RzColor rz_cons_color_random(RZ_NONNULL RZ_BORROW RzCons *cons, ut8 alpha) {
 	RzColor rcolor = { 0 };
 	if (cons->context->color_mode > COLOR_MODE_16) {
 		rcolor.r = rz_num_rand32(0xff);
@@ -219,7 +219,7 @@ RZ_API RzColor rz_cons_color_random(RzCons *cons, ut8 alpha) {
 	return rcolor;
 }
 
-RZ_API void rz_cons_color(RzCons *cons, int fg, int r, int g, int b) {
+RZ_API void rz_cons_color(RZ_NONNULL RZ_BORROW RzCons *cons, int fg, int r, int g, int b) {
 	int k;
 	r = RZ_DIM(r, 0, 255);
 	g = RZ_DIM(g, 0, 255);
@@ -235,12 +235,12 @@ RZ_API void rz_cons_color(RzCons *cons, int fg, int r, int g, int b) {
 	rz_cons_printf(cons, "\x1b[%d;5;%dm", fg ? 48 : 38, k);
 }
 
-RZ_API void rz_cons_println(RzCons *cons, const char *str) {
+RZ_API void rz_cons_println(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str) {
 	rz_cons_print(cons, str);
 	rz_cons_newline(cons);
 }
 
-RZ_API void rz_cons_strcat_justify(RzCons *cons, const char *str, int j, char c) {
+RZ_API void rz_cons_strcat_justify(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str, int j, char c) {
 	int i, o, len;
 	for (o = i = len = 0; str[i]; i++, len++) {
 		if (str[i] == '\n') {
@@ -262,7 +262,7 @@ RZ_API void rz_cons_strcat_justify(RzCons *cons, const char *str, int j, char c)
 	}
 }
 
-RZ_API void rz_cons_strcat_at(RzCons *cons, const char *_str, int x, char y, int w, int h) {
+RZ_API void rz_cons_strcat_at(RZ_NONNULL RZ_BORROW RzCons *cons, const char *_str, int x, char y, int w, int h) {
 	int i, o, len;
 	int cols = 0;
 	int rows = 0;
@@ -316,7 +316,7 @@ RZ_API void rz_cons_context_break_pop(RzConsContext *context) {
 	rz_interrupt_break_pop(context->intr);
 }
 
-RZ_API bool rz_cons_is_interactive(RzCons *cons) {
+RZ_API bool rz_cons_is_interactive(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	return cons->context->is_interactive;
 }
 
@@ -373,7 +373,7 @@ static void resize(int sig) {
 	sigwinchFlag = 1;
 }
 #endif
-void resizeWin(RzCons *cons) {
+void resizeWin(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (cons->event_resize) {
 		cons->event_resize(cons->event_data);
 	}
@@ -386,14 +386,14 @@ void resizeWin(RzCons *cons) {
  * \param y The y coordinate of the position
  * \param event The type of the click
  */
-RZ_API void rz_cons_set_click(RzCons *cons, int x, int y, MouseEvent event) {
+RZ_API void rz_cons_set_click(RZ_NONNULL RZ_BORROW RzCons *cons, int x, int y, MouseEvent event) {
 	cons->click_x = x;
 	cons->click_y = y;
 	cons->click_set = true;
 	cons->mouse_event = event;
 }
 
-RZ_API bool rz_cons_get_click(RzCons *cons, int *x, int *y) {
+RZ_API bool rz_cons_get_click(RZ_NONNULL RZ_BORROW RzCons *cons, int *x, int *y) {
 	if (x) {
 		*x = cons->click_x;
 	}
@@ -405,11 +405,11 @@ RZ_API bool rz_cons_get_click(RzCons *cons, int *x, int *y) {
 	return set;
 }
 
-RZ_API void rz_cons_enable_highlight(RzCons *cons, const bool enable) {
+RZ_API void rz_cons_enable_highlight(RZ_NONNULL RZ_BORROW RzCons *cons, const bool enable) {
 	cons->enable_highlight = enable;
 }
 
-RZ_API bool rz_cons_enable_mouse(RzCons *cons, const bool enable) {
+RZ_API bool rz_cons_enable_mouse(RZ_NONNULL RZ_BORROW RzCons *cons, const bool enable) {
 	if ((cons->mouse && enable) || (!cons->mouse && !enable)) {
 		return cons->mouse;
 	}
@@ -512,7 +512,7 @@ static void restore_console_state(RzCons *cons) {
 
 // Stub function that cb_main_output gets pointed to in util/log.c by rz_cons_new
 // This allows Cutter to set per-task logging redirection
-RZ_API RzCons *rz_cons_new() {
+RZ_NONNULL RZ_BORROW RZ_API RzCons *rz_cons_new() {
 	RzCons *cons = RZ_NEW0(RzCons);
 #if __WINDOWS__
 	// Save the console state before rz_line_new() runs VT detection on Windows.
@@ -587,7 +587,7 @@ RZ_API RzCons *rz_cons_new() {
 	return cons;
 }
 
-RZ_API RzCons *rz_cons_free(RzCons *cons) {
+RZ_NONNULL RZ_BORROW RZ_API RzCons *rz_cons_free(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (!cons) {
 		return NULL;
 	}
@@ -646,11 +646,11 @@ static bool palloc(RzCons *cons, int moar) {
 	return true;
 }
 
-RZ_API int rz_cons_eof(RzCons *cons) {
+RZ_API int rz_cons_eof(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	return feof(cons->fdin);
 }
 
-RZ_API void rz_cons_gotoxy(RzCons *cons, int x, int y) {
+RZ_API void rz_cons_gotoxy(RZ_NONNULL RZ_BORROW RzCons *cons, int x, int y) {
 #if __WINDOWS__
 	rz_cons_w32_gotoxy(cons, 1, x, y);
 #else
@@ -658,12 +658,12 @@ RZ_API void rz_cons_gotoxy(RzCons *cons, int x, int y) {
 #endif
 }
 
-RZ_API void rz_cons_goto_origin_reset(RzCons *cons) {
+RZ_API void rz_cons_goto_origin_reset(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_cons_gotoxy(cons, 0, 0);
 	rz_cons_strcat(cons, Color_RESET);
 }
 
-RZ_API void rz_cons_fill_line(RzCons *cons) {
+RZ_API void rz_cons_fill_line(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	char *p, white[1024];
 	int cols = cons->columns - 1;
 	if (cols < 1) {
@@ -686,7 +686,7 @@ RZ_API void rz_cons_fill_line(RzCons *cons) {
  * \brief Print on `stream` the ANSI escape sequence to clear the current line.
  * \param stream Either stdout or stderr. Only 2 possible stream values are accepted.
  */
-RZ_API void rz_cons_clear_line(RzCons *cons, FILE *stream) {
+RZ_API void rz_cons_clear_line(RZ_NONNULL RZ_BORROW RzCons *cons, FILE *stream) {
 	rz_return_if_fail(stream == stdout || stream == stderr);
 #if __WINDOWS__
 	if (cons->vtmode != RZ_VIRT_TERM_MODE_DISABLE) {
@@ -709,16 +709,16 @@ RZ_API void rz_cons_clear_line(RzCons *cons, FILE *stream) {
 	fflush(stream);
 }
 
-RZ_API void rz_cons_clear00(RzCons *cons) {
+RZ_API void rz_cons_clear00(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_cons_clear(cons);
 	rz_cons_gotoxy(cons, 0, 0);
 }
 
-RZ_API void rz_cons_reset_colors(RzCons *cons) {
+RZ_API void rz_cons_reset_colors(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_cons_strcat(cons, Color_RESET_BG Color_RESET);
 }
 
-RZ_API void rz_cons_clear(RzCons *cons) {
+RZ_API void rz_cons_clear(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	cons->lines = 0;
 #if __WINDOWS__
 	rz_cons_w32_clear(cons);
@@ -739,7 +739,7 @@ static void cons_grep_reset(RzConsGrep *grep) {
 	grep->sort_invert = false;
 }
 
-RZ_API void rz_cons_reset(RzCons *cons) {
+RZ_API void rz_cons_reset(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (cons->context->buffer) {
 		(cons->context->buffer)[0] = '\0';
 	}
@@ -753,7 +753,7 @@ RZ_API void rz_cons_reset(RzCons *cons) {
 /**
  * \brief Return the current RzCons buffer
  */
-RZ_API const char *rz_cons_get_buffer(RzCons *cons) {
+RZ_API const char *rz_cons_get_buffer(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	// check len otherwise it will return trash
 	return cons->context->buffer_len ? cons->context->buffer : NULL;
 }
@@ -761,16 +761,16 @@ RZ_API const char *rz_cons_get_buffer(RzCons *cons) {
 /**
  * \brief Return a newly allocated buffer containing what's currently in RzCons buffer
  */
-RZ_API RZ_OWN char *rz_cons_get_buffer_dup(RzCons *cons) {
+RZ_API RZ_OWN char *rz_cons_get_buffer_dup(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	const char *s = rz_cons_get_buffer(cons);
 	return rz_str_dup(s);
 }
 
-RZ_API int rz_cons_get_buffer_len(RzCons *cons) {
+RZ_API int rz_cons_get_buffer_len(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	return cons->context->buffer_len;
 }
 
-RZ_API void rz_cons_filter(RzCons *cons) {
+RZ_API void rz_cons_filter(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	/* grep */
 	if (cons->filter || cons->context->grep.nstrings > 0 || cons->context->grep.tokens_used || cons->context->grep.less || cons->context->grep.json) {
 		(void)rz_cons_grepbuf(cons);
@@ -794,7 +794,7 @@ RZ_API void rz_cons_filter(RzCons *cons) {
 	}
 }
 
-RZ_API void rz_cons_push(RzCons *cons) {
+RZ_API void rz_cons_push(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (!cons->context->cons_stack) {
 		return;
 	}
@@ -810,7 +810,7 @@ RZ_API void rz_cons_push(RzCons *cons) {
 	cons->context->noflush = true;
 }
 
-RZ_API void rz_cons_pop(RzCons *cons) {
+RZ_API void rz_cons_pop(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (!cons->context->cons_stack) {
 		return;
 	}
@@ -840,15 +840,15 @@ RZ_API void rz_cons_context_free(RzConsContext *context) {
 	free(context);
 }
 
-RZ_API void rz_cons_context_load(RzCons *cons, RzConsContext *context) {
+RZ_API void rz_cons_context_load(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsContext *context) {
 	cons->context = context;
 }
 
-RZ_API void rz_cons_context_reset(RzCons *cons) {
+RZ_API void rz_cons_context_reset(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	cons->context = &rz_cons_context_default;
 }
 
-RZ_API bool rz_cons_context_is_main(RzCons *cons) {
+RZ_API bool rz_cons_context_is_main(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	return cons->context == &rz_cons_context_default;
 }
 
@@ -859,7 +859,7 @@ RZ_API void rz_cons_context_break(RzConsContext *context) {
 	rz_interrupt_raise(context->intr);
 }
 
-RZ_API void rz_cons_last(RzCons *cons) {
+RZ_API void rz_cons_last(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (!cons->context->lastEnabled) {
 		return;
 	}
@@ -871,7 +871,7 @@ static bool lastMatters(RzCons *cons) {
 	return (cons->context->buffer_len > 0) && (cons->context->lastEnabled && !cons->filter && cons->context->grep.nstrings < 1 && !cons->context->grep.tokens_used && !cons->context->grep.less && !cons->context->grep.json && !cons->is_html);
 }
 
-RZ_API void rz_cons_echo(RzCons *cons, const char *msg) {
+RZ_API void rz_cons_echo(RZ_NONNULL RZ_BORROW RzCons *cons, const char *msg) {
 	if (msg) {
 		if (cons->echobuf) {
 			rz_strbuf_append(cons->echobuf, msg);
@@ -890,7 +890,7 @@ RZ_API void rz_cons_echo(RzCons *cons, const char *msg) {
 	}
 }
 
-RZ_API void rz_cons_flush(RzCons *cons) {
+RZ_API void rz_cons_flush(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	const char *tee = cons->teefile;
 	if (cons->context->noflush) {
 		return;
@@ -998,7 +998,7 @@ RZ_API void rz_cons_flush(RzCons *cons) {
 	}
 }
 
-RZ_API void rz_cons_visual_flush(RzCons *cons) {
+RZ_API void rz_cons_visual_flush(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (cons->context->noflush) {
 		return;
 	}
@@ -1028,7 +1028,7 @@ static int real_strlen(const char *ptr, int len) {
 	return ansilen - diff;
 }
 
-RZ_API void rz_cons_visual_write(RzCons *cons, char *buffer) {
+RZ_API void rz_cons_visual_write(RZ_NONNULL RZ_BORROW RzCons *cons, char *buffer) {
 	char white[1024];
 	int alen, plen, lines = cons->rows;
 	bool break_lines = cons->break_lines;
@@ -1103,7 +1103,7 @@ RZ_API void rz_cons_visual_write(RzCons *cons, char *buffer) {
 	}
 }
 
-RZ_API void rz_cons_printf_list(RzCons *cons, const char *format, va_list ap) {
+RZ_API void rz_cons_printf_list(RZ_NONNULL RZ_BORROW RzCons *cons, const char *format, va_list ap) {
 	size_t size, written;
 	va_list ap2, ap3;
 
@@ -1135,7 +1135,7 @@ RZ_API void rz_cons_printf_list(RzCons *cons, const char *format, va_list ap) {
 	va_end(ap3);
 }
 
-RZ_API int rz_cons_printf(RzCons *cons, const char *format, ...) {
+RZ_API int rz_cons_printf(RZ_NONNULL RZ_BORROW RzCons *cons, const char *format, ...) {
 	va_list ap;
 	if (!format || !*format) {
 		return -1;
@@ -1147,7 +1147,7 @@ RZ_API int rz_cons_printf(RzCons *cons, const char *format, ...) {
 	return 0;
 }
 
-RZ_API int rz_cons_get_column(RzCons *cons) {
+RZ_API int rz_cons_get_column(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	char *line = strrchr(cons->context->buffer, '\n');
 	if (!line) {
 		line = cons->context->buffer;
@@ -1157,7 +1157,7 @@ RZ_API int rz_cons_get_column(RzCons *cons) {
 }
 
 /* final entrypoint for adding stuff in the buffer screen */
-RZ_API int rz_cons_memcat(RzCons *cons, const char *str, int len) {
+RZ_API int rz_cons_memcat(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str, int len) {
 	if (len < 0) {
 		return -1;
 	}
@@ -1186,7 +1186,7 @@ RZ_API int rz_cons_memcat(RzCons *cons, const char *str, int len) {
 	return len;
 }
 
-RZ_API void rz_cons_memset(RzCons *cons, char ch, int len) {
+RZ_API void rz_cons_memset(RZ_NONNULL RZ_BORROW RzCons *cons, char ch, int len) {
 	if (!cons->null && len > 0) {
 		if (palloc(cons, len + 1)) {
 			memset(cons->context->buffer + cons->context->buffer_len, ch, len);
@@ -1196,7 +1196,7 @@ RZ_API void rz_cons_memset(RzCons *cons, char ch, int len) {
 	}
 }
 
-RZ_API void rz_cons_strcat(RzCons *cons, const char *str) {
+RZ_API void rz_cons_strcat(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str) {
 	int len;
 	if (!str || cons->null) {
 		return;
@@ -1207,7 +1207,7 @@ RZ_API void rz_cons_strcat(RzCons *cons, const char *str) {
 	}
 }
 
-RZ_API void rz_cons_newline(RzCons *cons) {
+RZ_API void rz_cons_newline(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (!cons->null) {
 		rz_cons_strcat(cons, "\n");
 	}
@@ -1231,7 +1231,7 @@ RZ_API void rz_cons_newline(RzCons *cons) {
  * \param[out] rows Row number of the cursor
  * \return Column number of the cursor
  */
-RZ_API int rz_cons_get_cursor(RzCons *cons, RZ_NONNULL int *rows) {
+RZ_API int rz_cons_get_cursor(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NONNULL int *rows) {
 	rz_return_val_if_fail(rows, 0);
 	int col = cons->context->col;
 	int row = cons->context->row;
@@ -1380,7 +1380,7 @@ static bool __pty_get_size(void) {
 #endif
 
 // XXX: if this function returns <0 in rows or cols expect MAYHEM
-RZ_API int rz_cons_get_size(RzCons *cons, int *rows) {
+RZ_API int rz_cons_get_size(RZ_NONNULL RZ_BORROW RzCons *cons, int *rows) {
 #if __WINDOWS__
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	bool ret = GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
@@ -1480,7 +1480,7 @@ static inline bool is_win_10_creators_or_above(DWORD major, DWORD minor, DWORD r
 	return major > 10 || (major == 10 && minor > 0) || (major == 10 && minor == 0 && release >= 1703);
 }
 
-RZ_API RzVirtTermMode rz_cons_detect_vt_mode(RzCons *cons) {
+RZ_API RzVirtTermMode rz_cons_detect_vt_mode(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	DWORD major;
 	DWORD minor;
 	DWORD release = 0;
@@ -1554,7 +1554,7 @@ RZ_API RzVirtTermMode rz_cons_detect_vt_mode(RzCons *cons) {
 }
 #endif
 
-RZ_API void rz_cons_show_cursor(RzCons *cons, int cursor) {
+RZ_API void rz_cons_show_cursor(RZ_NONNULL RZ_BORROW RzCons *cons, int cursor) {
 #if __WINDOWS__
 	if (cons->vtmode != RZ_VIRT_TERM_MODE_DISABLE) {
 #endif
@@ -1590,7 +1590,7 @@ RZ_API void rz_cons_show_cursor(RzCons *cons, int cursor) {
  * If you doesn't use this order you'll probably loss your terminal properties.
  *
  */
-RZ_API void rz_cons_set_raw(RzCons *cons, bool is_raw) {
+RZ_API void rz_cons_set_raw(RZ_NONNULL RZ_BORROW RzCons *cons, bool is_raw) {
 	if (cons->oldraw != -1) {
 		if (is_raw == cons->oldraw) {
 			return;
@@ -1635,11 +1635,11 @@ RZ_API void rz_cons_set_raw(RzCons *cons, bool is_raw) {
 	cons->oldraw = is_raw;
 }
 
-RZ_API void rz_cons_set_utf8(RzCons *cons, bool b) {
+RZ_API void rz_cons_set_utf8(RZ_NONNULL RZ_BORROW RzCons *cons, bool b) {
 	cons->use_utf8 = b;
 }
 
-RZ_API void rz_cons_invert(RzCons *cons, int set, int color) {
+RZ_API void rz_cons_invert(RZ_NONNULL RZ_BORROW RzCons *cons, int set, int color) {
 	rz_cons_strcat(cons, RZ_CONS_INVERT(set, color));
 }
 
@@ -1649,7 +1649,7 @@ RZ_API void rz_cons_invert(RzCons *cons, int set, int color) {
   smcup: disable terminal scrolling (fullscreen mode)
   rmcup: enable terminal scrolling (normal mode)
 */
-RZ_API bool rz_cons_set_cup(RzCons *cons, bool enable) {
+RZ_API bool rz_cons_set_cup(RZ_NONNULL RZ_BORROW RzCons *cons, bool enable) {
 #if __UNIX__
 	const char *code = enable
 		? "\x1b[?1049h"
@@ -1684,7 +1684,7 @@ RZ_API bool rz_cons_set_cup(RzCons *cons, bool enable) {
 	return true;
 }
 
-RZ_API void rz_cons_column(RzCons *cons, int c) {
+RZ_API void rz_cons_column(RZ_NONNULL RZ_BORROW RzCons *cons, int c) {
 	char *b = malloc(cons->context->buffer_len + 1);
 	if (!b) {
 		return;
@@ -1698,16 +1698,16 @@ RZ_API void rz_cons_column(RzCons *cons, int c) {
 	free(b);
 }
 
-RZ_API void rz_cons_set_interactive(RzCons *cons, bool x) {
+RZ_API void rz_cons_set_interactive(RZ_NONNULL RZ_BORROW RzCons *cons, bool x) {
 	cons->context->last_interactive_option = cons->context->is_interactive;
 	cons->context->is_interactive = x;
 }
 
-RZ_API void rz_cons_set_last_interactive(RzCons *cons) {
+RZ_API void rz_cons_set_last_interactive(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	cons->context->is_interactive = cons->context->last_interactive_option;
 }
 
-RZ_API void rz_cons_set_title(RzCons *cons, const char *str) {
+RZ_API void rz_cons_set_title(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str) {
 #if __WINDOWS__
 #if defined(_UNICODE)
 	wchar_t *wstr = rz_utf8_to_utf16_l(str, strlen(str));
@@ -1723,14 +1723,14 @@ RZ_API void rz_cons_set_title(RzCons *cons, const char *str) {
 #endif
 }
 
-RZ_API void rz_cons_zero(RzCons *cons) {
+RZ_API void rz_cons_zero(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (cons->line) {
 		cons->line->zerosep = true;
 	}
 	rz_xwrite(1, "", 1);
 }
 
-RZ_API void rz_cons_highlight(RzCons *cons, const char *word) {
+RZ_API void rz_cons_highlight(RZ_NONNULL RZ_BORROW RzCons *cons, const char *word) {
 	int l, *cpos = NULL;
 	char *rword = NULL, *res, *clean = NULL;
 	char *inv[2] = {
@@ -1787,7 +1787,7 @@ RZ_API void rz_cons_highlight(RzCons *cons, const char *word) {
 	}
 }
 
-RZ_API char *rz_cons_lastline(RzCons *cons, int *len) {
+RZ_API char *rz_cons_lastline(RZ_NONNULL RZ_BORROW RzCons *cons, int *len) {
 	char *b = cons->context->buffer + cons->context->buffer_len;
 	while (b > cons->context->buffer) {
 		if (*b == '\n') {
@@ -1805,7 +1805,7 @@ RZ_API char *rz_cons_lastline(RzCons *cons, int *len) {
 
 // same as rz_cons_lastline(RzCons *cons), but len will be the number of
 // utf-8 characters excluding ansi escape sequences as opposed to just bytes
-RZ_API char *rz_cons_lastline_utf8_ansi_len(RzCons *cons, int *len) {
+RZ_API char *rz_cons_lastline_utf8_ansi_len(RZ_NONNULL RZ_BORROW RzCons *cons, int *len) {
 	if (!len) {
 		return rz_cons_lastline(cons, 0);
 	}
@@ -1865,7 +1865,7 @@ RZ_API char *rz_cons_swap_ground(const char *col) {
 	return rz_str_dup(col);
 }
 
-RZ_API bool rz_cons_drop(RzCons *cons, int n) {
+RZ_API bool rz_cons_drop(RZ_NONNULL RZ_BORROW RzCons *cons, int n) {
 	if (n > cons->context->buffer_len) {
 		cons->context->buffer_len = 0;
 		return false;
@@ -1874,7 +1874,7 @@ RZ_API bool rz_cons_drop(RzCons *cons, int n) {
 	return true;
 }
 
-RZ_API void rz_cons_chop(RzCons *cons) {
+RZ_API void rz_cons_chop(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	while (cons->context->buffer_len > 0) {
 		char ch = cons->context->buffer[cons->context->buffer_len - 1];
 		if (ch != '\n' && !IS_WHITESPACE(ch)) {
@@ -1913,7 +1913,7 @@ RZ_API const char *rz_cons_get_rune(const ut8 ch) {
 	return NULL;
 }
 
-RZ_API void rz_cons_breakword(RzCons *cons, RZ_NULLABLE const char *s) {
+RZ_API void rz_cons_breakword(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NULLABLE const char *s) {
 	free(cons->break_word);
 	if (s) {
 		cons->break_word = rz_str_dup(s);
@@ -1928,7 +1928,7 @@ RZ_API void rz_cons_breakword(RzCons *cons, RZ_NULLABLE const char *s) {
  * help should be an array of the following form:
  * {"command", "args", "description",
  * "command2", "args2", "description"}; */
-RZ_API void rz_cons_cmd_help(RzCons *cons, const char *help[], bool use_color) {
+RZ_API void rz_cons_cmd_help(RZ_NONNULL RZ_BORROW RzCons *cons, const char *help[], bool use_color) {
 	const char *pal_args_color = use_color ? cons->context->pal.args : "",
 		   *pal_help_color = use_color ? cons->context->pal.help : "",
 		   *pal_input_color = use_color ? cons->context->pal.input : "",
@@ -1965,7 +1965,7 @@ RZ_API void rz_cons_cmd_help(RzCons *cons, const char *help[], bool use_color) {
 	}
 }
 
-RZ_API void rz_cons_clear_buffer(RzCons *cons) {
+RZ_API void rz_cons_clear_buffer(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (cons->vtmode != RZ_VIRT_TERM_MODE_DISABLE) {
 		rz_xwrite(1, "\x1b"
 			     "c\x1b[3J",
@@ -1979,6 +1979,6 @@ RZ_API void rz_cons_clear_buffer(RzCons *cons) {
  * \param flush If true, calls to \p rz_cons_flush and \p rz_cons_visual_flush
  *              would flush cons content to the screen, otherwise they will not.
  */
-RZ_API void rz_cons_set_flush(RzCons *cons, bool flush) {
+RZ_API void rz_cons_set_flush(RZ_NONNULL RZ_BORROW RzCons *cons, bool flush) {
 	cons->context->noflush = !flush;
 }

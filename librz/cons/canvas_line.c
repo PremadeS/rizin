@@ -279,7 +279,7 @@ static void draw_vertical_line(RzConsCanvas *c, int x, int y, int height, int do
 	rz_interrupt_break_pop(c->cons->intr);
 }
 
-RZ_API void rz_cons_canvas_line_diagonal(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style) {
+RZ_API void rz_cons_canvas_line_diagonal(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style) {
 	if (x == x2 || y == y2) {
 		style->dot_style = DOT_STYLE_NORMAL;
 		rz_cons_canvas_line_square(cons, c, x, y + 1, x2, y2, style);
@@ -365,7 +365,7 @@ loop:
 	c->attr = Color_RESET;
 }
 
-RZ_API void rz_cons_canvas_line_square(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style) {
+RZ_API void rz_cons_canvas_line_square(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style) {
 	int min_x = RZ_MIN(x, x2);
 	int diff_x = RZ_ABS(x - x2);
 	int diff_y = RZ_ABS(y - y2);
@@ -395,7 +395,7 @@ RZ_API void rz_cons_canvas_line_square(RzCons *cons, RzConsCanvas *c, int x, int
 	c->attr = Color_RESET;
 }
 
-RZ_API void rz_cons_canvas_line_square_defined(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert) {
+RZ_API void rz_cons_canvas_line_square_defined(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int bendpoint, int isvert) {
 	if (!c->linemode) {
 		rz_cons_canvas_line(cons, c, x, y, x2, y2, style);
 		return;
@@ -448,7 +448,7 @@ RZ_API void rz_cons_canvas_line_square_defined(RzCons *cons, RzConsCanvas *c, in
 	c->attr = Color_RESET;
 }
 
-RZ_API void rz_cons_canvas_line_back_edge(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert) {
+RZ_API void rz_cons_canvas_line_back_edge(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style, int ybendpoint1, int xbendpoint, int ybendpoint2, int isvert) {
 	if (!c->linemode) {
 		rz_cons_canvas_line(cons, c, x, y, x2, y2, style);
 		return;

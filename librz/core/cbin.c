@@ -5286,7 +5286,7 @@ out:
 	return rz_strbuf_drain(buf);
 }
 
-RZ_IPI RzCmdStatus rz_core_bin_plugin_print(const RzBinPlugin *bp, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_IPI RzCmdStatus rz_core_bin_plugin_print(const RzBinPlugin *bp, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(bp && state, RZ_CMD_STATUS_ERROR);
 
 	rz_cmd_state_output_set_columnsf(state, "sssss", "name", "license", "author", "description", "version");
@@ -5331,7 +5331,7 @@ RZ_IPI RzCmdStatus rz_core_bin_plugin_print(const RzBinPlugin *bp, RzCmdStateOut
 	return RZ_CMD_STATUS_OK;
 }
 
-RZ_IPI RzCmdStatus rz_core_binxtr_plugin_print(const RzBinXtrPlugin *bx, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_IPI RzCmdStatus rz_core_binxtr_plugin_print(const RzBinXtrPlugin *bx, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(bx && state, RZ_CMD_STATUS_ERROR);
 
 	const char *name = NULL;
@@ -5368,7 +5368,7 @@ RZ_IPI RzCmdStatus rz_core_binxtr_plugin_print(const RzBinXtrPlugin *bx, RzCmdSt
 	return RZ_CMD_STATUS_OK;
 }
 
-RZ_API RzCmdStatus rz_core_bin_plugins_print(RzBin *bin, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API RzCmdStatus rz_core_bin_plugins_print(RzBin *bin, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(bin && state, RZ_CMD_STATUS_ERROR);
 
 	RzCmdStatus status;

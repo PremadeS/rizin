@@ -10,7 +10,7 @@
 
 #define I(x) rz_cons_singleton()->x
 
-RZ_API int rz_cons_less_str(RZ_NONNULL RzCons *cons, const char *str, const char *exitkeys) {
+RZ_API int rz_cons_less_str(RZ_NONNULL RZ_BORROW RzCons *cons, const char *str, const char *exitkeys) {
 	rz_return_val_if_fail(str && *str, 0);
 	if (!rz_cons_is_interactive(cons)) {
 		eprintf("Internal less requires scr.interactive=true.\n");
@@ -171,6 +171,6 @@ RZ_API int rz_cons_less_str(RZ_NONNULL RzCons *cons, const char *str, const char
 	return 0;
 }
 
-RZ_API void rz_cons_less(RzCons *cons) {
+RZ_API void rz_cons_less(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	(void)rz_cons_less_str(cons, cons->context->buffer, NULL);
 }

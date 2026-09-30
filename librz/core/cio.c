@@ -414,7 +414,7 @@ err:
  * \param state Specify how the plugin shall be printed
  * \param cons Reference to RzCons
  */
-RZ_API RzCmdStatus rz_core_io_plugin_print(RzIOPlugin *plugin, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API RzCmdStatus rz_core_io_plugin_print(RzIOPlugin *plugin, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	char str[4];
 	PJ *pj = state->d.pj;
 	str[0] = 'r';
@@ -488,7 +488,7 @@ RZ_API RzCmdStatus rz_core_io_plugin_print(RzIOPlugin *plugin, RzCmdStateOutput 
  * \param state Specify how plugins shall be printed
  * \param cons Reference to RzCons instance
  */
-RZ_API RzCmdStatus rz_core_io_plugins_print(RZ_NONNULL RZ_BORROW RzIO *io, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API RzCmdStatus rz_core_io_plugins_print(RZ_NONNULL RZ_BORROW RzIO *io, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(io && state, RZ_CMD_STATUS_ERROR);
 
 	if (!io) {

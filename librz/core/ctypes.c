@@ -472,7 +472,7 @@ RZ_API RZ_OWN char *rz_core_types_as_c_all(RZ_NONNULL RzCore *core, bool multili
 
 // Function types
 
-RZ_IPI void rz_core_types_function_print(RZ_NONNULL RzCons *cons, RzTypeDB *typedb, const char *function, RzOutputMode mode, PJ *pj) {
+RZ_IPI void rz_core_types_function_print(RZ_NONNULL RZ_BORROW RzCons *cons, RzTypeDB *typedb, const char *function, RzOutputMode mode, PJ *pj) {
 	rz_return_if_fail(function);
 	RzCallable *callable = rz_type_func_get(typedb, function);
 	if (!callable) {

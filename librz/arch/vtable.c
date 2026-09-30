@@ -287,7 +287,7 @@ RZ_API RzList /*<RVTableInfo *>*/ *rz_analysis_vtable_search(RVTableContext *con
 	return vtables;
 }
 
-RZ_API void rz_analysis_list_vtables(RzAnalysis *analysis, RzOutputMode mode, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_list_vtables(RzAnalysis *analysis, RzOutputMode mode, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	RVTableContext context;
 	rz_analysis_vtable_begin(analysis, &context);
 

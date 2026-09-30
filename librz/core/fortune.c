@@ -23,7 +23,7 @@ static char *rizin_fortune_file(RZ_BORROW RZ_NONNULL RzPath *sys_path, const cha
 	return RZ_STR_DUP(type);
 }
 
-RZ_API void rz_core_fortune_list_types(RZ_NONNULL RzCons *cons) {
+RZ_API void rz_core_fortune_list_types(RZ_NONNULL RZ_BORROW RzCons *cons) {
 	size_t i;
 	for (i = 0; i < RZ_ARRAY_SIZE(fortunes); i++) {
 		rz_cons_printf(cons, "%s\n", fortunes[i]);

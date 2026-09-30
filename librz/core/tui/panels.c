@@ -1191,7 +1191,7 @@ char *__handle_cmd_str_cache(RzCore *core, RzPanel *panel, bool force_cache) {
 	return out;
 }
 
-void __panel_all_clear(RzCons *cons, RzPanelsTab *tab) {
+void __panel_all_clear(RZ_NONNULL RZ_BORROW RzCons *cons, RzPanelsTab *tab) {
 	if (!tab) {
 		return;
 	}
@@ -1204,13 +1204,13 @@ void __panel_all_clear(RzCons *cons, RzPanelsTab *tab) {
 	rz_cons_flush(cons);
 }
 
-void __panels_layout(RzCons *cons, RzPanelsTab *tab) {
+void __panels_layout(RZ_NONNULL RZ_BORROW RzCons *cons, RzPanelsTab *tab) {
 	tab->can->sx = 0;
 	tab->can->sy = 0;
 	__layout_default(cons, tab);
 }
 
-void __layout_default(RzCons *cons, RzPanelsTab *tab) {
+void __layout_default(RZ_NONNULL RZ_BORROW RzCons *cons, RzPanelsTab *tab) {
 	RzPanel *p0 = __get_panel(tab, 0);
 	int h, w = rz_cons_get_size(cons, &h);
 	if (tab->n_panels <= 1) {
@@ -1238,7 +1238,7 @@ void __layout_default(RzCons *cons, RzPanelsTab *tab) {
 	}
 }
 
-void __adjust_side_panels(RzCons *cons, RzPanelsTab *tab) {
+void __adjust_side_panels(RZ_NONNULL RZ_BORROW RzCons *cons, RzPanelsTab *tab) {
 	int h;
 	(void)rz_cons_get_size(cons, &h);
 	for (int i = 0; i < tab->n_panels; i++) {

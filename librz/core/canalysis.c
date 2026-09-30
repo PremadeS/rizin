@@ -1322,7 +1322,7 @@ static void print_hint_tree(RzCons *cons, RBTree tree, RzCmdStateOutput *state) 
 	}
 }
 
-RZ_API void rz_core_analysis_hint_list_print(RzAnalysis *a, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_core_analysis_hint_list_print(RzAnalysis *a, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(a && state);
 	RBTree tree = NULL;
 	// Collect all hints in the tree to sort them
@@ -1333,7 +1333,7 @@ RZ_API void rz_core_analysis_hint_list_print(RzAnalysis *a, RzCmdStateOutput *st
 	rz_rbtree_free(tree, hint_node_free, NULL);
 }
 
-RZ_API void rz_core_analysis_hint_print(RzAnalysis *a, ut64 addr, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_core_analysis_hint_print(RzAnalysis *a, ut64 addr, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(a && state);
 	RBTree tree = NULL;
 	ut64 hint_addr = UT64_MAX;
@@ -4820,7 +4820,7 @@ static void var_global_show(RzCons *cons, RzAnalysis *analysis, RzAnalysisVarGlo
 	free(var_type);
 }
 
-RZ_IPI bool rz_analysis_var_global_list_show(RzAnalysis *analysis, RzCmdStateOutput *state, RZ_NULLABLE const char *name, RZ_NONNULL RzCons *cons) {
+RZ_IPI bool rz_analysis_var_global_list_show(RzAnalysis *analysis, RzCmdStateOutput *state, RZ_NULLABLE const char *name, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_val_if_fail(analysis && state, false);
 	rz_cmd_state_output_array_start(state);
 	rz_cmd_state_output_set_columnsf(state, "ssxxsnn",

@@ -212,7 +212,7 @@ RZ_API bool rz_cons_canvas_gotoxy(RzConsCanvas *c, int x, int y) {
 	return ret;
 }
 
-RZ_API RzConsCanvas *rz_cons_canvas_new(int w, int h, RzCons *cons) {
+RZ_API RzConsCanvas *rz_cons_canvas_new(int w, int h, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	if (w < 1 || h < 1) {
 		return NULL;
 	}
@@ -400,7 +400,7 @@ RZ_API RZ_OWN char *rz_cons_canvas_to_string(RzConsCanvas *c) {
 	return o;
 }
 
-RZ_API void rz_cons_canvas_print_region(RzCons *cons, RzConsCanvas *c) {
+RZ_API void rz_cons_canvas_print_region(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c) {
 	rz_return_if_fail(cons && c);
 	char *o = rz_cons_canvas_to_string(c);
 	if (RZ_STR_ISEMPTY(o) || !cons) {
@@ -414,7 +414,7 @@ RZ_API void rz_cons_canvas_print_region(RzCons *cons, RzConsCanvas *c) {
 	free(o);
 }
 
-RZ_API void rz_cons_canvas_print(RzCons *cons, RzConsCanvas *c) {
+RZ_API void rz_cons_canvas_print(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c) {
 	rz_return_if_fail(cons && c);
 	char *o = rz_cons_canvas_to_string(c);
 	if (!o) {
@@ -562,7 +562,7 @@ RZ_API void rz_cons_canvas_fill(RzConsCanvas *c, int x, int y, int w, int h, cha
 	free(row);
 }
 
-RZ_API void rz_cons_canvas_line(RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style) {
+RZ_API void rz_cons_canvas_line(RZ_NONNULL RZ_BORROW RzCons *cons, RzConsCanvas *c, int x, int y, int x2, int y2, RzCanvasLineStyle *style) {
 	if (c->linemode) {
 		rz_cons_canvas_line_square(cons, c, x, y, x2, y2, style);
 	} else {

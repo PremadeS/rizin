@@ -113,11 +113,11 @@ static void flag_print(RzCons *cons, RzFlag *f, RzCmdStateOutput *state, ut64 ra
 	}
 }
 
-RZ_IPI void rz_core_flag_print(RzFlag *f, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_IPI void rz_core_flag_print(RzFlag *f, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	flag_print(cons, f, state, UT64_MAX, UT64_MAX, false);
 }
 
-RZ_IPI void rz_core_flag_real_name_print(RzFlag *f, RzCmdStateOutput *state, RZ_NONNULL RzCons *cons) {
+RZ_IPI void rz_core_flag_real_name_print(RzFlag *f, RzCmdStateOutput *state, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	struct print_flag_t u = {
 		.f = f,
 		.in_range = false,
@@ -129,6 +129,6 @@ RZ_IPI void rz_core_flag_real_name_print(RzFlag *f, RzCmdStateOutput *state, RZ_
 	rz_flag_foreach_space(f, rz_flag_space_cur(f), print_flag_orig_name, &u);
 }
 
-RZ_IPI void rz_core_flag_range_print(RzFlag *f, RzCmdStateOutput *state, ut64 range_from, ut64 range_to, RZ_NONNULL RzCons *cons) {
+RZ_IPI void rz_core_flag_range_print(RzFlag *f, RzCmdStateOutput *state, ut64 range_from, ut64 range_to, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	flag_print(cons, f, state, range_from, range_to, true);
 }

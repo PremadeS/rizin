@@ -12,7 +12,7 @@
  * \param txt Optional text already shown in the prompt
  * \returns contents of the prompt input
  */
-RZ_API RZ_OWN char *rz_cons_prompt(RZ_NONNULL RzCons *cons, RZ_NONNULL const char *str, RZ_NULLABLE const char *txt) {
+RZ_API RZ_OWN char *rz_cons_prompt(RZ_NONNULL RZ_BORROW RzCons *cons, RZ_NONNULL const char *str, RZ_NULLABLE const char *txt) {
 	rz_return_val_if_fail(cons && str, NULL);
 	char cmd[1024];
 	char *res = NULL;

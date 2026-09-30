@@ -431,7 +431,7 @@ static void print_instruction_trace(RzILTraceInstruction *instruction, int idx, 
  * \param esil RzAnalysisEsil *, ESIL instance
  * \param cons RzCons *, cons instance
  */
-RZ_API void rz_analysis_esil_trace_list(RzAnalysisEsil *esil, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_esil_trace_list(RzAnalysisEsil *esil, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(esil);
 	if (!esil->trace) {
 		return;
@@ -454,7 +454,7 @@ RZ_API void rz_analysis_esil_trace_list(RzAnalysisEsil *esil, RZ_NONNULL RzCons 
  * \param idx int, index of trace
  * \param cons RzCons *, cons instance
  */
-RZ_API void rz_analysis_esil_trace_show(RzAnalysisEsil *esil, int idx, RZ_NONNULL RzCons *cons) {
+RZ_API void rz_analysis_esil_trace_show(RzAnalysisEsil *esil, int idx, RZ_NONNULL RZ_BORROW RzCons *cons) {
 	rz_return_if_fail(esil);
 	if (!esil->trace) {
 		return;

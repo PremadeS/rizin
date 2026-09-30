@@ -779,7 +779,7 @@ RZ_API RzDebugReasonType rz_debug_wait(RzDebug *dbg, RzBreakpointItem **bp) {
 			int what = rz_debug_signal_what(dbg, dbg->reason.signum);
 			const char *name = rz_signal_to_string(dbg->reason.signum);
 			if (name && strcmp("SIGTRAP", name)) {
-				dbg->cb_printf(dbg->cb_printf_user, "[+] signal %d aka %s received %d\n",
+				rz_cons_printf(dbg->cons, "[+] signal %d aka %s received %d\n",
 					dbg->reason.signum, name, what);
 			}
 		}
