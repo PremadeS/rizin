@@ -951,8 +951,8 @@ RZ_API RzVirtTermMode rz_cons_detect_vt_mode(RZ_NONNULL RZ_BORROW RzCons *cons);
 RZ_API void rz_cons_w32_clear(RZ_NONNULL RZ_BORROW RzCons *cons);
 RZ_API void rz_cons_w32_gotoxy(RZ_NONNULL RZ_BORROW RzCons *cons, int fd, int x, int y);
 RZ_API int rz_cons_w32_print(RZ_NONNULL RZ_BORROW RzCons *cons, const char *ptr, int len, bool vmode);
-RZ_API int rz_cons_win_printf(RZ_NONNULL RZ_BORROW RzCons *cons, bool vmode, const char *fmt, ...) RZ_PRINTF_CHECK(2, 3);
-RZ_API int rz_cons_win_eprintf(RZ_NONNULL RZ_BORROW RzCons *cons, bool vmode, const char *fmt, ...) RZ_PRINTF_CHECK(2, 3);
+RZ_API int rz_cons_win_printf(RZ_NONNULL RZ_BORROW RzCons *cons, bool vmode, const char *fmt, ...) RZ_PRINTF_CHECK(3, 4);
+RZ_API int rz_cons_win_eprintf(RZ_NONNULL RZ_BORROW RzCons *cons, bool vmode, const char *fmt, ...) RZ_PRINTF_CHECK(3, 4);
 RZ_API int rz_cons_win_vhprintf(RZ_NONNULL RZ_BORROW RzCons *cons, unsigned long hdl, bool vmode, const char *fmt, va_list ap);
 #endif
 
