@@ -9,21 +9,18 @@
 #include <rz_util/rz_stack.h>
 #include <stdlib.h>
 
-#if __UNIX__
-#include <signal.h>
-#endif
-
-#include <stdatomic.h>
-
 typedef struct rz_interrupt_frame_t {
 	RzInterruptEvent cb;
 	void *user;
 } RzInterruptFrame;
 
+#if __UNIX__
+#include <signal.h>
+#include <stdatomic.h>
+
 static volatile sig_atomic_t g_sigint_flag = 0; ///< Process-wide SIGINT arrival flag
 static atomic_int g_hook_count = 0; ///< Active reference counter for hooked signal handlers
 
-#if __UNIX__
 /**
  * \brief      Signal handler for SIGINT
  *
@@ -238,9 +235,11 @@ RZ_API bool rz_interrupt_is_breaked(RZ_NULLABLE RzInterrupt *intr) {
 		return false;
 	}
 
+#if __UNIX__
 	if (intr->hook_signals && g_sigint_flag) {
 		intr->is_breaked = true;
 	}
+#endif
 
 	if (intr->timeout > 0) {
 		if (rz_time_now_mono() > intr->timeout) {
