@@ -2354,6 +2354,7 @@ RZ_API RzCmdStatus rz_core_core_plugins_print(RzCore *core, RzCmdStateOutput *st
 			return status;
 		}
 	}
+  // sample change to run tests
 	rz_iterator_free(iter);
 	rz_cmd_state_output_array_end(state);
 	return RZ_CMD_STATUS_OK;
