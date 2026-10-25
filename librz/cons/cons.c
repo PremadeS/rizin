@@ -1753,16 +1753,11 @@ RZ_API void rz_cons_highlight(RZ_NONNULL RZ_BORROW RzCons *cons, const char *wor
 	}
 	if (word && *word && cons->context->buffer) {
 		int word_len = strlen(word);
+		char *orig;
 		clean = rz_str_ndup(cons->context->buffer, cons->context->buffer_len);
-
-		/* Pass NULL for out - cons->context->buffer already holds the original string */
-		l = rz_str_ansi_filter(clean, NULL, &cpos, -1);
-		if (l <= 0 || !cpos) {
-			free(clean);
-			free(cpos);
-			return;
-		}
-
+		l = rz_str_ansi_filter(clean, &orig, &cpos, -1);
+		free(cons->context->buffer);
+		cons->context->buffer = orig;
 		if (cons->highlight) {
 			if (strcmp(word, cons->highlight)) {
 				free(cons->highlight);
@@ -1786,14 +1781,13 @@ RZ_API void rz_cons_highlight(RZ_NONNULL RZ_BORROW RzCons *cons, const char *wor
 		if (res) {
 			cons->context->buffer = res;
 			cons->context->buffer_len = cons->context->buffer_sz = strlen(res);
-		} else {
-			cons->context->buffer = NULL;
-			cons->context->buffer_len = cons->context->buffer_sz = 0;
 		}
 		free(rword);
 		free(clean);
 		free(cpos);
 		ctx_rowcol_calc_reset(cons);
+		/* don't free orig - it's assigned
+		 * to cons->context->buffer and possibly realloc'd */
 	} else {
 		RZ_FREE(cons->highlight);
 	}
